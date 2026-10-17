@@ -1,0 +1,36 @@
+id: danakil
+name: Danakil Depression
+lane: earth
+hook: Acid-yellow sulphur springs and camel salt caravans in one of the hottest places on Earth.
+place:
+  label: Afar region, Ethiopia
+  countries:
+    - ET
+season_months:
+  - 1
+  - 2
+  - 3
+  - 11
+  - 12
+window_note: Nov–Mar, the cooler months
+scarcity:
+  type: season
+  note: Escorted only
+lead_time_note: 2–4 months; check travel advisories
+budget_band: 2
+segments:
+  - young
+safety_flags:
+  - extreme_heat
+  - remote_or_escorted
+status: live
+seed:
+  visa_in_passport:
+    effort: low
+    note: e-Visa
+  where_to_book: Mekelle-based expedition operators
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

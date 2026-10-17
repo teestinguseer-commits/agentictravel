@@ -1,0 +1,32 @@
+id: tomatina
+name: La Tomatina
+lane: fest
+hook: The tomato fight from Zindagi Na Milegi Dobara. It is ticketed now, so the crowd is capped.
+place:
+  label: Buñol, Valencia, Spain
+  countries:
+    - ES
+season_months:
+  - 8
+window_note: Last Wednesday of August · 25 Aug 2027
+fixed_dates:
+  - start: 2027-08-25
+scarcity:
+  type: capacity
+  note: Ticketed and capped
+lead_time_note: 3–6 months
+budget_band: 2
+segments:
+  - young
+safety_flags: []
+status: live
+seed:
+  visa_in_passport:
+    effort: high
+    note: Schengen
+  where_to_book: Official La Tomatina tickets, Spain operators
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

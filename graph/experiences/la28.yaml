@@ -1,0 +1,34 @@
+id: la28
+name: "LA28 Olympics: cricket returns"
+lane: sport
+hook: Cricket comes back to the Olympics after 128 years. Expect India's matches to be the hardest tickets of the Games.
+place:
+  label: Los Angeles, USA
+  countries:
+    - US
+season_months:
+  - 7
+window_note: 14–30 Jul 2028
+fixed_dates:
+  - start: 2028-07-14
+scarcity:
+  type: lottery
+  note: First Olympic cricket since 1900
+lead_time_note: Register for the official ticket draw
+budget_band: 3
+segments:
+  - affluent
+  - young
+  - nri
+safety_flags: []
+status: live
+seed:
+  visa_in_passport:
+    effort: high
+    note: US B1/B2; book the interview early
+  where_to_book: LA28 official ticketing, official hospitality packages
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

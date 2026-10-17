@@ -1,0 +1,31 @@
+id: paro
+name: Paro Tshechu
+lane: fest
+hook: Masked dances in a fortress courtyard and a giant thangka unrolled at dawn.
+place:
+  label: Paro, Bhutan
+  countries:
+    - BT
+season_months:
+  - 3
+  - 4
+window_note: Spring, set by the lunar calendar
+scarcity:
+  type: event
+  note: Annual
+lead_time_note: 3–4 months; daily Sustainable Development Fee
+budget_band: 1
+segments:
+  - young
+  - affluent
+safety_flags: []
+status: live
+seed:
+  visa_in_passport:
+    effort: none
+  where_to_book: Licensed Bhutan operators
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

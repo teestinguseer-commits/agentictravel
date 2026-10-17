@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.lifelist.invalid/contracts/tools/request_experience.schema.json",
+  "title": "request_experience",
+  "description": "File a structured request when search falls short. Becomes demand input for the Prospector. Writes, so it takes an idempotency key; anonymous calls are allowed but rate limited, and contact needs a signed-in user.",
+  "$defs": {
+    "Input": {
+      "type": "object",
+      "required": ["description", "idempotency_key"],
+      "properties": {
+        "description": { "type": "string", "minLength": 10, "maxLength": 1000, "description": "What the traveller wants, in their words" },
+        "constraints": {
+          "type": "object",
+          "properties": {
+            "month": { "$ref": "../common.schema.json#/$defs/Month" },
+            "year": { "type": "integer", "minimum": 2026, "maximum": 2035 },
+            "budget_band": { "$ref": "../common.schema.json#/$defs/BudgetBand" },
+            "passport": { "$ref": "../common.schema.json#/$defs/Passport" },
+            "home_city": { "type": "string", "maxLength": 80 },
+            "lane": { "$ref": "../common.schema.json#/$defs/Lane" }
+          },
+          "additionalProperties": false
+        },
+        "notify_when_added": { "type": "boolean", "default": false, "description": "Needs a signed-in user (OAuth scope lifelist:write); ignored for anonymous calls" },
+        "idempotency_key": { "type": "string", "minLength": 8, "maxLength": 128 }
+      },
+      "additionalProperties": false
+    },
+    "Result": {
+      "type": "object",
+      "required": ["request_id", "status", "notify", "similar", "message"],
+      "properties": {
+        "request_id": { "type": "string" },
+        "status": { "enum": ["received", "duplicate_of_existing"], "description": "duplicate_of_existing: the same idempotency key was seen; the original request_id is returned" },
+        "notify": { "type": "boolean", "description": "Whether the user will be told when it lands" },
+        "similar": {
+          "type": "array",
+          "maxItems": 3,
+          "description": "Closest live experiences, in case one already fits",
+          "items": {
+            "type": "object",
+            "required": ["id", "name", "why"],
+            "properties": {
+              "id": { "$ref": "../common.schema.json#/$defs/ExperienceId" },
+              "name": { "type": "string" },
+              "why": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "message": { "type": "string", "description": "A sentence the caller can show the user as-is" }
+      },
+      "additionalProperties": false
+    },
+    "Output": {
+      "oneOf": [{ "$ref": "#/$defs/Result" }, { "$ref": "../common.schema.json#/$defs/Error" }]
+    }
+  }
+}

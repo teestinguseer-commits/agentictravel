@@ -2,6 +2,8 @@
 
 Lifelist is a product, and it is also your residency. A teaching hospital treats real patients while residents rotate through departments: cardiology, surgery, paediatrics. They leave with skills, a case log and references. Lifelist works the same way. You ship a real agent platform to real users, and each phase moves you through a different "department" that the 25 PM roles in [Cracking Lenny's 25 PM Roles](https://claude.ai/artifact/3D2fKmaBEPgvoXgaQHSXLh) screen for: agents and MCP, evals and safety, data platforms, voice, growth, payments, billing, identity, CI.
 
+**Decision, 17 Oct 2026:** Lifelist is the flagship build. The RecordOps Agent from the field guide's six-month plan is paused; its proofs (MCP, permissions, approvals, an eval set) are covered by rotations R1, R2, R3 and R13.
+
 The rule: **learn by building, not alongside it.** Every rotation is a task Lifelist needs anyway, chosen and scoped so that the work also produces the proof a hiring manager asks for. Side quests exist only where a JD asks for something Lifelist would not otherwise need, and each is capped at one weekend.
 
 ## What this gets you, and what it can't

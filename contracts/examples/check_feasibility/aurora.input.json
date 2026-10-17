@@ -1,0 +1,10 @@
+{
+  "experience_id": "aurora",
+  "passport": "IN",
+  "home_city": "Bengaluru",
+  "travel_window": { "earliest": "2026-12-15", "latest": "2027-01-10" },
+  "leave_days": 5,
+  "budget_inr_max": 250000,
+  "party": { "adults": 2 },
+  "cold_tolerance": "moderate"
+}

@@ -1,0 +1,34 @@
+id: uyuni
+name: Salar de Uyuni mirror
+lane: earth
+hook: A thin film of rain turns the world's largest salt flat into a mirror the size of the sky.
+place:
+  label: Uyuni, Bolivia
+  countries:
+    - BO
+season_months:
+  - 1
+  - 2
+  - 3
+window_note: Jan–Mar, wet season
+scarcity:
+  type: season
+  note: Narrow season
+lead_time_note: 3–6 months
+budget_band: 3
+segments:
+  - young
+  - affluent
+safety_flags:
+  - altitude
+status: live
+seed:
+  visa_in_passport:
+    effort: medium
+    note: Bolivian visa; check current rules
+  where_to_book: Uyuni 4x4 operators, Atacama–Uyuni crossings
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

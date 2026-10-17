@@ -1,0 +1,33 @@
+id: up-helly-aa
+name: Up Helly Aa fire festival
+lane: fest
+hook: Hundreds of torch-bearing guizers march through town, and the night ends with a full-size Viking longship set on fire.
+place:
+  label: Lerwick, Shetland, Scotland
+  countries:
+    - GB
+season_months:
+  - 1
+window_note: Last Tuesday of January · 26 Jan 2027
+fixed_dates:
+  - start: 2027-01-26
+scarcity:
+  type: event
+  note: One night a year
+lead_time_note: 6 months; beds are scarce
+budget_band: 3
+segments:
+  - affluent
+  - nri
+safety_flags: []
+status: live
+seed:
+  visa_in_passport:
+    effort: high
+    note: UK visitor visa
+  where_to_book: Visit Shetland, local guesthouses
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

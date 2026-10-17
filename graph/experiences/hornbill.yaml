@@ -1,0 +1,31 @@
+id: hornbill
+name: Hornbill Festival
+lane: fest
+hook: "All of Nagaland's tribes in one heritage village for ten days: morungs, log drums and smoked pork."
+place:
+  label: Kisama, Nagaland
+  countries:
+    - IN
+season_months:
+  - 12
+window_note: 1–10 December
+fixed_dates:
+  - start: 2026-12-01
+scarcity:
+  type: event
+  note: Annual
+lead_time_note: 2–3 months; Inner Line Permit online
+budget_band: 1
+segments:
+  - young
+safety_flags: []
+status: live
+seed:
+  visa_in_passport:
+    effort: none
+  where_to_book: Nagaland Tourism, Kohima homestays and camps
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

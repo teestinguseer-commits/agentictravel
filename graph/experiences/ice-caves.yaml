@@ -1,0 +1,36 @@
+id: ice-caves
+name: Crystal ice caves of Vatnajökull
+lane: earth
+hook: New blue ice caves form inside the glacier each winter, so no two seasons look the same.
+place:
+  label: South Iceland
+  countries:
+    - IS
+season_months:
+  - 1
+  - 2
+  - 3
+  - 11
+  - 12
+window_note: Nov–Mar
+scarcity:
+  type: season
+  note: Reshaped every winter
+lead_time_note: 3–6 months
+budget_band: 3
+segments:
+  - affluent
+  - young
+safety_flags:
+  - extreme_cold
+status: live
+seed:
+  visa_in_passport:
+    effort: high
+    note: Schengen
+  where_to_book: Guide to Iceland (marketplace), glacier-guide operators
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

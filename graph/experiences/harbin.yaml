@@ -1,0 +1,33 @@
+id: harbin
+name: Harbin Ice and Snow World
+lane: fest
+hook: A whole city of buildings carved from river ice, lit in colour at minus 25°C.
+place:
+  label: Harbin, China
+  countries:
+    - CN
+season_months:
+  - 1
+  - 2
+  - 12
+window_note: Late Dec–Feb
+scarcity:
+  type: season
+  note: Rebuilt every winter
+lead_time_note: 2–4 months
+budget_band: 2
+segments:
+  - young
+safety_flags:
+  - extreme_cold
+status: live
+seed:
+  visa_in_passport:
+    effort: medium
+    note: Chinese visa
+  where_to_book: China specialist operators
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

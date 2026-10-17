@@ -1,0 +1,33 @@
+id: churchill
+name: Polar bears of Churchill
+lane: wild
+hook: Bears gather on the Hudson Bay shore waiting for sea ice, and you watch from a tundra vehicle.
+place:
+  label: Churchill, Manitoba, Canada
+  countries:
+    - CA
+season_months:
+  - 10
+  - 11
+window_note: Oct–Nov
+scarcity:
+  type: season
+  note: Six-week season
+lead_time_note: 9–12 months
+budget_band: 4
+segments:
+  - affluent
+  - nri
+safety_flags:
+  - extreme_cold
+status: live
+seed:
+  visa_in_passport:
+    effort: high
+    note: Canadian visitor visa
+  where_to_book: Frontiers North, Natural Habitat Adventures
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

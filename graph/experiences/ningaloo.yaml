@@ -1,0 +1,36 @@
+id: ningaloo
+name: Whale sharks of Ningaloo
+lane: wild
+hook: Snorkel beside the world's biggest fish on a reef that starts at the beach.
+place:
+  label: Exmouth and Coral Bay, Western Australia
+  countries:
+    - AU
+season_months:
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+window_note: Mar–Jul
+scarcity:
+  type: season
+  note: Seasonal
+lead_time_note: 3–6 months
+budget_band: 3
+segments:
+  - affluent
+  - young
+safety_flags:
+  - open_water
+status: live
+seed:
+  visa_in_passport:
+    effort: medium
+    note: online visitor visa
+  where_to_book: Licensed Exmouth and Coral Bay operators
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

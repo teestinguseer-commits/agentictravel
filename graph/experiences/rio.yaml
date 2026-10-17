@@ -1,0 +1,32 @@
+id: rio
+name: Rio Carnival in the Sambadrome
+lane: fest
+hook: Samba schools parade through the night for the title. Book a box, or a costume in the parade itself.
+place:
+  label: Rio de Janeiro, Brazil
+  countries:
+    - BR
+season_months:
+  - 2
+  - 3
+window_note: February or March, before Lent
+scarcity:
+  type: event
+  note: Annual
+lead_time_note: 6–9 months
+budget_band: 3
+segments:
+  - affluent
+  - young
+safety_flags: []
+status: live
+seed:
+  visa_in_passport:
+    effort: medium
+    note: Brazilian visa
+  where_to_book: Sambadrome ticket resellers, Rio operators
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

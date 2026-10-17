@@ -1,0 +1,35 @@
+id: icehotel
+name: ICEHOTEL
+lane: edge
+hook: A hotel carved fresh from river ice each winter, with artist-designed suites that melt in spring.
+place:
+  label: Jukkasjärvi, Swedish Lapland
+  countries:
+    - SE
+season_months:
+  - 1
+  - 2
+  - 3
+  - 12
+window_note: Dec–Mar
+scarcity:
+  type: season
+  note: Rebuilt every winter
+lead_time_note: 4–6 months
+budget_band: 3
+segments:
+  - affluent
+  - young
+safety_flags:
+  - extreme_cold
+status: live
+seed:
+  visa_in_passport:
+    effort: high
+    note: Schengen
+  where_to_book: ICEHOTEL direct, Lapland specialists
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

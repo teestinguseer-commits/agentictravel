@@ -1,0 +1,33 @@
+id: eclipse-luxor
+name: 2027 total solar eclipse over Luxor
+lane: sky
+hook: About 6 min 22 s of totality, the longest over land this century, with temples built for the sun as the backdrop and roughly an 80% chance of clear sky.
+place:
+  label: Luxor and the Nile, Egypt
+  countries:
+    - EG
+season_months:
+  - 8
+window_note: 2 Aug 2027 · about 1:05 pm local
+fixed_dates:
+  - start: 2027-08-02
+scarcity:
+  type: once
+  note: Once in a lifetime
+lead_time_note: "Now: Luxor beds and Nile flights are filling"
+budget_band: 3
+segments:
+  - affluent
+  - nri
+safety_flags: []
+status: live
+seed:
+  visa_in_passport:
+    effort: low
+    note: e-Visa
+  where_to_book: On The Go Tours, Eclipse Travel, Omega Breaks, Nile cruise operators
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

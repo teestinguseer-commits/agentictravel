@@ -1,0 +1,6 @@
+{
+  "description": "Cherry blossom season somewhere cheaper than Japan, with my parents",
+  "constraints": { "month": 4, "year": 2027, "budget_band": 2, "passport": "IN", "home_city": "Pune" },
+  "notify_when_added": true,
+  "idempotency_key": "req-2026-10-17-8f2a91"
+}

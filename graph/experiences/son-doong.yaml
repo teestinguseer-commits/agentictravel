@@ -1,0 +1,40 @@
+id: son-doong
+name: Son Doong, the world's largest cave
+lane: edge
+hook: A four-day expedition into a cave big enough to have its own jungle and clouds. One licensed operator, about $3,000.
+place:
+  label: Phong Nha-Ke Bang, Vietnam
+  countries:
+    - VN
+season_months:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+window_note: Late Jan–Aug
+scarcity:
+  type: permit_cap
+  note: About 1,000 places a year
+lead_time_note: "Years: reported sold out into 2028"
+budget_band: 2
+segments:
+  - affluent
+  - young
+safety_flags:
+  - age_or_fitness_limit
+  - remote_or_escorted
+status: live
+seed:
+  visa_in_passport:
+    effort: low
+    note: e-Visa
+  where_to_book: Oxalis Adventure (exclusive). Hang En 2-day trek as the alternative
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

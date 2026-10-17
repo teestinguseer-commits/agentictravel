@@ -1,0 +1,32 @@
+id: eagles
+name: Golden Eagle Festival
+lane: fest
+hook: Kazakh hunters on horseback compete with trained golden eagles on the open steppe.
+place:
+  label: Bayan-Ölgii, western Mongolia
+  countries:
+    - MN
+season_months:
+  - 10
+window_note: First weekend of October
+scarcity:
+  type: event
+  note: Remote, annual
+lead_time_note: 4–6 months
+budget_band: 2
+segments:
+  - young
+  - affluent
+safety_flags:
+  - remote_or_escorted
+status: live
+seed:
+  visa_in_passport:
+    effort: low
+    note: e-Visa
+  where_to_book: Mongolia specialist operators
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

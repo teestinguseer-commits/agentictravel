@@ -1,0 +1,33 @@
+id: emperors
+name: Emperor penguin colony by helicopter
+lane: wild
+hook: Helicopter from an icebreaker onto the sea ice beside an emperor penguin colony. Only a handful of voyages try it each year.
+place:
+  label: Snow Hill Island, Weddell Sea, Antarctica
+  countries:
+    - AR
+    - AQ
+season_months:
+  - 10
+  - 11
+window_note: Oct–Nov
+scarcity:
+  type: capacity
+  note: A few voyages a year
+lead_time_note: 12–18 months
+budget_band: 4
+segments:
+  - affluent
+safety_flags:
+  - polar
+status: live
+seed:
+  visa_in_passport:
+    effort: high
+    note: Argentine transit visa
+  where_to_book: Quark Expeditions
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

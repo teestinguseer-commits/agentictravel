@@ -1,0 +1,330 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.lifelist.invalid/contracts/common.schema.json",
+  "title": "Lifelist shared definitions",
+  "description": "Types shared by every public tool. A Fact carries its provenance; a fact past its freshness limit comes back as unknown, never as a stale value.",
+  "$defs": {
+    "ExperienceId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 64
+    },
+    "Lane": {
+      "enum": [
+        "sky",
+        "earth",
+        "wild",
+        "edge",
+        "sport",
+        "endure",
+        "fest"
+      ],
+      "description": "sky = Sky & light, earth = Wild earth, wild = Wildlife, edge = Expeditions, sport = Sport, endure = Endurance, fest = Festivals"
+    },
+    "ScarcityType": {
+      "enum": [
+        "once",
+        "event",
+        "lottery",
+        "permit_cap",
+        "capacity",
+        "season",
+        "natural"
+      ],
+      "description": "once = once-in-a-lifetime date; event = recurring dated event; lottery = ballot, lottery or draw; permit_cap = official daily or yearly cap; capacity = few seats, berths or beds; season = narrow natural window; natural = unpredictable natural event"
+    },
+    "BudgetBand": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4,
+      "description": "Per person, all-in from India including flights: 1 = under ₹1.5 lakh, 2 = ₹1.5–4 lakh, 3 = ₹4–8 lakh, 4 = above ₹8 lakh"
+    },
+    "Month": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 12
+    },
+    "CountryCode": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}$",
+      "description": "ISO 3166-1 alpha-2"
+    },
+    "Passport": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/CountryCode"
+        }
+      ],
+      "description": "Issuing country of the traveller's passport (ISO 3166-1 alpha-2). Defaults to IN."
+    },
+    "VisaEffort": {
+      "enum": [
+        "none",
+        "low",
+        "medium",
+        "high"
+      ],
+      "description": "none = no visa; low = e-visa or on arrival; medium = online application with documents; high = consular visa with appointment waits"
+    },
+    "Segment": {
+      "enum": [
+        "affluent",
+        "young",
+        "nri"
+      ]
+    },
+    "SafetyFlag": {
+      "enum": [
+        "altitude",
+        "polar",
+        "open_water",
+        "wildlife_on_foot",
+        "extreme_heat",
+        "extreme_cold",
+        "age_or_fitness_limit",
+        "remote_or_escorted",
+        "strenuous"
+      ]
+    },
+    "Confidence": {
+      "enum": [
+        "certain",
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "FreshnessClass": {
+      "enum": [
+        "fixed",
+        "seasonal",
+        "rule",
+        "price",
+        "availability",
+        "forecast"
+      ]
+    },
+    "Provenance": {
+      "type": "object",
+      "required": [
+        "source_url",
+        "checked_at",
+        "confidence",
+        "record_id"
+      ],
+      "properties": {
+        "source_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "checked_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "confidence": {
+          "$ref": "#/$defs/Confidence"
+        },
+        "record_id": {
+          "type": "string",
+          "description": "Graph record this fact came from"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Fact": {
+      "description": "A value with provenance, or an explicit unknown when the fact is past its freshness limit.",
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "value",
+            "provenance"
+          ],
+          "properties": {
+            "value": {},
+            "provenance": {
+              "$ref": "#/$defs/Provenance"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "unknown",
+            "last_checked_at"
+          ],
+          "properties": {
+            "unknown": {
+              "const": true
+            },
+            "last_checked_at": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date-time"
+            },
+            "reason": {
+              "enum": [
+                "stale",
+                "never_checked",
+                "source_unavailable",
+                "contradicted"
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Window": {
+      "type": "object",
+      "required": [
+        "months"
+      ],
+      "properties": {
+        "months": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Month"
+          },
+          "uniqueItems": true
+        },
+        "starts_on": {
+          "type": "string",
+          "format": "date"
+        },
+        "ends_on": {
+          "type": "string",
+          "format": "date"
+        },
+        "probability": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Set for probabilistic windows such as aurora odds"
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ExperienceSummary": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "lane",
+        "place",
+        "season_months",
+        "scarcity",
+        "budget_band",
+        "visa_effort",
+        "next_window",
+        "why"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ExperienceId"
+        },
+        "name": {
+          "type": "string"
+        },
+        "lane": {
+          "$ref": "#/$defs/Lane"
+        },
+        "place": {
+          "type": "string"
+        },
+        "season_months": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Month"
+          }
+        },
+        "scarcity": {
+          "$ref": "#/$defs/ScarcityType"
+        },
+        "budget_band": {
+          "$ref": "#/$defs/Fact",
+          "description": "value: BudgetBand"
+        },
+        "visa_effort": {
+          "$ref": "#/$defs/Fact",
+          "description": "value: VisaEffort for the requested passport (the hardest across the experience's countries)"
+        },
+        "next_window": {
+          "$ref": "#/$defs/Fact",
+          "description": "value: Window"
+        },
+        "why": {
+          "type": "string",
+          "maxLength": 280,
+          "description": "One sentence on why this matches the request"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Relevance, present in search results"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Error": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "type": "object",
+          "required": [
+            "code",
+            "message",
+            "retryable"
+          ],
+          "properties": {
+            "code": {
+              "enum": [
+                "INVALID_INPUT",
+                "NOT_FOUND",
+                "UNSUPPORTED_PASSPORT",
+                "UNAUTHORIZED",
+                "RATE_LIMITED",
+                "DUPLICATE_REQUEST",
+                "UNAVAILABLE",
+                "INTERNAL"
+              ]
+            },
+            "message": {
+              "type": "string"
+            },
+            "retryable": {
+              "type": "boolean"
+            },
+            "retry_after_seconds": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "field": {
+              "type": "string",
+              "description": "Input field at fault, for INVALID_INPUT"
+            },
+            "details": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,45 @@
+id: aurora
+name: Northern Lights at their post-peak best
+lane: sky
+hook: Aurora activity tends to peak a few years after solar maximum, so physicists expect 2026-27 to be one of the best seasons of this cycle.
+place:
+  label: Tromsø, Abisko, Rovaniemi, Iceland
+  countries:
+    - NO
+    - SE
+    - FI
+    - IS
+season_months:
+  - 1
+  - 2
+  - 3
+  - 9
+  - 10
+  - 11
+  - 12
+window_note: Late Sep–Mar · 2026-27 forecast strong
+scarcity:
+  type: season
+  note: Solar-cycle window
+lead_time_note: 3–6 months; book the Schengen slot first
+budget_band: 2
+segments:
+  - affluent
+  - young
+  - nri
+safety_flags:
+  - extreme_cold
+pairings:
+  - with: orcas
+    reason: Tromsø in Nov–Jan gives whales by day and aurora by night.
+status: live
+seed:
+  visa_in_passport:
+    effort: high
+    note: Schengen
+  where_to_book: Lights Over Lapland, Aurora Nights, Thomas Cook and SOTC (India)
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

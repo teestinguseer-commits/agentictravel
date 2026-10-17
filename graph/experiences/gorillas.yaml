@@ -1,0 +1,45 @@
+id: gorillas
+name: Mountain gorilla trek
+lane: wild
+hook: One hour face to face with a wild gorilla family. Permits are capped every day.
+place:
+  label: Volcanoes NP, Rwanda · Bwindi, Uganda
+  countries:
+    - RW
+    - UG
+season_months:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+window_note: Year-round; Jun–Sep and Dec–Feb are drier
+scarcity:
+  type: permit_cap
+  note: Daily permit cap
+lead_time_note: 4–6 months for permits
+budget_band: 3
+segments:
+  - affluent
+  - nri
+safety_flags:
+  - wildlife_on_foot
+  - age_or_fitness_limit
+status: live
+seed:
+  visa_in_passport:
+    effort: low
+    note: Rwanda visa on arrival
+  where_to_book: Rwanda Development Board permits, SafariBookings
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

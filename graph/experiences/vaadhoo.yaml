@@ -1,0 +1,39 @@
+id: vaadhoo
+name: Glowing shoreline in the Maldives
+lane: sky
+hook: Plankton light the surf blue at night. A short flight from India and an easy add-on to a beach holiday.
+place:
+  label: Vaadhoo and other atolls, Maldives
+  countries:
+    - MV
+season_months:
+  - 1
+  - 2
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+window_note: Best Jun–Feb, never guaranteed
+scarcity:
+  type: natural
+  note: Unpredictable
+lead_time_note: 1–3 months
+budget_band: 2
+segments:
+  - young
+  - affluent
+safety_flags: []
+status: live
+seed:
+  visa_in_passport:
+    effort: low
+    note: free on arrival
+  where_to_book: Maldives resorts, local-island guesthouses
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

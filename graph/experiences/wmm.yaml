@@ -1,0 +1,40 @@
+id: wmm
+name: The Six Star marathon quest
+lane: endure
+hook: Indian finishers across the six Majors grew from 459 in 2014 to 1,673 in 2025. The Six Star medal is the trophy.
+place:
+  label: Tokyo, Boston, London, Berlin, Chicago, New York
+  countries:
+    - JP
+    - US
+    - GB
+    - DE
+season_months:
+  - 3
+  - 4
+  - 9
+  - 10
+  - 11
+window_note: "Multi-year: spring and autumn races"
+scarcity:
+  type: lottery
+  note: Ballots and qualifying times
+lead_time_note: Ballots 8–12 months ahead
+budget_band: 2
+segments:
+  - young
+  - affluent
+  - nri
+safety_flags:
+  - strenuous
+status: live
+seed:
+  visa_in_passport:
+    effort: high
+    note: Japan, US, UK, Schengen
+  where_to_book: Active Holiday Company (India partner for all six), race ballots
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

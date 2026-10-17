@@ -1,0 +1,31 @@
+id: ascot
+name: Royal Ascot
+lane: sport
+hook: Top hats, the Royal Procession and the strictest dress code in sport.
+place:
+  label: Ascot, England
+  countries:
+    - GB
+season_months:
+  - 6
+window_note: Mid-June, five days
+scarcity:
+  type: capacity
+  note: Enclosure tiers
+lead_time_note: 6 months
+budget_band: 3
+segments:
+  - affluent
+  - nri
+safety_flags: []
+status: live
+seed:
+  visa_in_passport:
+    effort: high
+    note: UK visitor visa
+  where_to_book: Ascot official hospitality
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

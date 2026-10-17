@@ -1,0 +1,34 @@
+id: ant-marathon
+name: Antarctica Marathon
+lane: endure
+hook: Run on the seventh continent. For runners collecting all seven, this is the hardest one to get into.
+place:
+  label: King George Island, Antarctica
+  countries:
+    - AR
+    - AQ
+season_months:
+  - 3
+window_note: March
+scarcity:
+  type: capacity
+  note: Long waitlist
+lead_time_note: Years ahead
+budget_band: 4
+segments:
+  - affluent
+safety_flags:
+  - polar
+  - strenuous
+  - age_or_fitness_limit
+status: live
+seed:
+  visa_in_passport:
+    effort: high
+    note: Argentine transit visa
+  where_to_book: Marathon Tours & Travel, Active Holiday Company (India)
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

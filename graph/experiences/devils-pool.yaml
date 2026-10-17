@@ -1,0 +1,37 @@
+id: devils-pool
+name: Devil's Pool at Victoria Falls
+lane: earth
+hook: Swim to the lip of Victoria Falls in a rock pool above a drop of more than 100 m. Pairs with India's 2027 World Cup match at Victoria Falls.
+place:
+  label: Livingstone Island, Zambia
+  countries:
+    - ZM
+season_months:
+  - 1
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+window_note: Mid-Aug–mid-Jan, low water
+scarcity:
+  type: season
+  note: Low-water season only
+lead_time_note: 2–4 months
+budget_band: 3
+segments:
+  - young
+  - affluent
+safety_flags:
+  - open_water
+status: live
+seed:
+  visa_in_passport:
+    effort: medium
+    note: Zambian visa or KAZA Univisa
+  where_to_book: Livingstone Island tours (Tongabezi)
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

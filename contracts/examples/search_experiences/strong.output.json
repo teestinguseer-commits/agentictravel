@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "id": "eclipse-luxor",
+      "name": "2027 total solar eclipse over Luxor",
+      "lane": "sky",
+      "place": "Luxor and the Nile, Egypt",
+      "season_months": [8],
+      "scarcity": "once",
+      "budget_band": {
+        "value": 3,
+        "provenance": { "source_url": "https://www.onthegotours.com/Egypt/Guides/Solar-Eclipse", "checked_at": "2026-10-15T09:00:00Z", "confidence": "medium", "record_id": "offer_7f3c" }
+      },
+      "visa_effort": {
+        "value": "low",
+        "provenance": { "source_url": "https://visa2egypt.gov.eg/", "checked_at": "2026-10-10T06:30:00Z", "confidence": "high", "record_id": "constraint_eg_in_visa" }
+      },
+      "next_window": {
+        "value": { "months": [8], "starts_on": "2027-08-02", "ends_on": "2027-08-02", "note": "About 6 min 22 s of totality" },
+        "provenance": { "source_url": "https://www.onthegotours.com/Egypt/Guides/Solar-Eclipse", "checked_at": "2026-10-01T00:00:00Z", "confidence": "certain", "record_id": "window_eclipse_luxor_2027" }
+      },
+      "why": "The longest totality over land this century, with an e-Visa for Indian passports.",
+      "score": 0.94
+    }
+  ],
+  "match_quality": "strong",
+  "next_cursor": null,
+  "as_of": "2026-10-17T07:00:00Z"
+}

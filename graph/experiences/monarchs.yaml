@@ -1,0 +1,36 @@
+id: monarchs
+name: Monarch butterfly forests
+lane: wild
+hook: Millions of butterflies hang from fir branches after a migration of up to 4,000 km.
+place:
+  label: Michoacán, Mexico
+  countries:
+    - MX
+season_months:
+  - 1
+  - 2
+  - 3
+  - 11
+  - 12
+window_note: Nov–Mar
+scarcity:
+  type: season
+  note: Seasonal
+lead_time_note: 2–4 months
+budget_band: 3
+segments:
+  - nri
+  - young
+safety_flags:
+  - altitude
+status: live
+seed:
+  visa_in_passport:
+    effort: medium
+    note: visa-free with a valid US, UK or Schengen visa
+  where_to_book: El Rosario and Sierra Chincua reserve guides
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

@@ -1,0 +1,43 @@
+id: zero-g
+name: Zero-gravity flight
+lane: edge
+hook: Fifteen arcs of real weightlessness on a modified Boeing 727. No astronaut training needed.
+place:
+  label: Selected US cities
+  countries:
+    - US
+season_months:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+window_note: Scheduled dates through the year
+scarcity:
+  type: capacity
+  note: Few seats per flight
+lead_time_note: 3–6 months
+budget_band: 4
+segments:
+  - affluent
+  - nri
+safety_flags:
+  - age_or_fitness_limit
+status: live
+seed:
+  visa_in_passport:
+    effort: high
+    note: US B1/B2
+  where_to_book: Zero Gravity Corporation (ZERO-G)
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

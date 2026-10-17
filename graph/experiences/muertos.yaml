@@ -1,0 +1,32 @@
+id: muertos
+name: Día de Muertos in Oaxaca
+lane: fest
+hook: Candlelit cemetery vigils, marigold altars and street parades. A festival for the dead that feels joyful.
+place:
+  label: Oaxaca, Mexico
+  countries:
+    - MX
+season_months:
+  - 10
+  - 11
+window_note: 31 Oct–2 Nov
+scarcity:
+  type: event
+  note: Annual
+lead_time_note: 6 months
+budget_band: 3
+segments:
+  - young
+  - affluent
+safety_flags: []
+status: live
+seed:
+  visa_in_passport:
+    effort: medium
+    note: visa-free with a valid US, UK or Schengen visa
+  where_to_book: Oaxaca cultural operators
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

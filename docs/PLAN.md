@@ -251,15 +251,15 @@ v1's list stands. Added or changed items are in **bold**.
 - [ ] Run 15 interviews, five per segment. **Add one question: "Which Instagram or YouTube account made you want your last rare trip?"** (This seeds the Trend Scout's watch list.)
 - [ ] Concierge test: plan three real trips by hand over WhatsApp and log every lookup. **Log each one in the Signal format ([architecture/graph.md](architecture/graph.md)).**
 - [ ] Sign up for Viator's affiliate programme and two other open programmes. **Ask each about booking postbacks.**
-- [ ] Draft the graph schema, **including Signal, Candidate and Demand**, and load the 65 Atlas entries.
-- [ ] Write the MCP contract for `search_experiences`, `get_experience`, `check_feasibility` **and `request_experience`**.
+- [x] Draft the graph schema, **including Signal, Candidate and Demand**, and load the 65 Atlas entries. *(Done 17 Oct: `supabase/migrations/`, `graph/experiences/`.)*
+- [x] Write the MCP contract for `search_experiences`, `get_experience`, `check_feasibility` **and `request_experience`**. *(Done 17 Oct: [architecture/contracts.md](architecture/contracts.md).)*
 - [ ] Build the 100-question golden set for evals.
 - [ ] Choose the two launch lanes from interview data; default to sky and sport.
 - [ ] Email the first five partners on the list.
 - [ ] **Apply for the Google Trends API alpha; create an Instagram Business account and a Meta developer app, and start App Review for Public Content Access.**
 - [ ] **Get a YouTube Data API key; list 30 Indian travel creators and 30 hashtags for the first Trend Scout watch list.**
 - [ ] **Write the first Meta AI prompt pack and run it once by hand to judge usefulness ([agents/trend-scout.md](agents/trend-scout.md)).**
-- [ ] **Turn on CI run logging from the first commit (R6 needs 8 weeks of data), and start the decision log ([learning/rotations.md](learning/rotations.md)).**
+- [ ] **Turn on CI run logging from the first commit (R6 needs 8 weeks of data), and start the decision log ([learning/rotations.md](learning/rotations.md)).** *(CI is live in `.github/workflows/ci.yml`; GitHub keeps run timings, so the log starts now.)*
 - [ ] **Check visa sponsorship for each Tier A role in the field guide before planning which proofs to prioritise.**
 
 ## Sources

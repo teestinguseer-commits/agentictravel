@@ -1,0 +1,33 @@
+id: okavango
+name: Okavango Delta in flood
+lane: earth
+hook: Floodwater arrives in the dry season and you track game by mokoro canoe through the channels.
+place:
+  label: Botswana
+  countries:
+    - BW
+season_months:
+  - 6
+  - 7
+  - 8
+window_note: Jun–Aug flood peak
+scarcity:
+  type: capacity
+  note: Small, costly camps
+lead_time_note: 9–12 months
+budget_band: 4
+segments:
+  - affluent
+safety_flags:
+  - wildlife_on_foot
+status: live
+seed:
+  visa_in_passport:
+    effort: medium
+    note: check Botswana rules
+  where_to_book: Wilderness, &Beyond, SafariBookings
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

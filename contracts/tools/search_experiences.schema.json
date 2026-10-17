@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.lifelist.invalid/contracts/tools/search_experiences.schema.json",
+  "title": "search_experiences",
+  "description": "Find rare experiences by free text and filters. Read-only, no sign-in. Always reports match_quality so callers know when results are weak, and offers request_experience when they are.",
+  "$defs": {
+    "Input": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "description": "Free text, e.g. 'eclipse', 'aurora under 1.5 lakh in December'"
+        },
+        "month": {
+          "$ref": "../common.schema.json#/$defs/Month",
+          "description": "Only experiences possible in this month"
+        },
+        "budget_band": {
+          "type": "array",
+          "items": {
+            "$ref": "../common.schema.json#/$defs/BudgetBand"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "passport": {
+          "$ref": "../common.schema.json#/$defs/Passport",
+          "default": "IN"
+        },
+        "max_visa_effort": {
+          "$ref": "../common.schema.json#/$defs/VisaEffort",
+          "description": "Exclude experiences whose visa effort for this passport is higher"
+        },
+        "lane": {
+          "type": "array",
+          "items": {
+            "$ref": "../common.schema.json#/$defs/Lane"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "segment": {
+          "$ref": "../common.schema.json#/$defs/Segment"
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20,
+          "default": 10
+        },
+        "cursor": {
+          "type": "string",
+          "maxLength": 200
+        }
+      },
+      "additionalProperties": false
+    },
+    "Result": {
+      "type": "object",
+      "required": [
+        "results",
+        "match_quality",
+        "as_of"
+      ],
+      "properties": {
+        "results": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "allOf": [
+              {
+                "$ref": "../common.schema.json#/$defs/ExperienceSummary"
+              },
+              {
+                "type": "object",
+                "required": [
+                  "score"
+                ]
+              }
+            ]
+          }
+        },
+        "match_quality": {
+          "enum": [
+            "strong",
+            "weak",
+            "none"
+          ],
+          "description": "strong: the top result clears the match threshold; weak: results exist but none clears it; none: no results"
+        },
+        "suggest_request": {
+          "type": "object",
+          "description": "Present when match_quality is weak or none: a prefilled request_experience call the caller may offer the user",
+          "required": [
+            "tool",
+            "arguments"
+          ],
+          "properties": {
+            "tool": {
+              "const": "request_experience"
+            },
+            "arguments": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": false
+        },
+        "next_cursor": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "as_of": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Output": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/Result"
+        },
+        {
+          "$ref": "../common.schema.json#/$defs/Error"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,33 @@
+id: derby
+name: Kentucky Derby
+lane: sport
+hook: Sport's most famous two minutes, with mint juleps and extravagant hats in the stands.
+place:
+  label: Churchill Downs, Louisville, USA
+  countries:
+    - US
+season_months:
+  - 5
+window_note: First Saturday of May · 1 May 2027
+fixed_dates:
+  - start: 2027-05-01
+scarcity:
+  type: event
+  note: Annual
+lead_time_note: 6–9 months
+budget_band: 3
+segments:
+  - affluent
+  - nri
+safety_flags: []
+status: live
+seed:
+  visa_in_passport:
+    effort: high
+    note: US B1/B2
+  where_to_book: Churchill Downs, official Derby experience packages
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

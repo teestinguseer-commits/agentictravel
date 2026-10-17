@@ -2,7 +2,7 @@
 
 One tool layer serves everyone: the web app, the MCP server for personal AIs, WhatsApp, A2A delegations and Lifelist's own agents. Anything a page can do, a permitted agent can do.
 
-This page lists the tools and their intent. Full contracts (input and output schemas, error cases, examples) are the next deliverable, starting with the first four marked ★.
+This page lists the tools and their intent. The first four (marked ★) have full contracts: readable in [contracts.md](contracts.md), machine-readable in [`contracts/`](../../contracts/), with examples validated in CI.
 
 ## Response envelope
 

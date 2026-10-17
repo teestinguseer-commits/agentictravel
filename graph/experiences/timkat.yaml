@@ -1,0 +1,30 @@
+id: timkat
+name: Timkat
+lane: fest
+hook: "Ethiopian Orthodox Epiphany: white-robed crowds, all-night processions and a blessing in a royal bath."
+place:
+  label: Gondar or Lalibela, Ethiopia
+  countries:
+    - ET
+season_months:
+  - 1
+window_note: Around 19 January
+scarcity:
+  type: event
+  note: Annual
+lead_time_note: 4 months
+budget_band: 2
+segments:
+  - young
+safety_flags: []
+status: live
+seed:
+  visa_in_passport:
+    effort: low
+    note: e-Visa
+  where_to_book: Ethiopian cultural tour operators
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

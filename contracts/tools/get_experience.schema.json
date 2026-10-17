@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.lifelist.invalid/contracts/tools/get_experience.schema.json",
+  "title": "get_experience",
+  "description": "Full facts for one experience, each with source, check time and confidence. Read-only, no sign-in.",
+  "$defs": {
+    "Input": {
+      "type": "object",
+      "required": ["id"],
+      "properties": {
+        "id": { "$ref": "../common.schema.json#/$defs/ExperienceId" },
+        "passport": { "$ref": "../common.schema.json#/$defs/Passport", "default": "IN" },
+        "include": {
+          "type": "array",
+          "items": { "enum": ["windows", "visa", "offers", "pairings"] },
+          "uniqueItems": true,
+          "default": ["windows", "visa", "offers", "pairings"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "Experience": {
+      "type": "object",
+      "required": ["id", "name", "lane", "hook", "place", "countries", "season_months", "scarcity", "budget_band", "safety_flags", "status", "as_of"],
+      "properties": {
+        "id": { "$ref": "../common.schema.json#/$defs/ExperienceId" },
+        "name": { "type": "string" },
+        "lane": { "$ref": "../common.schema.json#/$defs/Lane" },
+        "hook": { "type": "string" },
+        "place": { "type": "string" },
+        "countries": { "type": "array", "items": { "$ref": "../common.schema.json#/$defs/CountryCode" } },
+        "season_months": { "type": "array", "items": { "$ref": "../common.schema.json#/$defs/Month" } },
+        "scarcity": {
+          "type": "object",
+          "required": ["type"],
+          "properties": {
+            "type": { "$ref": "../common.schema.json#/$defs/ScarcityType" },
+            "note": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "lead_time": { "$ref": "../common.schema.json#/$defs/Fact", "description": "value: string, e.g. 'Ballot is open now'" },
+        "budget_band": { "$ref": "../common.schema.json#/$defs/Fact", "description": "value: BudgetBand" },
+        "windows": {
+          "type": "array",
+          "items": { "$ref": "../common.schema.json#/$defs/Fact", "description": "value: Window" }
+        },
+        "visa": {
+          "type": "array",
+          "description": "One entry per country to enter, for the requested passport",
+          "items": {
+            "type": "object",
+            "required": ["country", "effort"],
+            "properties": {
+              "country": { "$ref": "../common.schema.json#/$defs/CountryCode" },
+              "effort": { "$ref": "../common.schema.json#/$defs/Fact", "description": "value: VisaEffort" },
+              "lead_time_days": { "$ref": "../common.schema.json#/$defs/Fact", "description": "value: integer" },
+              "note": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "offers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["offer_id", "operator", "price_band"],
+            "properties": {
+              "offer_id": { "type": "string" },
+              "operator": { "type": "string" },
+              "price_band": { "$ref": "../common.schema.json#/$defs/Fact", "description": "value: BudgetBand" },
+              "booking_url": { "type": "string", "format": "uri" },
+              "sold_out": { "$ref": "../common.schema.json#/$defs/Fact", "description": "value: boolean" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "pairings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "name", "reason"],
+            "properties": {
+              "id": { "$ref": "../common.schema.json#/$defs/ExperienceId" },
+              "name": { "type": "string" },
+              "reason": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "twin": {
+          "type": "object",
+          "required": ["id", "name", "why"],
+          "properties": {
+            "id": { "$ref": "../common.schema.json#/$defs/ExperienceId" },
+            "name": { "type": "string" },
+            "why": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "safety_flags": { "type": "array", "items": { "$ref": "../common.schema.json#/$defs/SafetyFlag" } },
+        "status": { "enum": ["live", "paused", "retired"] },
+        "status_reason": { "type": "string", "description": "Present when status is not live" },
+        "url": { "type": "string", "format": "uri" },
+        "as_of": { "type": "string", "format": "date-time" }
+      },
+      "additionalProperties": false
+    },
+    "Output": {
+      "oneOf": [{ "$ref": "#/$defs/Experience" }, { "$ref": "../common.schema.json#/$defs/Error" }]
+    }
+  }
+}

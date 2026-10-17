@@ -1,0 +1,31 @@
+id: vegas
+name: Las Vegas Grand Prix
+lane: sport
+hook: Formula 1 down the Strip after dark, past the Bellagio fountains.
+place:
+  label: Las Vegas Strip, USA
+  countries:
+    - US
+season_months:
+  - 11
+window_note: November
+scarcity:
+  type: event
+  note: Night race
+lead_time_note: 6–9 months
+budget_band: 4
+segments:
+  - affluent
+  - nri
+safety_flags: []
+status: live
+seed:
+  visa_in_passport:
+    effort: high
+    note: US B1/B2
+  where_to_book: F1 Experiences, Grand Prix Tickets
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

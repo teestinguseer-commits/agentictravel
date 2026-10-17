@@ -1,0 +1,30 @@
+id: purushwadi
+name: Firefly season in the Sahyadris
+lane: sky
+hook: India's own firefly forest, a few hours from Mumbai, with a village homestay instead of a hotel.
+place:
+  label: Purushwadi, Akole, Maharashtra
+  countries:
+    - IN
+season_months:
+  - 5
+  - 6
+window_note: Late May–mid June, before the monsoon
+scarcity:
+  type: season
+  note: Narrow season
+lead_time_note: 1–2 months
+budget_band: 1
+segments:
+  - young
+safety_flags: []
+status: live
+seed:
+  visa_in_passport:
+    effort: none
+  where_to_book: Grassroutes Journeys, village homestays
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

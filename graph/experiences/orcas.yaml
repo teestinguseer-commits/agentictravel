@@ -1,0 +1,34 @@
+id: orcas
+name: Orcas in the Arctic fjords
+lane: wild
+hook: Orcas and humpbacks follow the winter herring into the fjords. Whales by day, aurora by night.
+place:
+  label: Tromsø and Skjervøy, Norway
+  countries:
+    - NO
+season_months:
+  - 1
+  - 11
+  - 12
+window_note: Nov–Jan
+scarcity:
+  type: season
+  note: Herring-run window
+lead_time_note: 4–6 months
+budget_band: 3
+segments:
+  - affluent
+  - young
+safety_flags:
+  - extreme_cold
+status: live
+seed:
+  visa_in_passport:
+    effort: high
+    note: Schengen
+  where_to_book: Tromsø whale-safari operators
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

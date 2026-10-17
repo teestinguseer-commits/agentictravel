@@ -1,0 +1,40 @@
+id: glass-igloo
+name: Aurora from a glass igloo
+lane: sky
+hook: Watch the sky from a warm bed under a glass roof instead of a 2 am tripod vigil in the snow.
+place:
+  label: Saariselkä and Rovaniemi, Finnish Lapland
+  countries:
+    - FI
+season_months:
+  - 1
+  - 2
+  - 3
+  - 9
+  - 10
+  - 11
+  - 12
+window_note: Sep–Mar · Dec–Feb busiest
+scarcity:
+  type: capacity
+  note: Few rooms, short season
+lead_time_note: 6–9 months for Dec–Feb
+budget_band: 3
+segments:
+  - affluent
+  - nri
+safety_flags: []
+pairings:
+  - with: icehotel
+    reason: Finnish and Swedish Lapland share the Dec–Mar season; one Schengen visa covers both.
+status: live
+seed:
+  visa_in_passport:
+    effort: high
+    note: Schengen
+  where_to_book: Kakslauttanen Arctic Resort, Arctic TreeHouse, Lapland specialists
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

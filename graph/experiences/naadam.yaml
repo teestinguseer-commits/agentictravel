@@ -1,0 +1,32 @@
+id: naadam
+name: Naadam
+lane: fest
+hook: Wrestling, archery and child jockeys racing horses across the steppe, Mongolia's three manly games.
+place:
+  label: Ulaanbaatar and the steppe, Mongolia
+  countries:
+    - MN
+season_months:
+  - 7
+window_note: 11–13 July
+fixed_dates:
+  - start: 2027-07-11
+scarcity:
+  type: event
+  note: Annual
+lead_time_note: 4–6 months
+budget_band: 2
+segments:
+  - young
+safety_flags: []
+status: live
+seed:
+  visa_in_passport:
+    effort: low
+    note: e-Visa
+  where_to_book: Mongolia specialist operators
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

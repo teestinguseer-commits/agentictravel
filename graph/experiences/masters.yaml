@@ -1,0 +1,31 @@
+id: masters
+name: The Masters
+lane: sport
+hook: Golf's most exclusive gallery. Even practice-round access is decided by lottery.
+place:
+  label: Augusta, Georgia, USA
+  countries:
+    - US
+season_months:
+  - 4
+window_note: Early April
+scarcity:
+  type: lottery
+  note: Patron lottery
+lead_time_note: Lottery opens a year ahead
+budget_band: 4
+segments:
+  - affluent
+  - nri
+safety_flags: []
+status: live
+seed:
+  visa_in_passport:
+    effort: high
+    note: US B1/B2
+  where_to_book: Augusta National ticket lottery, licensed hospitality
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

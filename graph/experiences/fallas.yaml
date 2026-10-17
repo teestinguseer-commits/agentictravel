@@ -1,0 +1,33 @@
+id: fallas
+name: Las Fallas
+lane: fest
+hook: Neighbourhoods spend a year building giant satirical sculptures, then burn them all in one night.
+place:
+  label: Valencia, Spain
+  countries:
+    - ES
+season_months:
+  - 3
+window_note: 15–19 March
+fixed_dates:
+  - start: 2027-03-15
+scarcity:
+  type: event
+  note: Annual
+lead_time_note: 4–6 months
+budget_band: 2
+segments:
+  - young
+  - affluent
+safety_flags: []
+status: live
+seed:
+  visa_in_passport:
+    effort: high
+    note: Schengen
+  where_to_book: Valencia operators
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

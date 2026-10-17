@@ -1,0 +1,30 @@
+{
+  "experience_id": "aurora",
+  "verdict": "maybe",
+  "target_window": {
+    "value": { "months": [12, 1], "starts_on": "2026-12-20", "ends_on": "2026-12-27", "probability": 0.6, "note": "Strong season forecast; odds per clear night vary" },
+    "provenance": { "source_url": "https://www.livescience.com/space/the-sun/aurora-activity-is-just-getting-started-heres-why-the-best-northern-lights-are-yet-to-come", "checked_at": "2026-10-12T00:00:00Z", "confidence": "medium", "record_id": "window_aurora_2026_27" }
+  },
+  "reasons": [
+    { "code": "VISA_LEAD_TIME", "severity": "warning", "message": "Schengen appointments in Bengaluru are running about 6 weeks; apply by 1 November to travel on 20 December.", "facts": ["constraint_schengen_in_blr"] },
+    { "code": "VISA_REFUSAL_RISK", "severity": "info", "message": "Schengen states refused 15.8% of Indian applications in 2025; keep bookings refundable until the visa is issued.", "facts": ["constraint_schengen_in_refusal"] },
+    { "code": "COLD", "severity": "info", "message": "Nights reach −20°C; heated glass igloos are an option if cold is a concern.", "facts": ["exp_glass-igloo"] }
+  ],
+  "timeline": [
+    { "step": "Book a Schengen appointment", "by": "2026-10-25", "facts": ["constraint_schengen_in_blr"] },
+    { "step": "Submit the visa application", "by": "2026-11-01" },
+    { "step": "Book refundable flights and stays", "by": "2026-11-05" }
+  ],
+  "budget": {
+    "band": {
+      "value": 2,
+      "provenance": { "source_url": "https://curlytales.com/trending/indians-spend-over-lakh-to-see-northern-lights-despite-cost-whats-driving-the-demand/", "checked_at": "2026-10-14T00:00:00Z", "confidence": "medium", "record_id": "offer_band_aurora" }
+    },
+    "includes_tcs": true,
+    "note": "Within ₹2.5 lakh per person for a package, including 2% TCS."
+  },
+  "leave": { "trip_days": 8, "leave_days_needed": 4, "holidays_bridged": ["Christmas Day (25 Dec)"] },
+  "assumptions": ["Departing Bengaluru", "Two adults sharing", "Package of flights plus stay, so TCS applies"],
+  "consult_consulate": false,
+  "as_of": "2026-10-17T07:00:00Z"
+}

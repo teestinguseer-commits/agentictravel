@@ -1,0 +1,30 @@
+id: tomorrowland
+name: Tomorrowland
+lane: fest
+hook: The stage builds are the show. Official Global Journey packages bundle travel with the ticket.
+place:
+  label: Boom, Belgium
+  countries:
+    - BE
+season_months:
+  - 7
+window_note: July, two weekends
+scarcity:
+  type: capacity
+  note: Global presale sells out fast
+lead_time_note: Register about 6 months ahead
+budget_band: 3
+segments:
+  - young
+safety_flags: []
+status: live
+seed:
+  visa_in_passport:
+    effort: high
+    note: Schengen
+  where_to_book: Tomorrowland Global Journey (official)
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

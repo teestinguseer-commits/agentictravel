@@ -1,0 +1,40 @@
+id: cwc2027
+name: Cricket World Cup 2027
+lane: sport
+hook: Virat Kohli has called it his last World Cup. India plays the first ever World Cup match at Victoria Falls, and could meet South Africa in Johannesburg on 31 Oct if both reach the Super 7.
+place:
+  label: South Africa, Zimbabwe, Namibia
+  countries:
+    - ZA
+    - ZW
+    - NA
+season_months:
+  - 10
+  - 11
+window_note: 2 Oct–21 Nov 2027 · India v Zimbabwe at Victoria Falls, 24 Oct
+fixed_dates:
+  - start: 2027-10-02
+scarcity:
+  type: lottery
+  note: Ticket ballot
+lead_time_note: Ballot is open now
+budget_band: 2
+segments:
+  - young
+  - affluent
+  - nri
+safety_flags: []
+pairings:
+  - with: devils-pool
+    reason: India plays Zimbabwe at Victoria Falls on 24 Oct 2027, inside Devil's Pool's low-water season.
+status: live
+seed:
+  visa_in_passport:
+    effort: medium
+    note: South Africa and Zimbabwe visas
+  where_to_book: ICC ticket ballot, DreamSetGo, sports-travel agents
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

@@ -1,0 +1,32 @@
+id: eclipse-maroc
+name: 2027 eclipse from Morocco or Andalusia
+lane: sky
+hook: The same eclipse on a shorter flight and a smaller budget. Pair totality with a Sahara camp or a week in Andalusia.
+place:
+  label: Northern Morocco · Cádiz and Málaga, Spain
+  countries:
+    - MA
+    - ES
+season_months:
+  - 8
+window_note: 2 Aug 2027 · shorter totality than Egypt
+scarcity:
+  type: once
+  note: Once in a lifetime
+lead_time_note: 12+ months
+budget_band: 2
+segments:
+  - young
+  - affluent
+safety_flags: []
+status: live
+seed:
+  visa_in_passport:
+    effort: medium
+    note: Morocco e-Visa; Spain needs Schengen
+  where_to_book: Eclipse Travel (Morocco tours), astronomy tour specialists
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

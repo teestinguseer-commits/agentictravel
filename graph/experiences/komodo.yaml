@@ -1,0 +1,40 @@
+id: komodo
+name: Komodo dragons by liveaboard
+lane: wild
+hook: See the last living dragons, then sleep on a wooden phinisi among pink-sand islands.
+place:
+  label: Komodo NP, Indonesia
+  countries:
+    - ID
+season_months:
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+window_note: Apr–Dec, dry season
+scarcity:
+  type: capacity
+  note: Limited boat berths
+lead_time_note: 2–4 months
+budget_band: 2
+segments:
+  - young
+  - affluent
+safety_flags:
+  - wildlife_on_foot
+status: live
+seed:
+  visa_in_passport:
+    effort: low
+    note: e-VOA
+  where_to_book: Labuan Bajo liveaboard operators
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

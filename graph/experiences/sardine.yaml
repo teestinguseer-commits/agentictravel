@@ -1,0 +1,32 @@
+id: sardine
+name: The Sardine Run
+lane: wild
+hook: Dolphins, sharks and diving gannets hunt a shoal that can stretch for kilometres. For experienced divers.
+place:
+  label: Wild Coast, South Africa
+  countries:
+    - ZA
+season_months:
+  - 6
+  - 7
+window_note: Jun–Jul
+scarcity:
+  type: natural
+  note: Natural event, unpredictable
+lead_time_note: 6 months
+budget_band: 3
+segments:
+  - affluent
+safety_flags:
+  - open_water
+status: live
+seed:
+  visa_in_passport:
+    effort: medium
+    note: South African visa
+  where_to_book: Port St Johns dive operators
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

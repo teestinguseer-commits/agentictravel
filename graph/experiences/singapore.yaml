@@ -1,0 +1,32 @@
+id: singapore
+name: Singapore night race
+lane: sport
+hook: F1's original night race, a short flight from India. The easiest first Grand Prix for Indian fans.
+place:
+  label: Marina Bay, Singapore
+  countries:
+    - SG
+season_months:
+  - 9
+  - 10
+window_note: Sep–Oct
+scarcity:
+  type: event
+  note: Annual
+lead_time_note: 4–6 months
+budget_band: 2
+segments:
+  - young
+  - affluent
+safety_flags: []
+status: live
+seed:
+  visa_in_passport:
+    effort: low
+    note: tourist visa via agents
+  where_to_book: F1 Experiences, Singapore GP tickets, DreamSetGo
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

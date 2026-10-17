@@ -1,0 +1,32 @@
+id: wimbledon
+name: Centre Court at Wimbledon
+lane: sport
+hook: Whites, strawberries and a ballot so oversubscribed that fans camp overnight in The Queue.
+place:
+  label: London, England
+  countries:
+    - GB
+season_months:
+  - 6
+  - 7
+window_note: Late Jun–mid Jul
+scarcity:
+  type: lottery
+  note: Public ballot
+lead_time_note: Ballot opens about a year ahead
+budget_band: 3
+segments:
+  - affluent
+  - nri
+safety_flags: []
+status: live
+seed:
+  visa_in_passport:
+    effort: high
+    note: UK visitor visa
+  where_to_book: Wimbledon public ballot, debenture resale, official hospitality
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

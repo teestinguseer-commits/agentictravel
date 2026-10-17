@@ -1,0 +1,30 @@
+id: turkey
+name: Turkish Grand Prix returns
+lane: sport
+hook: Istanbul Park and its famous multi-apex Turn 8 return to the calendar in 2027.
+place:
+  label: Istanbul Park, Türkiye
+  countries:
+    - TR
+season_months: []
+window_note: 2027 · date TBC
+scarcity:
+  type: event
+  note: Comeback race
+lead_time_note: Join the waitlist now
+budget_band: 2
+segments:
+  - young
+  - affluent
+safety_flags: []
+status: live
+seed:
+  visa_in_passport:
+    effort: medium
+    note: e-Visa if you hold a US, UK or Schengen visa
+  where_to_book: F1 Experiences waitlist
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

@@ -1,0 +1,32 @@
+id: north-pole
+name: North Pole by icebreaker
+lane: edge
+hook: Stand on the sea ice at the top of the world. Only a few ships reach it each summer.
+place:
+  label: Arctic Ocean, 90° North
+  countries:
+    - NO
+season_months:
+  - 7
+  - 8
+window_note: Jul–Aug
+scarcity:
+  type: capacity
+  note: Very few departures
+lead_time_note: 12–18 months
+budget_band: 4
+segments:
+  - affluent
+safety_flags:
+  - polar
+status: live
+seed:
+  visa_in_passport:
+    effort: high
+    note: Schengen or departure-port visa
+  where_to_book: Ponant (Le Commandant Charcot)
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

@@ -1,0 +1,35 @@
+id: kailash
+name: Kailash Mansarovar Yatra
+lane: edge
+hook: The holiest circuit for Hindus, Jains and Buddhists, open to Indian citizens through an annual government draw.
+place:
+  label: Tibet, via Lipulekh or Nathu La
+  countries:
+    - CN
+season_months:
+  - 6
+  - 7
+  - 8
+  - 9
+window_note: Jun–Sep
+scarcity:
+  type: lottery
+  note: Government draw
+lead_time_note: Apply in spring
+budget_band: 2
+segments:
+  - young
+  - affluent
+safety_flags:
+  - altitude
+  - age_or_fitness_limit
+status: live
+seed:
+  visa_in_passport:
+    effort: none
+  where_to_book: Ministry of External Affairs yatra portal
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

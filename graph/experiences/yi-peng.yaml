@@ -1,0 +1,31 @@
+id: yi-peng
+name: Yi Peng lantern night
+lane: fest
+hook: Thousands of paper lanterns rise at once. Close to home, cheap, and it looks like Diwali floating into the sky.
+place:
+  label: Chiang Mai, Thailand
+  countries:
+    - TH
+season_months:
+  - 11
+window_note: November full moon
+scarcity:
+  type: capacity
+  note: Ticketed releases sell out
+lead_time_note: 3–6 months
+budget_band: 1
+segments:
+  - young
+  - affluent
+safety_flags: []
+status: live
+seed:
+  visa_in_passport:
+    effort: low
+    note: visa-exempt
+  where_to_book: Ticketed lantern events, Chiang Mai operators
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

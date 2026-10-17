@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.lifelist.invalid/contracts/tools/check_feasibility.schema.json",
+  "title": "check_feasibility",
+  "description": "Can this traveller do this experience, and when? Combines visa lead times by passport, the next window, Indian public holidays and leave days, budget (including TCS where a package applies) and fitness. Read-only, no sign-in.",
+  "$defs": {
+    "Input": {
+      "type": "object",
+      "required": ["experience_id"],
+      "properties": {
+        "experience_id": { "$ref": "../common.schema.json#/$defs/ExperienceId" },
+        "passport": { "$ref": "../common.schema.json#/$defs/Passport", "default": "IN" },
+        "home_city": { "type": "string", "maxLength": 80, "description": "Departure city, e.g. 'Mumbai'. Used for flight time, consulate jurisdiction and state holidays" },
+        "travel_window": {
+          "type": "object",
+          "description": "When the traveller could go. Omit to use the next window",
+          "required": ["earliest", "latest"],
+          "properties": {
+            "earliest": { "type": "string", "format": "date" },
+            "latest": { "type": "string", "format": "date" }
+          },
+          "additionalProperties": false
+        },
+        "leave_days": { "type": "integer", "minimum": 0, "maximum": 60, "description": "Working days of leave available" },
+        "budget_inr_max": { "type": "integer", "minimum": 0, "description": "Per person, all-in" },
+        "party": {
+          "type": "object",
+          "properties": {
+            "adults": { "type": "integer", "minimum": 1, "maximum": 20, "default": 1 },
+            "children_ages": { "type": "array", "items": { "type": "integer", "minimum": 0, "maximum": 17 } },
+            "senior_ages": { "type": "array", "items": { "type": "integer", "minimum": 60, "maximum": 110 } }
+          },
+          "additionalProperties": false
+        },
+        "fitness": { "enum": ["low", "moderate", "high"] },
+        "cold_tolerance": { "enum": ["low", "moderate", "high"] }
+      },
+      "additionalProperties": false
+    },
+    "Reason": {
+      "type": "object",
+      "required": ["code", "message"],
+      "properties": {
+        "code": {
+          "enum": [
+            "VISA_LEAD_TIME", "VISA_REFUSAL_RISK", "WINDOW_CLOSED", "WINDOW_OUTSIDE_TRAVEL_DATES",
+            "BALLOT_OR_PERMIT", "SOLD_OUT", "LEAVE_SHORT", "OVER_BUDGET", "AGE_LIMIT", "FITNESS",
+            "COLD", "SAFETY_ADVISORY", "FACT_UNKNOWN"
+          ]
+        },
+        "severity": { "enum": ["blocker", "warning", "info"], "default": "warning" },
+        "message": { "type": "string", "maxLength": 280 },
+        "facts": { "type": "array", "items": { "type": "string" }, "description": "Graph record ids this reason relies on" }
+      },
+      "additionalProperties": false
+    },
+    "Result": {
+      "type": "object",
+      "required": ["experience_id", "verdict", "reasons", "timeline", "assumptions", "consult_consulate", "as_of"],
+      "properties": {
+        "experience_id": { "$ref": "../common.schema.json#/$defs/ExperienceId" },
+        "verdict": {
+          "enum": ["yes", "maybe", "not_yet"],
+          "description": "yes: no blockers; maybe: warnings or unknown facts; not_yet: at least one blocker"
+        },
+        "target_window": { "$ref": "../common.schema.json#/$defs/Fact", "description": "value: Window chosen for this plan" },
+        "reasons": { "type": "array", "items": { "$ref": "#/$defs/Reason" } },
+        "timeline": {
+          "type": "array",
+          "description": "Steps in date order, e.g. apply for the visa, enter the ballot, book flights",
+          "items": {
+            "type": "object",
+            "required": ["step", "by"],
+            "properties": {
+              "step": { "type": "string" },
+              "by": { "type": "string", "format": "date" },
+              "facts": { "type": "array", "items": { "type": "string" } }
+            },
+            "additionalProperties": false
+          }
+        },
+        "budget": {
+          "type": "object",
+          "required": ["band", "includes_tcs"],
+          "properties": {
+            "band": { "$ref": "../common.schema.json#/$defs/Fact", "description": "value: BudgetBand" },
+            "includes_tcs": { "type": "boolean", "description": "True when the estimate includes 2% TCS on an overseas package" },
+            "note": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "leave": {
+          "type": "object",
+          "properties": {
+            "trip_days": { "type": "integer", "minimum": 1 },
+            "leave_days_needed": { "type": "integer", "minimum": 0 },
+            "holidays_bridged": { "type": "array", "items": { "type": "string" } }
+          },
+          "additionalProperties": false
+        },
+        "assumptions": { "type": "array", "items": { "type": "string" } },
+        "cheaper_twin": {
+          "type": "object",
+          "required": ["id", "name", "why"],
+          "properties": {
+            "id": { "$ref": "../common.schema.json#/$defs/ExperienceId" },
+            "name": { "type": "string" },
+            "why": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "consult_consulate": { "type": "boolean", "description": "True for edge cases the engine will not guess: prior refusals, dual nationality, minors with one parent" },
+        "as_of": { "type": "string", "format": "date-time" }
+      },
+      "additionalProperties": false
+    },
+    "Output": {
+      "oneOf": [{ "$ref": "#/$defs/Result" }, { "$ref": "../common.schema.json#/$defs/Error" }]
+    }
+  }
+}

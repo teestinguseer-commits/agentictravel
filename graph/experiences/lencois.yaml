@@ -1,0 +1,34 @@
+id: lencois
+name: Lagoons in the dunes
+lane: earth
+hook: Blue freshwater pools fill the hollows between white dunes for a few months, then disappear.
+place:
+  label: Lençóis Maranhenses, Brazil
+  countries:
+    - BR
+season_months:
+  - 6
+  - 7
+  - 8
+  - 9
+window_note: Jun–Sep, after the rains
+scarcity:
+  type: season
+  note: Narrow season
+lead_time_note: 3–6 months
+budget_band: 3
+segments:
+  - young
+  - affluent
+safety_flags: []
+status: live
+seed:
+  visa_in_passport:
+    effort: medium
+    note: Brazilian visa
+  where_to_book: Barreirinhas and Atins local operators
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

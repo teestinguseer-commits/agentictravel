@@ -1,0 +1,41 @@
+id: atacama
+name: Stargazing in the Atacama
+lane: sky
+hook: One of the driest, darkest skies on Earth, the reason the world's big observatories are built here.
+place:
+  label: San Pedro de Atacama, Chile
+  countries:
+    - CL
+season_months:
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+window_note: Most of the year; Jan–Feb storms
+scarcity:
+  type: season
+  note: Remote dark sky
+lead_time_note: 4–6 months
+budget_band: 3
+segments:
+  - affluent
+  - nri
+safety_flags:
+  - altitude
+status: live
+seed:
+  visa_in_passport:
+    effort: high
+    note: Chilean consular visa
+  where_to_book: San Pedro astro-tour operators, observatory visits
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

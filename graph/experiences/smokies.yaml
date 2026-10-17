@@ -1,0 +1,32 @@
+id: smokies
+name: Synchronous fireflies
+lane: sky
+hook: Thousands of fireflies flash in unison. Entry is by a parking lottery each year, which makes it a great NRI weekend.
+place:
+  label: Elkmont, Great Smoky Mountains, USA
+  countries:
+    - US
+season_months:
+  - 5
+  - 6
+window_note: About two weeks, late May to mid-June
+scarcity:
+  type: lottery
+  note: Lottery
+lead_time_note: Lottery opens in spring
+budget_band: 3
+segments:
+  - nri
+  - affluent
+safety_flags: []
+status: live
+seed:
+  visa_in_passport:
+    effort: high
+    note: US B1/B2
+  where_to_book: Recreation.gov lottery (US National Park Service)
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

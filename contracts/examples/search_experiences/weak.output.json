@@ -1,0 +1,13 @@
+{
+  "results": [],
+  "match_quality": "none",
+  "suggest_request": {
+    "tool": "request_experience",
+    "arguments": {
+      "description": "cherry blossom cheaper than Japan",
+      "constraints": { "month": 4, "budget_band": 2, "passport": "IN" }
+    }
+  },
+  "next_cursor": null,
+  "as_of": "2026-10-17T07:00:00Z"
+}

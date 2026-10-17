@@ -1,0 +1,33 @@
+id: svalbard
+name: Polar bears by ship in Svalbard
+lane: wild
+hook: Sail the edge of the pack ice under the midnight sun looking for bears, walrus and calving glaciers.
+place:
+  label: Svalbard, Norway
+  countries:
+    - NO
+season_months:
+  - 6
+  - 7
+  - 8
+window_note: Jun–Aug, midnight sun
+scarcity:
+  type: season
+  note: Short Arctic summer
+lead_time_note: 9–12 months
+budget_band: 4
+segments:
+  - affluent
+safety_flags:
+  - polar
+status: live
+seed:
+  visa_in_passport:
+    effort: high
+    note: Schengen, via Oslo
+  where_to_book: HX Hurtigruten Expeditions, Oceanwide Expeditions, Swoop
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

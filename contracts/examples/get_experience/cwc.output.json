@@ -1,0 +1,32 @@
+{
+  "id": "cwc2027",
+  "name": "Cricket World Cup 2027",
+  "lane": "sport",
+  "hook": "India plays the first ever World Cup match at Victoria Falls.",
+  "place": "South Africa, Zimbabwe, Namibia",
+  "countries": ["ZA", "ZW", "NA"],
+  "season_months": [10, 11],
+  "scarcity": { "type": "lottery", "note": "Ticket ballot" },
+  "lead_time": {
+    "value": "Ballot is open now",
+    "provenance": { "source_url": "https://www.icc-cricket.com/news/fixture-schedule-announced-for-icc-men-s-cricket-world-cup-2027", "checked_at": "2026-10-16T08:00:00Z", "confidence": "high", "record_id": "window_cwc2027_ballot" }
+  },
+  "budget_band": { "unknown": true, "last_checked_at": "2026-10-02T10:00:00Z", "reason": "stale" },
+  "windows": [
+    {
+      "value": { "months": [10, 11], "starts_on": "2027-10-02", "ends_on": "2027-11-21", "note": "India v Zimbabwe at Victoria Falls, 24 Oct" },
+      "provenance": { "source_url": "https://www.icc-cricket.com/news/fixture-schedule-announced-for-icc-men-s-cricket-world-cup-2027", "checked_at": "2026-10-16T08:00:00Z", "confidence": "certain", "record_id": "window_cwc2027" }
+    }
+  ],
+  "visa": [
+    { "country": "ZA", "effort": { "unknown": true, "last_checked_at": null, "reason": "never_checked" } },
+    { "country": "ZW", "effort": { "unknown": true, "last_checked_at": null, "reason": "never_checked" } },
+    { "country": "NA", "effort": { "unknown": true, "last_checked_at": null, "reason": "never_checked" } }
+  ],
+  "pairings": [
+    { "id": "devils-pool", "name": "Devil's Pool at Victoria Falls", "reason": "India plays Zimbabwe at Victoria Falls on 24 Oct 2027, inside Devil's Pool's low-water season." }
+  ],
+  "safety_flags": [],
+  "status": "live",
+  "as_of": "2026-10-17T07:00:00Z"
+}

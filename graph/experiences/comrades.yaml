@@ -1,0 +1,32 @@
+id: comrades
+name: Comrades Marathon
+lane: endure
+hook: One of the world's oldest ultramarathons, close to 90 km, with a 12-hour cut-off.
+place:
+  label: Durban and Pietermaritzburg, South Africa
+  countries:
+    - ZA
+season_months:
+  - 6
+window_note: June
+scarcity:
+  type: capacity
+  note: Entry cap
+lead_time_note: 6–9 months
+budget_band: 2
+segments:
+  - young
+safety_flags:
+  - strenuous
+  - age_or_fitness_limit
+status: live
+seed:
+  visa_in_passport:
+    effort: medium
+    note: South African visa
+  where_to_book: Comrades entry portal, Active Holiday Company
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

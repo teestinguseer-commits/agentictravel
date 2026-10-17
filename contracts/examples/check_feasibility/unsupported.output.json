@@ -1,0 +1,1 @@
+{ "error": { "code": "UNSUPPORTED_PASSPORT", "message": "Feasibility currently covers Indian passports only (IN).", "retryable": false, "field": "passport" } }

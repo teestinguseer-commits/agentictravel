@@ -2,7 +2,7 @@
 
 The graph is the moat. It is a data-modelling problem before it is an AI problem: get the graph right and the agents stay simple.
 
-This page is a schema outline for coding agents to turn into migrations; field lists are the minimum, not the final design.
+This page is the design. The implementation is [`supabase/migrations/`](../../supabase/migrations/) (tables, enums, row-level security, the event outbox, the agent roster), loaded from [`graph/experiences/`](../../graph/experiences/) by `npm run graph:seed-sql`, and validated against [`contracts/experience.schema.json`](../../contracts/experience.schema.json).
 
 ## Provenance on every fact
 
@@ -34,9 +34,10 @@ The Verifier withholds any fact past its limit.
 
 ## Records from v1
 
-- **Experience:** id, lane, anchor moment, place (geo), season months, fixed dates, scarcity type (`date`, `lottery`, `permit_cap`, `season`), lead time, difficulty, group fit, **safety category**, **rarity score**, **status** (`live`, `paused`, `retired`).
+- **Experience:** id, lane, anchor moment (`hook`), place and countries, season months, fixed dates, scarcity type, lead time, budget band, segments, **safety flags**, **rarity score**, **status** (`live`, `paused`, `retired`). Scarcity types: `once` (once-in-a-lifetime date), `event` (recurring dated event), `lottery` (ballot, lottery or draw), `permit_cap`, `capacity` (few seats, berths or beds), `season` (narrow natural window), `natural` (unpredictable natural event).
+- **Safety flags:** `altitude`, `polar`, `open_water`, `wildlife_on_foot`, `extreme_heat`, `extreme_cold`, `age_or_fitness_limit` (any of these makes an experience safety-critical under ADR 0002), plus the informational `remote_or_escorted` and `strenuous`.
 - **Offer:** experience id, operator, price band (INR and source currency), inclusions, booking link or API, commission, last checked, **partner tier**, **accepts Indian travellers**.
-- **Constraint:** experience id or country, type (`visa`, `fitness`, `age`, `gear`), passport, consulate, lead time, refusal risk, value.
+- **Constraint:** stored in two tables. `visa_constraints` are per passport, country and consulate (effort, lead time, refusal rate), so one rule serves every experience in that country. `experience_constraints` hold age, fitness, gear and permit rules for one experience.
 - **Window:** experience id, start, end, confidence, source; probabilistic windows carry odds.
 - **Pairing:** experience a, experience b, reason, distance, window gap, **origin** (`knowledge`, `mined`), lift and support when mined.
 

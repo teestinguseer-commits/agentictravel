@@ -1,0 +1,31 @@
+id: sapporo
+name: Sapporo Snow Festival
+lane: fest
+hook: Giant snow sculptures along Odori Park, then hot springs and miso ramen.
+place:
+  label: Hokkaido, Japan
+  countries:
+    - JP
+season_months:
+  - 2
+window_note: About a week in early February
+scarcity:
+  type: capacity
+  note: Hotels sell out
+lead_time_note: 4–6 months
+budget_band: 2
+segments:
+  - young
+  - affluent
+safety_flags: []
+status: live
+seed:
+  visa_in_passport:
+    effort: low
+    note: Japan eVISA
+  where_to_book: Japan specialists
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

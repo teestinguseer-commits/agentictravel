@@ -1,0 +1,37 @@
+id: antarctica
+name: Antarctic Peninsula expedition
+lane: edge
+hook: Landings among penguin colonies on the seventh continent, with strict limits on how many people go ashore at once.
+place:
+  label: Ushuaia to the Antarctic Peninsula
+  countries:
+    - AR
+    - AQ
+season_months:
+  - 1
+  - 2
+  - 3
+  - 11
+  - 12
+window_note: Nov–Mar, austral summer
+scarcity:
+  type: permit_cap
+  note: Short season, landing caps
+lead_time_note: 9–15 months
+budget_band: 4
+segments:
+  - affluent
+  - nri
+safety_flags:
+  - polar
+status: live
+seed:
+  visa_in_passport:
+    effort: high
+    note: Argentine transit visa
+  where_to_book: Swoop Antarctica, Antarctica Travel Centre, Quark Expeditions, Antarctica21
+provenance:
+  source_url: https://claude.ai/artifact/FtmWwkGHiLB9zm32qzTtBh
+  checked_at: 2026-10-16
+  verified_by: atlas-seed
+  confidence: low

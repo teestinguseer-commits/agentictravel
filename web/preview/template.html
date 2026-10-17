@@ -1,0 +1,526 @@
+<title>Lifelist Preview</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: the Atlas almanac carried into a working tool. A slim masthead with two tabs; the traveller tab is a filter deck over a results list and a detail sheet; the editor's desk is a ledger of 100 exam questions with review stamps. */
+:root{
+  --bg:#F4F6F9; --surface:#FFFFFF; --soft:#EBEFF5; --ink:#141A27; --muted:#586377; --line:#D9DFE8;
+  --accent:#9A5900; --accent-fill:#F0A22B; --accent-ink:#1E1505;
+  --ok:#1D7A4C; --ok-soft:#E2F3EA; --warn:#9A5B00; --warn-soft:#FBEFD9; --bad:#B42335; --bad-soft:#FBE5E8;
+  --l-sky:#4F5FDC; --l-earth:#12897A; --l-wild:#4F8A1E; --l-edge:#2A7DBC; --l-sport:#C33642; --l-endure:#7E55C8; --l-fest:#BC4380;
+  --f-display:"Young Serif", Georgia, "Times New Roman", serif;
+  --f-body:"Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --radius:10px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B101E; --surface:#131A2B; --soft:#1A2236; --ink:#E6EAF2; --muted:#9AA4B9; --line:#263049;
+    --accent:#F3AE48; --accent-fill:#F0A22B; --accent-ink:#1E1505;
+    --ok:#5BD08F; --ok-soft:#14301F; --warn:#F3B65A; --warn-soft:#33260F; --bad:#FF7B88; --bad-soft:#3A1A20;
+    --l-sky:#8591FF; --l-earth:#3CC2AE; --l-wild:#8CC552; --l-edge:#5DB1EC; --l-sport:#F0646F; --l-endure:#AE8CF0; --l-fest:#EE79B1;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B101E; --surface:#131A2B; --soft:#1A2236; --ink:#E6EAF2; --muted:#9AA4B9; --line:#263049;
+  --accent:#F3AE48; --accent-fill:#F0A22B; --accent-ink:#1E1505;
+  --ok:#5BD08F; --ok-soft:#14301F; --warn:#F3B65A; --warn-soft:#33260F; --bad:#FF7B88; --bad-soft:#3A1A20;
+  --l-sky:#8591FF; --l-earth:#3CC2AE; --l-wild:#8CC552; --l-edge:#5DB1EC; --l-sport:#F0646F; --l-endure:#AE8CF0; --l-fest:#EE79B1;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:20px 64px;display:grid;gap:20px}
+a{color:var(--accent)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mono{font-family:var(--f-mono)}
+.eyebrow{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;margin:0;text-wrap:balance}
+h1{font-size:clamp(1.8rem,4vw,2.5rem);line-height:1.05}
+h2{font-size:1.35rem}
+h3{font-size:1.15rem;line-height:1.25}
+p{margin:0}
+
+/* Masthead + tabs */
+.mast{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-end;justify-content:space-between}
+.mast-text{display:grid;gap:6px;min-width:0}
+.build{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.tabs{display:flex;gap:4px;background:var(--soft);padding:4px;border-radius:999px}
+.tab{border:0;background:transparent;padding:8px 16px;border-radius:999px;cursor:pointer;font-weight:600;font-size:14px;color:var(--muted)}
+.tab[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgb(0 0 0 / .08)}
+.note{font-size:13px;color:var(--muted);background:var(--surface);border:1px dashed var(--line);border-radius:var(--radius);padding:10px 14px}
+
+/* Filter deck */
+.deck{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px;display:grid;gap:12px}
+.row{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center}
+.label{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);min-width:58px}
+input[type=search],input[type=number],select,textarea{font:inherit;font-size:14px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-width:0}
+input[type=search]{width:min(360px,100%)}
+textarea{width:100%;min-height:64px;resize:vertical}
+.chip{font-size:13px;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:5px 11px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;line-height:1.2}
+.chip:hover{border-color:var(--muted)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--lane);flex:0 0 auto}
+.btn{font-size:13.5px;font-weight:600;background:var(--accent-fill);color:var(--accent-ink);border:0;border-radius:999px;padding:7px 14px;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--muted);border:1px solid var(--line);font-weight:500}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.call{font-family:var(--f-mono);font-size:12px;color:var(--muted);overflow-x:auto;white-space:pre;background:var(--soft);border-radius:8px;padding:8px 10px;margin:0}
+.count{font-family:var(--f-mono);font-size:12.5px;color:var(--muted);margin-left:auto;font-variant-numeric:tabular-nums}
+
+/* Results + detail */
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:16px;align-items:start}
+.list{display:grid;gap:8px;min-width:0}
+.res{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 12px;align-items:center;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:10px 12px;cursor:pointer;width:100%}
+.res:hover{border-color:var(--lane)}
+.res[aria-current="true"]{border-color:var(--lane);box-shadow:inset 3px 0 0 var(--lane)}
+.res .name{font-weight:600;line-height:1.3}
+.res .where{grid-column:2;font-size:12.5px;color:var(--muted)}
+.res .meta{grid-row:1 / span 2;grid-column:3;text-align:right;font-family:var(--f-mono);font-size:12px;color:var(--muted);display:grid;gap:2px}
+.res .dot{grid-row:1 / span 2}
+.rupees{font-family:var(--f-mono);letter-spacing:.06em}
+.rupees i{font-style:normal;color:var(--line)}
+.detail{position:sticky;top:12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px;display:grid;gap:14px;min-width:0}
+.d-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.lanetag{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.prov{font-size:12.5px;color:var(--warn);background:var(--warn-soft);border-radius:8px;padding:8px 10px}
+.almanac{display:grid;grid-template-columns:repeat(12,1fr);gap:3px}
+.almanac span{font-family:var(--f-mono);font-size:10px;text-align:center;line-height:20px;border-radius:3px;background:var(--soft);color:var(--muted)}
+.almanac span.on{background:var(--lane);color:var(--surface);font-weight:500}
+.facts{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 14px;margin:0;font-size:13.5px}
+.facts dt{color:var(--muted)}
+.facts dd{margin:0;min-width:0}
+.flags{display:flex;flex-wrap:wrap;gap:6px}
+.flag{font-family:var(--f-mono);font-size:11px;border-radius:4px;padding:2px 7px;border:1px solid var(--line);color:var(--muted)}
+.flag.crit{border-color:var(--bad);color:var(--bad)}
+.pair{background:none;border:0;padding:0;color:var(--accent);text-decoration:underline;cursor:pointer;font-size:13.5px;text-align:left}
+.fit{border-top:1px solid var(--line);padding-top:14px;display:grid;gap:10px}
+.verdict{display:inline-flex;align-items:center;gap:8px;font-weight:700;border-radius:999px;padding:4px 12px;font-size:13px;justify-self:start}
+.v-yes{background:var(--ok-soft);color:var(--ok)} .v-maybe{background:var(--warn-soft);color:var(--warn)} .v-not_yet{background:var(--bad-soft);color:var(--bad)}
+.reasons{margin:0;padding-left:18px;display:grid;gap:4px;font-size:13.5px}
+.reasons code{font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+.empty{border:1px dashed var(--line);border-radius:var(--radius);padding:24px 18px;display:grid;gap:12px;background:var(--surface)}
+.close{display:none}
+
+/* Editor's desk */
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px;display:grid;gap:8px}
+.tile b{font-family:var(--f-mono);font-size:22px;font-weight:500;font-variant-numeric:tabular-nums}
+.bar{display:flex;height:8px;border-radius:4px;overflow:hidden;background:var(--soft)}
+.bar span{display:block;height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--muted)}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:5px;vertical-align:0}
+.items{display:grid;gap:8px}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);min-width:0}
+.item[data-status="verified"]{box-shadow:inset 3px 0 0 var(--ok)}
+.item[data-status="disputed"]{box-shadow:inset 3px 0 0 var(--bad)}
+.item summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 12px;align-items:center;padding:12px 14px}
+.item summary::-webkit-details-marker{display:none}
+.gid{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.q{font-weight:600;line-height:1.35}
+.pills{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}
+.pill{font-family:var(--f-mono);font-size:11px;border-radius:999px;padding:2px 8px;background:var(--soft);color:var(--muted);white-space:nowrap}
+.p-verified{background:var(--ok-soft);color:var(--ok)} .p-disputed{background:var(--bad-soft);color:var(--bad)}
+.p-pass{background:var(--ok-soft);color:var(--ok)} .p-wait{background:var(--warn-soft);color:var(--warn)}
+.body{padding:0 14px 14px;display:grid;gap:12px;border-top:1px solid var(--line);padding-top:12px}
+.kv{display:grid;grid-template-columns:110px minmax(0,1fr);gap:6px 12px;font-size:13.5px}
+.kv > span:nth-child(odd){color:var(--muted);font-size:12.5px}
+.checks{margin:0;padding:0;list-style:none;display:grid;gap:4px;font-family:var(--f-mono);font-size:12px}
+.checks li{display:flex;gap:8px;align-items:baseline;min-width:0}
+.checks code{overflow-wrap:anywhere}
+.ok{color:var(--ok)} .bad{color:var(--bad)} .wait{color:var(--warn)}
+.rubric{margin:0;padding-left:18px;font-size:13.5px;display:grid;gap:3px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn.ok-btn{background:var(--ok);color:var(--surface)}
+.btn.bad-btn{background:var(--bad);color:var(--surface)}
+.saved{font-size:12.5px;color:var(--muted)}
+
+@media (max-width: 860px){
+  .split{grid-template-columns:minmax(0,1fr)}
+  .detail{position:static;order:-1}
+  .close{display:inline-block}
+  .kv{grid-template-columns:minmax(0,1fr)}
+  .item summary{grid-template-columns:auto minmax(0,1fr)}
+  .pills{grid-column:1 / -1;justify-content:flex-start}
+}
+@media (prefers-reduced-motion: reduce){ *{scroll-behavior:auto!important} }
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <div class="mast-text">
+      <p class="eyebrow">Lifelist · Phase 0 preview</p>
+      <h1>Lifelist Preview</h1>
+      <p class="build" id="build"></p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Views">
+      <button class="tab" role="tab" id="tab-traveller" aria-controls="view-traveller" aria-selected="true" type="button">Traveller view</button>
+      <button class="tab" role="tab" id="tab-desk" aria-controls="view-desk" aria-selected="false" type="button">Editor's desk</button>
+    </div>
+  </header>
+
+  <!-- Traveller view -->
+  <section id="view-traveller" role="tabpanel" aria-labelledby="tab-traveller" class="wrap" style="padding:0;gap:16px">
+    <p class="note">This runs the repo's reference search over the 65 Atlas experiences, the same code the tests use. Every fact is still an unverified Atlas seed, and visa rules per country are not loaded yet.</p>
+    <div class="deck" role="search">
+      <div class="row">
+        <label class="label" for="q">Search</label>
+        <input id="q" type="search" placeholder="eclipse, polar bears, Mongolia…" autocomplete="off">
+        <label class="label" for="month">Month</label>
+        <select id="month"><option value="0">Any</option></select>
+        <label class="label" for="seg">Traveller</label>
+        <select id="seg"><option value="">Everyone</option><option value="affluent">Affluent, time-poor</option><option value="young">Young, saving up</option><option value="nri">NRI / diaspora</option></select>
+        <label class="label" for="visa">Visa</label>
+        <select id="visa"><option value="">Any effort</option><option value="none">No visa</option><option value="low">Easy or none</option><option value="medium">Moderate or easier</option></select>
+      </div>
+      <div class="row" id="lanes"><span class="label">Lane</span></div>
+      <div class="row"><span class="label">Budget</span><span class="row" id="budgets" style="gap:8px"></span>
+        <button class="btn ghost" id="reset" type="button">Clear filters</button>
+        <span class="count" id="count"></span>
+      </div>
+      <pre class="call" id="call" aria-label="Tool call"></pre>
+    </div>
+    <div class="split">
+      <div class="list" id="results" aria-live="polite"></div>
+      <aside class="detail" id="detail" hidden aria-live="polite"></aside>
+    </div>
+  </section>
+
+  <!-- Editor's desk -->
+  <section id="view-desk" role="tabpanel" aria-labelledby="tab-desk" class="wrap" style="padding:0;gap:16px" hidden>
+    <div class="summary" id="summary"></div>
+    <p class="note" id="store-note">Your marks save to this page. Ask Claude to "sync reviews" to copy them into evals/golden/golden.yaml.</p>
+    <div class="deck">
+      <div class="row" id="cats"><span class="label">Category</span></div>
+      <div class="row">
+        <label class="label" for="rstatus">Review</label>
+        <select id="rstatus"><option value="">All</option><option value="pending">Pending</option><option value="verified">Verified</option><option value="disputed">Disputed</option></select>
+        <label class="label" for="astatus">Auto check</label>
+        <select id="astatus"><option value="">All</option><option value="pass">Passes against the graph</option><option value="awaiting_tool">Waiting for the tool</option><option value="awaiting_data">Waiting for data</option><option value="judge">Graded by a judge only</option></select>
+        <button class="chip" id="care" type="button" aria-pressed="false">Needs special care</button>
+        <input id="dq" type="search" placeholder="Find a question" autocomplete="off" aria-label="Find a question">
+        <span class="count" id="dcount"></span>
+      </div>
+    </div>
+    <div class="items" id="items"></div>
+  </section>
+</div>
+
+<script type="application/json" id="data">/*__DATA__*/</script>
+<script>
+/*__ORACLE__*/
+</script>
+<script>
+const DATA = JSON.parse(document.getElementById("data").textContent);
+const graph = new Map(DATA.experiences.map(d => [d.id, d]));
+const LANES = {sky:["Sky & light","--l-sky"],earth:["Wild earth","--l-earth"],wild:["Wildlife","--l-wild"],edge:["Expeditions","--l-edge"],sport:["Sport","--l-sport"],endure:["Endurance","--l-endure"],fest:["Festivals","--l-fest"]};
+const VISA = {none:"No visa",low:"Easy",medium:"Moderate",high:"Hard"};
+const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const BANDS = [[0,150000,"Under ₹1.5 lakh"],[150000,400000,"₹1.5–4 lakh"],[400000,800000,"₹4–8 lakh"],[800000,Infinity,"Above ₹8 lakh"]];
+const CRITICAL = new Set(["altitude","polar","open_water","wildlife_on_foot","extreme_heat","extreme_cold","age_or_fitness_limit"]);
+const CARE = new Set(DATA.special_care);
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmtDate = iso => { const [y,m,d] = iso.split("-"); return `${+d} ${MONTHS[+m-1]} ${y}`; };
+const rupees = b => "₹".repeat(b) + `<i>${"₹".repeat(4-b)}</i>`;
+
+$("#build").textContent = `Built ${DATA.build.date} from ${DATA.build.branch} @ ${DATA.build.commit} · ${DATA.experiences.length} experiences · ${DATA.golden.length} test questions`;
+
+/* ---------- Tabs ---------- */
+function showTab(name){
+  const desk = name === "desk";
+  $("#tab-traveller").setAttribute("aria-selected", !desk);
+  $("#tab-desk").setAttribute("aria-selected", desk);
+  $("#view-traveller").hidden = desk;
+  $("#view-desk").hidden = !desk;
+  try { localStorage.setItem("lifelist-preview-tab", name); } catch(e) {}
+}
+$("#tab-traveller").addEventListener("click", () => showTab("traveller"));
+$("#tab-desk").addEventListener("click", () => showTab("desk"));
+let startTab = location.hash === "#desk" ? "desk" : location.hash === "#traveller" ? "traveller" : null;
+if (!startTab) { try { startTab = localStorage.getItem("lifelist-preview-tab"); } catch(e) {} }
+showTab(startTab === "desk" ? "desk" : "traveller");
+
+/* ---------- Traveller view ---------- */
+const state = {q:"", month:0, seg:"", visa:"", lanes:new Set(), budgets:new Set(), selected:null};
+MONTHS.forEach((m,i) => $("#month").insertAdjacentHTML("beforeend", `<option value="${i+1}">${["January","February","March","April","May","June","July","August","September","October","November","December"][i]}</option>`));
+Object.entries(LANES).forEach(([k,[name,v]]) => $("#lanes").insertAdjacentHTML("beforeend",
+  `<button class="chip" type="button" data-lane="${k}" aria-pressed="false" style="--lane:var(${v})"><span class="dot"></span>${name}</button>`));
+[1,2,3,4].forEach(n => $("#budgets").insertAdjacentHTML("beforeend",
+  `<button class="chip rupees" type="button" data-bud="${n}" aria-pressed="false" aria-label="${BANDS[n-1][2]}">${"₹".repeat(n)}</button>`));
+
+function args(){
+  const a = {};
+  if (state.q) a.query = state.q;
+  if (state.month) a.month = state.month;
+  if (state.budgets.size) a.budget_band = [...state.budgets].sort();
+  if (state.visa) a.max_visa_effort = state.visa;
+  if (state.lanes.size) a.lane = [...state.lanes];
+  if (state.seg) a.segment = state.seg;
+  return a;
+}
+
+function renderSearch(){
+  const a = args();
+  const out = searchExperiences(graph, a);
+  $("#call").textContent = `search_experiences(${JSON.stringify(a)})\n→ match_quality: "${out.match_quality}", ${out.results.length} result${out.results.length===1?"":"s"}`;
+  $("#count").textContent = `${out.results.length} of ${graph.size}`;
+  if (!out.results.length) { renderNoMatch(a); return; }
+  $("#results").innerHTML = out.results.map(r => {
+    const d = graph.get(r.id), [, v] = LANES[d.lane];
+    return `<button class="res" type="button" data-id="${d.id}" style="--lane:var(${v})" aria-current="${state.selected===d.id}">
+      <span class="dot"></span><span class="name">${esc(d.name)}</span>
+      <span class="meta"><span class="rupees">${rupees(d.budget_band)}</span><span>${esc(VISA[d.seed?.visa_in_passport?.effort] ?? "")}</span></span>
+      <span class="where">${esc(d.place.label)}</span></button>`;
+  }).join("");
+}
+
+function renderNoMatch(a){
+  const desc = a.query || "";
+  $("#results").innerHTML = `<div class="empty">
+    <h3>Nothing on Lifelist matches${desc ? ` “${esc(desc)}”` : " these filters"}.</h3>
+    <p>This is the no-match path: the tool says so plainly and offers to file a request for the Prospector, instead of padding the list.</p>
+    ${desc ? `<form id="reqform" class="row" style="gap:8px">
+      <label class="label" for="reqdesc">Request</label>
+      <input id="reqdesc" type="search" value="${esc(desc)}" style="flex:1 1 240px">
+      <button class="btn" type="submit" id="reqbtn">Ask Lifelist for it</button>
+    </form><p class="saved" id="reqmsg"></p>` : `<button class="btn ghost" type="button" id="reset2">Clear filters</button>`}
+  </div>`;
+  $("#reset2")?.addEventListener("click", resetFilters);
+  $("#reqform")?.addEventListener("submit", submitRequest);
+}
+
+function renderDetail(id, scroll = true){
+  const view = getExperience(graph, {id});
+  const d = graph.get(id);
+  state.selected = id;
+  document.querySelectorAll(".res").forEach(b => b.setAttribute("aria-current", b.dataset.id === id));
+  const [laneName, v] = LANES[d.lane];
+  const strip = MONTHS.map((m,i) => `<span class="${d.season_months.includes(i+1)?"on":""}" title="${m}">${m[0]}</span>`).join("");
+  const dates = (view.windows||[]).filter(w => w.starts_on).map(w => fmtDate(w.starts_on));
+  const flags = d.safety_flags.length ? d.safety_flags.map(f => `<span class="flag ${CRITICAL.has(f)?"crit":""}">${esc(f.replaceAll("_"," "))}</span>`).join("") : `<span class="flag">none</span>`;
+  const crit = d.safety_flags.some(f => CRITICAL.has(f));
+  const pairs = view.pairings.length ? view.pairings.map(p => `<div><button class="pair" type="button" data-go="${p.id}">${esc(p.name)}</button><br><span style="color:var(--muted);font-size:12.5px">${esc(p.reason)}</span></div>`).join("") : "None yet";
+  const el = $("#detail");
+  el.hidden = false;
+  el.style.setProperty("--lane", `var(${v})`);
+  el.innerHTML = `
+    <div class="d-top"><span class="lanetag"><span class="dot"></span>${laneName}</span>
+      <button class="btn ghost close" type="button" id="closedetail">Close</button></div>
+    <h2>${esc(d.name)}</h2>
+    <p>${esc(d.hook)}</p>
+    <div class="almanac" role="img" aria-label="Season months">${strip}</div>
+    <dl class="facts">
+      <dt>Where</dt><dd>${esc(d.place.label)} <span class="mono" style="color:var(--muted);font-size:12px">${d.place.countries.join(" · ")}</span></dd>
+      <dt>When</dt><dd>${esc(d.window_note || "Date to be announced")}${dates.length ? `<br><span class="mono" style="font-size:12.5px;color:var(--muted)">Fixed date: ${dates.join(", ")}</span>` : ""}</dd>
+      <dt>Scarcity</dt><dd><span class="mono" style="font-size:12.5px">${esc(d.scarcity.type)}</span> · ${esc(d.scarcity.note)}</dd>
+      <dt>Book</dt><dd>${esc(d.lead_time_note || "")}</dd>
+      <dt>Budget</dt><dd><span class="rupees">${rupees(d.budget_band)}</span> ${BANDS[d.budget_band-1][2]}</dd>
+      <dt>Visa</dt><dd>${esc(VISA[d.seed?.visa_in_passport?.effort] ?? "Unknown")}${d.seed?.visa_in_passport?.note ? ` · ${esc(d.seed.visa_in_passport.note)}` : ""}</dd>
+      <dt>Safety</dt><dd><div class="flags">${flags}</div>${crit ? `<span style="font-size:12.5px;color:var(--bad)">Safety-critical: agents can never publish changes to this without a person.</span>` : ""}</dd>
+      <dt>Pairs with</dt><dd style="display:grid;gap:6px">${pairs}</dd>
+      <dt>Where to book</dt><dd>${esc(d.seed?.where_to_book || "")}</dd>
+    </dl>
+    <p class="prov">Source: Atlas seed, checked ${fmtDate(d.provenance.checked_at)}, confidence ${esc(d.provenance.confidence)}. The Verifier must confirm these facts before travellers see them.</p>
+    <form class="fit" id="fitform">
+      <h3>Quick fit</h3>
+      <p style="font-size:13px;color:var(--muted)">A preview of check_feasibility using only the season, budget and safety flags. Visa lead times and leave days arrive with the real tool.</p>
+      <div class="row">
+        <label class="label" for="fitmonth">Month</label>
+        <select id="fitmonth">${MONTHS.map((m,i) => `<option value="${i+1}" ${state.month===i+1?"selected":""}>${m}</option>`).join("")}</select>
+        <label class="label" for="fitbudget">Budget ₹</label>
+        <input id="fitbudget" type="number" min="0" step="10000" value="300000" style="width:130px">
+      </div>
+      <div id="fitout" style="display:grid;gap:8px"></div>
+    </form>`;
+  $("#closedetail").addEventListener("click", () => { el.hidden = true; state.selected = null; renderSearch(); });
+  el.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => renderDetail(b.dataset.go)));
+  const run = () => renderFit(d);
+  $("#fitmonth").addEventListener("change", run);
+  $("#fitbudget").addEventListener("input", run);
+  $("#fitform").addEventListener("submit", e => e.preventDefault());
+  run();
+  if (scroll && window.matchMedia("(max-width: 860px)").matches) el.scrollIntoView({block:"start"});
+}
+
+function renderFit(d){
+  const month = +$("#fitmonth").value, budget = +$("#fitbudget").value || 0;
+  const reasons = [];
+  if (!d.season_months.length) reasons.push(["FACT_UNKNOWN","warning","The date is still to be announced."]);
+  else if (!d.season_months.includes(month)) reasons.push(["WINDOW_OUTSIDE_TRAVEL_DATES","blocker",`Not possible in ${MONTHS[month-1]}. Season: ${d.season_months.map(m=>MONTHS[m-1]).join(", ")}.`]);
+  const floor = BANDS[d.budget_band-1][0];
+  if (budget < floor) reasons.push(["OVER_BUDGET","blocker",`This sits in the ${BANDS[d.budget_band-1][2]} band per person, above ₹${budget.toLocaleString("en-IN")}.`]);
+  if (d.safety_flags.includes("extreme_cold")) reasons.push(["COLD","info","Expect deep cold; check the person's cold tolerance."]);
+  if (d.safety_flags.includes("age_or_fitness_limit")) reasons.push(["AGE_LIMIT","warning","There are age or fitness rules; they are not loaded yet."]);
+  if (["lottery","permit_cap"].includes(d.scarcity.type)) reasons.push(["BALLOT_OR_PERMIT","warning",d.scarcity.note]);
+  reasons.push(["FACT_UNKNOWN","warning","Visa rules per country are not loaded yet."]);
+  const verdict = reasons.some(r => r[1]==="blocker") ? "not_yet" : reasons.some(r => r[1]==="warning") ? "maybe" : "yes";
+  $("#fitout").innerHTML = `<span class="verdict v-${verdict}">${{yes:"Yes",maybe:"Maybe",not_yet:"Not yet"}[verdict]}</span>
+    <ul class="reasons">${reasons.map(([c,s,m]) => `<li>${esc(m)} <code>${c} · ${s}</code></li>`).join("")}</ul>`;
+}
+
+let db = null, user = null;
+async function submitRequest(e){
+  e.preventDefault();
+  const desc = $("#reqdesc").value.trim();
+  const msg = $("#reqmsg");
+  if (desc.length < 10) { msg.textContent = "Describe it in at least 10 characters."; return; }
+  const body = {description: desc, constraints: {...(state.month?{month:state.month}:{}), ...(state.budgets.size?{budget_band:Math.max(...state.budgets)}:{}), passport:"IN"}, channel:"web", created_at:new Date().toISOString()};
+  if (!db) { msg.textContent = "Requests can't be saved in this view. This is what would be sent: " + JSON.stringify(body); return; }
+  $("#reqbtn").disabled = true;
+  try { await db.collection("requests").add(body); msg.textContent = "Request saved. The Prospector reads these as demand."; }
+  catch(err) { msg.textContent = err?.code === "quota_exceeded" ? "The request store is full." : "Couldn't save the request. Try again."; $("#reqbtn").disabled = false; }
+}
+
+function resetFilters(){
+  Object.assign(state, {q:"", month:0, seg:"", visa:""}); state.lanes.clear(); state.budgets.clear();
+  $("#q").value = ""; $("#month").value = "0"; $("#seg").value = ""; $("#visa").value = "";
+  document.querySelectorAll("#lanes .chip, #budgets .chip").forEach(c => c.setAttribute("aria-pressed","false"));
+  renderSearch();
+}
+
+document.addEventListener("click", e => {
+  const lane = e.target.closest("[data-lane]");
+  if (lane) { const k = lane.dataset.lane; state.lanes.has(k) ? state.lanes.delete(k) : state.lanes.add(k); lane.setAttribute("aria-pressed", state.lanes.has(k)); renderSearch(); return; }
+  const bud = e.target.closest("[data-bud]");
+  if (bud) { const n = +bud.dataset.bud; state.budgets.has(n) ? state.budgets.delete(n) : state.budgets.add(n); bud.setAttribute("aria-pressed", state.budgets.has(n)); renderSearch(); return; }
+  const res = e.target.closest(".res");
+  if (res) renderDetail(res.dataset.id);
+});
+$("#q").addEventListener("input", e => { state.q = e.target.value.trim(); renderSearch(); });
+$("#month").addEventListener("change", e => { state.month = +e.target.value; renderSearch(); });
+$("#seg").addEventListener("change", e => { state.seg = e.target.value; renderSearch(); });
+$("#visa").addEventListener("change", e => { state.visa = e.target.value; renderSearch(); });
+$("#reset").addEventListener("click", resetFilters);
+renderSearch();
+if (!window.matchMedia("(max-width: 860px)").matches) renderDetail("eclipse-luxor", false);
+
+/* ---------- Editor's desk ---------- */
+const CATS = ["fact","search","no_match","feasibility","safety","freshness","adversarial"];
+const CAT_NAMES = {fact:"Facts",search:"Search",no_match:"No match",feasibility:"Feasibility",safety:"Safety",freshness:"Freshness",adversarial:"Adversarial"};
+const AUTO_NAMES = {pass:"Passes against the graph",awaiting_tool:"Waiting for the tool",awaiting_data:"Waiting for data",judge:"Judge only"};
+const reviews = {};          // id -> {status, note, updated_at}
+const dstate = {cats:new Set(), r:"", a:"", care:false, q:""};
+const openItems = new Set();
+const drafts = {};          // id -> unsaved note text
+CATS.forEach(c => $("#cats").insertAdjacentHTML("beforeend", `<button class="chip" type="button" data-cat="${c}" aria-pressed="false">${CAT_NAMES[c]}</button>`));
+
+const statusOf = it => reviews[it.id]?.status || it.review || "pending";
+
+function renderSummary(){
+  const n = DATA.golden.length;
+  const counts = {verified:0, disputed:0, pending:0};
+  DATA.golden.forEach(it => counts[statusOf(it)]++);
+  const auto = {pass:0, awaiting_tool:0, awaiting_data:0, judge:0};
+  DATA.golden.forEach(it => auto[it.auto]++);
+  const pct = k => (counts[k] / n * 100).toFixed(1) + "%";
+  const apct = k => (auto[k] / n * 100).toFixed(1) + "%";
+  $("#summary").innerHTML = `
+    <div class="tile"><span class="eyebrow">Your review</span><b>${counts.verified} of ${n} verified</b>
+      <div class="bar" role="img" aria-label="${counts.verified} verified, ${counts.disputed} disputed, ${counts.pending} pending"><span style="width:${pct("verified")};background:var(--ok)"></span><span style="width:${pct("disputed")};background:var(--bad)"></span></div>
+      <div class="legend"><span><i style="background:var(--ok)"></i>${counts.verified} verified</span><span><i style="background:var(--bad)"></i>${counts.disputed} disputed</span><span><i style="background:var(--soft);border:1px solid var(--line)"></i>${counts.pending} pending</span></div></div>
+    <div class="tile"><span class="eyebrow">Automatic checks today</span><b>${auto.pass} pass</b>
+      <div class="bar" role="img" aria-label="Automatic check status"><span style="width:${apct("pass")};background:var(--ok)"></span><span style="width:${apct("awaiting_tool")};background:var(--warn)"></span><span style="width:${apct("awaiting_data")};background:var(--accent-fill)"></span></div>
+      <div class="legend"><span><i style="background:var(--ok)"></i>${auto.pass} pass</span><span><i style="background:var(--warn)"></i>${auto.awaiting_tool} need the tool</span><span><i style="background:var(--accent-fill)"></i>${auto.awaiting_data} need data</span><span><i style="background:var(--soft);border:1px solid var(--line)"></i>${auto.judge} judge only</span></div></div>
+    <div class="tile"><span class="eyebrow">Check first</span><b>${DATA.special_care.length} items</b>
+      <p style="font-size:13px;color:var(--muted)">${DATA.special_care.join(", ")}: facts taken from secondary sources.</p></div>`;
+}
+
+function itemMatches(it){
+  if (dstate.cats.size && !dstate.cats.has(it.category)) return false;
+  if (dstate.r && statusOf(it) !== dstate.r) return false;
+  if (dstate.a && it.auto !== dstate.a) return false;
+  if (dstate.care && !CARE.has(it.id)) return false;
+  if (dstate.q && !(it.id + " " + it.question + " " + it.answer).toLowerCase().includes(dstate.q.toLowerCase())) return false;
+  return true;
+}
+
+function itemHTML(it){
+  const st = statusOf(it), r = reviews[it.id];
+  const autoCls = it.auto === "pass" ? "p-pass" : it.auto === "judge" ? "" : "p-wait";
+  const checks = (it.checks||[]).map((c,i) => {
+    const res = it.check_results?.[i];
+    const mark = res == null ? `<span class="wait" title="Not run yet">○</span>` : res ? `<span class="ok" title="Passes">✓</span>` : `<span class="bad" title="Fails">✗</span>`;
+    return `<li>${mark}<code>${esc(c.path)} ${esc(c.op)} ${esc(JSON.stringify(c.value))}</code></li>`;
+  }).join("");
+  return `<details class="item" data-id="${it.id}" data-status="${st}" ${openItems.has(it.id)?"open":""}>
+    <summary><span class="gid">${it.id}</span><span class="q">${esc(it.question)}</span>
+      <span class="pills"><span class="pill">${CAT_NAMES[it.category]}</span><span class="pill ${autoCls}">${AUTO_NAMES[it.auto]}</span><span class="pill p-${st}">${st}</span>${CARE.has(it.id)?`<span class="pill p-wait">check first</span>`:""}</span></summary>
+    <div class="body">
+      <div class="kv">
+        <span>Expected answer</span><span>${esc(it.answer)}</span>
+        ${it.tool ? `<span>Tool call</span><span><pre class="call">${esc(it.tool.name)}(${esc(JSON.stringify(it.tool.args))})</pre></span>` : ""}
+        ${checks ? `<span>Checks</span><ul class="checks">${checks}</ul>` : ""}
+        ${it.rubric ? `<span>Judge rubric</span><ul class="rubric">${it.rubric.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}
+        ${it.requires_data ? `<span>Waiting for</span><span class="mono" style="font-size:12px">${it.requires_data.map(esc).join("<br>")}</span>` : ""}
+        <span>Source</span><span class="mono" style="font-size:12px">${esc(it.source)}</span>
+      </div>
+      <label class="label" for="note-${it.id}" style="min-width:0">Note for disputes or the source you checked</label>
+      <textarea id="note-${it.id}" data-note="${it.id}" placeholder="e.g. Confirmed on the organiser's site, 18 Oct">${esc(drafts[it.id] ?? r?.note ?? "")}</textarea>
+      <div class="actions">
+        <button class="btn ok-btn" type="button" data-mark="verified" data-id="${it.id}">Mark verified</button>
+        <button class="btn bad-btn" type="button" data-mark="disputed" data-id="${it.id}">Mark disputed</button>
+        <button class="btn ghost" type="button" data-mark="pending" data-id="${it.id}">Reset</button>
+        <span class="saved" id="saved-${it.id}">${r?.updated_at ? `Saved ${new Date(r.updated_at).toLocaleString()}` : ""}</span>
+      </div>
+    </div>
+  </details>`;
+}
+
+function renderDesk(){
+  renderSummary();
+  const shown = DATA.golden.filter(itemMatches);
+  $("#dcount").textContent = `${shown.length} of ${DATA.golden.length}`;
+  $("#items").innerHTML = shown.length ? shown.map(itemHTML).join("") : `<div class="empty"><p>No questions match these filters.</p></div>`;
+  if (!db) document.querySelectorAll("[data-mark],[data-note]").forEach(el => el.disabled = true);
+}
+
+$("#items").addEventListener("toggle", e => { const d = e.target.closest("details"); if (d) d.open ? openItems.add(d.dataset.id) : openItems.delete(d.dataset.id); }, true);
+$("#cats").addEventListener("click", e => { const c = e.target.closest("[data-cat]"); if (!c) return; const k = c.dataset.cat; dstate.cats.has(k) ? dstate.cats.delete(k) : dstate.cats.add(k); c.setAttribute("aria-pressed", dstate.cats.has(k)); renderDesk(); });
+$("#rstatus").addEventListener("change", e => { dstate.r = e.target.value; renderDesk(); });
+$("#astatus").addEventListener("change", e => { dstate.a = e.target.value; renderDesk(); });
+$("#care").addEventListener("click", e => { dstate.care = !dstate.care; e.currentTarget.setAttribute("aria-pressed", dstate.care); renderDesk(); });
+$("#dq").addEventListener("input", e => { dstate.q = e.target.value.trim(); renderDesk(); });
+
+const writing = new Set();
+async function saveReview(id, status){
+  if (!db || writing.has(id)) return;
+  const note = document.querySelector(`[data-note="${id}"]`)?.value.trim() || "";
+  if (status === "disputed" && !note) { $(`#saved-${id}`).textContent = "Add a note saying what is wrong before disputing."; return; }
+  writing.add(id);
+  $(`#saved-${id}`).textContent = "Saving…";
+  const body = {status, note, updated_at: new Date().toISOString()};
+  try { const uid = await user?.id?.(); if (uid) body.by = uid; } catch(e) {}
+  try { await db.doc(`reviews/${id}`).set(body); delete drafts[id]; }
+  catch(err) { $(`#saved-${id}`).textContent = err?.code === "invalid_argument" ? "You can view this page but not save reviews." : "Couldn't save. Try again."; }
+  finally { writing.delete(id); }
+}
+$("#items").addEventListener("input", e => { const t = e.target.closest("[data-note]"); if (t) drafts[t.dataset.note] = t.value; });
+$("#items").addEventListener("click", e => {
+  const b = e.target.closest("[data-mark]");
+  if (b) saveReview(b.dataset.id, b.dataset.mark);
+});
+
+renderDesk();
+
+/* ---------- Store: light up saving when the viewer provides it ---------- */
+(async () => {
+  try { db = await window.claude?.use?.("db"); } catch(e) { db = null; }
+  try { user = await window.claude?.use?.("user"); } catch(e) { user = null; }
+  if (!db) {
+    $("#store-note").textContent = "Saving isn't available in this view, so the review buttons are off. Open the page on claude.ai while signed in to mark items.";
+    renderDesk();
+    return;
+  }
+  renderDesk();
+  db.collection("reviews").onSnapshot(snap => {
+    for (const k of Object.keys(reviews)) delete reviews[k];
+    snap.docs.forEach(doc => { if (doc.exists) reviews[doc.id] = doc.data(); });
+    renderDesk();
+  }, () => { $("#store-note").textContent = "Lost the connection to saved reviews. Reload the page to reconnect."; });
+})();
+</script>

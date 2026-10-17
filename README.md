@@ -14,7 +14,8 @@ Start with [docs/README.md](docs/README.md).
 | `contracts/` | JSON Schema contracts for the public tools, with validated examples |
 | `evals/` | The 100-question golden set, a reference oracle over the graph, and check operators |
 | `supabase/` | Postgres migrations and the generated seed |
-| `scripts/` | Import, validation, seed generation and migration tests |
+| `web/preview/` | The preview page template; `npm run preview:build` writes `web/preview/dist/lifelist-preview.html` |
+| `scripts/` | Import, validation, seed generation, migration tests and the preview build |
 
 ## Checks
 

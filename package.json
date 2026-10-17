@@ -11,6 +11,7 @@
     "contracts:check": "node scripts/check-contracts.mjs",
     "golden:check": "node scripts/check-golden.mjs",
     "db:test": "bash scripts/test-migrations.sh",
+    "preview:build": "node scripts/build-preview.mjs",
     "check": "npm run graph:validate && npm run contracts:check && npm run golden:check"
   },
   "dependencies": {

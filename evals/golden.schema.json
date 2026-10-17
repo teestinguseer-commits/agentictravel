@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.lifelist.invalid/evals/golden.schema.json",
+  "title": "Lifelist golden set",
+  "type": "object",
+  "required": ["version", "created", "items"],
+  "properties": {
+    "version": { "type": "integer", "minimum": 1 },
+    "created": { "type": "string", "format": "date" },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "category", "question", "answer", "source", "review"],
+        "anyOf": [{ "required": ["checks"] }, { "required": ["rubric"] }],
+        "properties": {
+          "id": { "type": "string", "pattern": "^G[0-9]{3}$" },
+          "category": { "enum": ["fact", "search", "no_match", "feasibility", "safety", "freshness", "adversarial"] },
+          "question": { "type": "string", "minLength": 5 },
+          "tool": {
+            "type": "object",
+            "required": ["name", "args"],
+            "properties": {
+              "name": { "enum": ["search_experiences", "get_experience", "check_feasibility", "request_experience"] },
+              "args": { "type": "object" }
+            },
+            "additionalProperties": false
+          },
+          "checks": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["path", "op", "value"],
+              "properties": {
+                "path": { "type": "string", "pattern": "^[a-z_]+(\\[\\])?(\\.[a-z_]+(\\[\\])?)*$" },
+                "op": { "enum": ["equals", "one_of", "includes", "excludes", "set_equals", "length_gte", "exists"] },
+                "value": {}
+              },
+              "additionalProperties": false
+            }
+          },
+          "rubric": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+          "answer": { "type": "string" },
+          "requires_data": { "type": "array", "items": { "type": "string", "pattern": "^[a-z_]+:[A-Za-z0-9_:.-]+$" } },
+          "source": { "type": "string" },
+          "review": { "enum": ["pending", "verified", "disputed"] },
+          "reviewed_by": { "type": "string" },
+          "reviewed_on": { "type": "string", "format": "date" },
+          "tags": { "type": "array", "items": { "type": "string" } }
+        },
+        "if": { "required": ["checks"] },
+        "then": { "required": ["tool"] },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -253,7 +253,7 @@ v1's list stands. Added or changed items are in **bold**.
 - [ ] Sign up for Viator's affiliate programme and two other open programmes. **Ask each about booking postbacks.**
 - [x] Draft the graph schema, **including Signal, Candidate and Demand**, and load the 65 Atlas entries. *(Done 17 Oct: `supabase/migrations/`, `graph/experiences/`.)*
 - [x] Write the MCP contract for `search_experiences`, `get_experience`, `check_feasibility` **and `request_experience`**. *(Done 17 Oct: [architecture/contracts.md](architecture/contracts.md).)*
-- [ ] Build the 100-question golden set for evals.
+- [x] Build the 100-question golden set for evals. *(Done 17 Oct: [evals.md](evals.md); your review of each answer is still pending.)*
 - [ ] Choose the two launch lanes from interview data; default to sky and sport.
 - [ ] Email the first five partners on the list.
 - [ ] **Apply for the Google Trends API alpha; create an Instagram Business account and a Meta developer app, and start App Review for Public Content Access.**

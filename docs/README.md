@@ -9,8 +9,9 @@ Lifelist is an agent-first platform for rare travel experiences, run around the 
 3. [architecture/graph.md](architecture/graph.md): the Experience Graph, including Signal, Candidate and Demand.
 4. [architecture/events.md](architecture/events.md): the event bus that keeps agents working without polling.
 5. [architecture/mcp-tools.md](architecture/mcp-tools.md): the public tool layer for personal AIs, the web app and internal agents, with full contracts for the first four tools in [architecture/contracts.md](architecture/contracts.md).
-6. [decisions/](decisions/): the decisions behind the design.
-7. [learning/](learning/README.md): the learning track. Lifelist as a teaching hospital, with 14 rotations, a JD-by-JD coverage map for the 25 PM roles, and the proof portfolio.
+6. [evals.md](evals.md): the 100-question golden set every tool and agent is tested against.
+7. [decisions/](decisions/): the decisions behind the design.
+8. [learning/](learning/README.md): the learning track. Lifelist as a teaching hospital, with 14 rotations, a JD-by-JD coverage map for the 25 PM roles, and the proof portfolio.
 
 ## Agent specs
 

@@ -9,8 +9,9 @@
     "graph:validate": "node scripts/validate-graph.mjs",
     "graph:seed-sql": "node scripts/build-seed-sql.mjs",
     "contracts:check": "node scripts/check-contracts.mjs",
+    "golden:check": "node scripts/check-golden.mjs",
     "db:test": "bash scripts/test-migrations.sh",
-    "check": "npm run graph:validate && npm run contracts:check"
+    "check": "npm run graph:validate && npm run contracts:check && npm run golden:check"
   },
   "dependencies": {
     "ajv": "8.20.0",

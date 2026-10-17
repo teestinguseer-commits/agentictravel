@@ -12,6 +12,7 @@ Start with [docs/README.md](docs/README.md).
 | `graph/experiences/` | One reviewed YAML definition per experience (the stable half of the graph) |
 | `graph/seed/` | The Atlas export the definitions were first imported from |
 | `contracts/` | JSON Schema contracts for the public tools, with validated examples |
+| `evals/` | The 100-question golden set, a reference oracle over the graph, and check operators |
 | `supabase/` | Postgres migrations and the generated seed |
 | `scripts/` | Import, validation, seed generation and migration tests |
 
@@ -21,7 +22,7 @@ Requires Node 22 and, for the database test, a local Postgres (or `DATABASE_URL`
 
 ```
 npm ci
-npm run check        # experience definitions + tool contracts
+npm run check        # experience definitions, tool contracts and the golden set
 npm run graph:seed-sql
 npm run db:test      # migrations, seed and smoke checks on a throwaway database
 ```

@@ -20,7 +20,8 @@ Agent run logs and traces, budgets and spend, error rates, source access status,
 
 - Pauses and resumes agents (with a reason in the audit log).
 - Releases reserve budget for spikes (and reports it).
-- The **daily digest**, delivered by email and WhatsApp:
+- Monthly **access reviews** of every agent's scopes and keys (learning rotation R13).
+- The **daily digest**, delivered by email and WhatsApp, and from Phase 2 into Slack with the review queue actionable there through MCP:
   1. What needs you today: the review queue, at most 20 items, ranked by expected value.
   2. What the agents did: experiences proposed, verified, published, retired; alerts sent.
   3. Health: freshness, golden-set accuracy, tool success rate, spend against budget, paused agents.

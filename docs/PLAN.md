@@ -20,6 +20,7 @@ v1 described a **library**: Scouts catalogue supply, a Verifier checks facts, a 
 | 10 | Per-agent **budgets**, model tiers, nightly batch runs and a kill switch | 24/7 agents can quietly blow the ₹10–25k a month budget |
 | 11 | Fix for **Path 1 booking blindness**: partner postbacks, self-reported Booked/Done, `report_outcome` | You can't learn from bookings you can't see |
 | 12 | The web app is **just another client** of the same API the MCP server uses | Agent-first in the architecture, not only in the pitch |
+| 13 | A **learning track**: 14 rotations that make the build double as training for the 25 PM roles in your field guide ([learning/](learning/README.md)) | Every learnable JD requirement gets built and proven on Lifelist, not studied alongside it |
 
 ## The bet
 
@@ -170,6 +171,21 @@ Unchanged from v1: launch on **Path 1** (hand-off) and move individual lanes to 
 
 **Weekly rhythm at 12–15 hours.** About a third on supply and partners, a third directing coding agents against acceptance tests, and a third on users. **The daily review queue (about 10 minutes a day, roughly 1.5 hours a week) comes out of the users third:** it is user research, delivered by agents.
 
+## Learning track
+
+Lifelist is also your residency. Each phase moves you through rotations (agents and MCP, evals, safety, data, voice, growth, billing, payments, identity, CI) that the 25 roles in [Cracking Lenny's 25 PM Roles](https://claude.ai/artifact/3D2fKmaBEPgvoXgaQHSXLh) screen for. Details: [learning/README.md](learning/README.md), with the requirement-by-requirement map in [learning/jd-coverage.md](learning/jd-coverage.md).
+
+| Phase | Rotations | Build additions the learning track introduces |
+| --- | --- | --- |
+| 0–1 | R1 tools and MCP, R2 evals, R3 safety, R4 data, R6 CI, R14 craft | CI run logging from the first commit; signed container and SBOM for the MCP server; dbt over the events table; unsafe-advice eval |
+| 1–2 | R5 orchestration and economics, R7 partners | Cost-per-moment dashboard; partner integration scorecard |
+| 2 | R8 voice, R9 post-training, R10 growth, R11 billing sandbox, R12 payments memo, R13 identity | Concierge Desk on WhatsApp voice notes; fine-tuned small extractor; metered B2B Graph API billed in Stripe test mode; review queue and digest in Slack via MCP; agent lifecycle and access reviews |
+| 3 | R11 and R12 live | Path 3 quote-to-cash, double-entry ledger with landed cost, UPI mandate checkout, operator payouts |
+
+**What it can't do.** Years of experience, managing PMs, location and work authorisation, required degrees and prior scale are hard filters that no project meets. The coverage map lists them role by role. Two offsets are written into the plan: a part-time product intern in Phase 2–3 who owns one lane (real, if small, PM management), and a three-person advisory board with quarterly updates.
+
+**Time.** Rotations sit inside build work. Writing each rotation's proof artifact and field note adds 1–2 hours at its end. Side quests run only in slack weeks between gates, at most one a month.
+
 ## Stack and running cost
 
 v1 picks stand (Supabase Postgres with pgvector, the TypeScript MCP SDK with MCP Apps, Next.js, WhatsApp Business API, Viator Partner API, Duffel on Path 3, PostHog, golden-set evals). Added:
@@ -243,6 +259,8 @@ v1's list stands. Added or changed items are in **bold**.
 - [ ] **Apply for the Google Trends API alpha; create an Instagram Business account and a Meta developer app, and start App Review for Public Content Access.**
 - [ ] **Get a YouTube Data API key; list 30 Indian travel creators and 30 hashtags for the first Trend Scout watch list.**
 - [ ] **Write the first Meta AI prompt pack and run it once by hand to judge usefulness ([agents/trend-scout.md](agents/trend-scout.md)).**
+- [ ] **Turn on CI run logging from the first commit (R6 needs 8 weeks of data), and start the decision log ([learning/rotations.md](learning/rotations.md)).**
+- [ ] **Check visa sponsorship for each Tier A role in the field guide before planning which proofs to prioritise.**
 
 ## Sources
 

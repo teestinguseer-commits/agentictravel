@@ -8,7 +8,7 @@ Answer inbound WhatsApp and email from the graph, and hand everything else to a 
 
 ## Triggers
 
-Inbound WhatsApp messages and emails.
+Inbound WhatsApp messages and emails. From Phase 2, WhatsApp voice notes (transcribed, answered in text or voice) and one phone flow: "Is my aurora trip still on?" (learning rotation R8).
 
 ## Reads
 

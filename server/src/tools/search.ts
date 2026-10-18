@@ -83,7 +83,7 @@ export function searchExperiences(store: GraphStore, args: SearchArgs, ctx: Tool
     if (args.lane && !args.lane.includes(d.lane)) return false;
     if (args.segment && !d.segments.includes(args.segment as never)) return false;
     if (args.max_visa_effort) {
-      const v = tripVisaEffort(d, passport, policy);
+      const v = tripVisaEffort(d, passport, policy, store);
       // An unknown visa rule can't be promised to fit the filter.
       if (!isKnown(v) || VISA_ORDER.indexOf(v.value) > VISA_ORDER.indexOf(args.max_visa_effort)) return false;
     }
@@ -121,7 +121,7 @@ export function searchExperiences(store: GraphStore, args: SearchArgs, ctx: Tool
     season_months: d.season_months,
     scarcity: d.scarcity.type,
     budget_band: budgetBand(d, policy),
-    visa_effort: tripVisaEffort(d, passport, policy),
+    visa_effort: tripVisaEffort(d, passport, policy, store),
     next_window: nextWindow(d, policy),
     why: why(d, args, words),
     score: Math.round(score * 100) / 100,

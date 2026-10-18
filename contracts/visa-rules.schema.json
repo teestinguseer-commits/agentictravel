@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.lifelist.invalid/contracts/visa-rules.schema.json",
+  "title": "Visa rules for one passport (graph/visa/<passport>.yaml)",
+  "type": "object",
+  "required": ["passport", "updated", "rules"],
+  "properties": {
+    "passport": { "$ref": "common.schema.json#/$defs/CountryCode" },
+    "updated": { "type": "string", "format": "date" },
+    "rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["country", "name", "effort", "visa_type", "lead_time_days", "official_sources", "checked_at", "verified_by", "confidence"],
+        "properties": {
+          "country": { "type": "string", "pattern": "^([A-Z]{2}|SCHENGEN)$" },
+          "name": { "type": "string" },
+          "covers": { "type": "array", "items": { "$ref": "common.schema.json#/$defs/CountryCode" }, "uniqueItems": true },
+          "effort": { "$ref": "common.schema.json#/$defs/VisaEffort" },
+          "visa_type": { "type": "string" },
+          "lead_time_days": { "type": "integer", "minimum": 0, "maximum": 730 },
+          "exemption": { "type": "string", "description": "A condition that lowers the effort, e.g. holding a valid US visa" },
+          "note": { "type": "string" },
+          "refusal_rate": { "type": "number", "minimum": 0, "maximum": 1 },
+          "official_sources": { "type": "array", "items": { "type": "string", "format": "uri" } },
+          "open_questions": { "type": "array", "items": { "type": "string" } },
+          "evidence": {
+            "type": "object",
+            "required": ["url", "quote", "content_sha256"],
+            "properties": {
+              "url": { "type": "string", "format": "uri" },
+              "quote": { "type": "string", "maxLength": 600 },
+              "content_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+            },
+            "additionalProperties": false
+          },
+          "checked_at": { "type": "string", "format": "date" },
+          "verified_by": { "type": "string" },
+          "confidence": { "$ref": "common.schema.json#/$defs/Confidence" }
+        },
+        "if": { "properties": { "country": { "const": "SCHENGEN" } } },
+        "then": { "required": ["covers"] },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

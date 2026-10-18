@@ -4,7 +4,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { execSync } from "node:child_process";
 import { parse } from "yaml";
-import { loadGraph } from "../evals/lib/graph.mjs";
+import { loadGraph, loadVisaRules } from "../evals/lib/graph.mjs";
 import { ORACLE_TOOLS } from "../evals/lib/oracle.mjs";
 import { check, normalize } from "../evals/lib/assert.mjs";
 
@@ -35,10 +35,14 @@ const data = {
   },
   experiences: [...graph.values()].sort((a, b) => a.id.localeCompare(b.id)),
   golden,
+  visa_rules: [...loadVisaRules("IN").entries()],
   special_care: SPECIAL_CARE,
 };
 
-const oracle = readFileSync("evals/lib/oracle.mjs", "utf8").replace(/^export /gm, "");
+// In the browser the oracle reads visa rules from the embedded data instead of the file system.
+const oracle = readFileSync("evals/lib/oracle.mjs", "utf8")
+  .replace(/^import \{ loadVisaRules \} from "\.\/graph\.mjs";$/m, 'const loadVisaRules = () => new Map(JSON.parse(document.getElementById("data").textContent).visa_rules);')
+  .replace(/^export /gm, "");
 const json = JSON.stringify(data).replace(/</g, "\\u003c");
 const html = readFileSync("web/preview/template.html", "utf8")
   .replace("/*__DATA__*/", () => json)

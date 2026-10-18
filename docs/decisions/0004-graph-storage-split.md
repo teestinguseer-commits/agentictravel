@@ -13,6 +13,8 @@ Agents will propose changes to the graph around the clock. Every change must be 
 
 Analogy: the git repo is the encyclopaedia, edited carefully with a full history. Postgres is the live ticker.
 
+**Until Postgres is deployed,** visa rules also live in git (`graph/visa/<passport>.yaml`), and the World-change Scout proposes changes to them as pull requests. They move to the `visa_constraints` table when the database is live.
+
 ## Consequences
 
 - A free, familiar review interface and history for the most important records.

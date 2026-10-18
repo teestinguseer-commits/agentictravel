@@ -23,6 +23,10 @@ segments:
 safety_flags:
   - altitude
   - age_or_fitness_limit
+visa_arranged:
+  countries:
+    - CN
+  note: Travel documents for Tibet are arranged through the MEA yatra after the draw.
 status: live
 seed:
   visa_in_passport:

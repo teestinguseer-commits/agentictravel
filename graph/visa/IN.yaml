@@ -1,0 +1,398 @@
+# Visa rules for Indian passports (ordinary passports, tourism), one entry per country
+# or group that a Lifelist experience enters. Maintained by the World-change Scout
+# (agents/world-change-scout), reviewed through pull requests, read by the MCP server.
+#
+# effort:          none = no visa; low = e-visa, eTA or on arrival; medium = online application
+#                  with documents or through an agent; high = consular visa with an appointment
+# lead_time_days:  how many days before departure to start, including appointment waits and
+#                  processing. These are planning estimates, not official figures.
+# confidence:      every entry starts low. A person (or the Verifier, later) raises it after
+#                  checking the official source.
+passport: IN
+updated: "2026-10-18"
+rules:
+  - country: SCHENGEN
+    name: Schengen area
+    covers: [ES, FR, DE, BE, NO, SE, FI, IS, MC]
+    effort: high
+    visa_type: Schengen short-stay (C) visa, applied through the destination country's visa centre
+    lead_time_days: 60
+    note: Apply at the consulate of the main destination; appointments can be booked up to 6 months ahead. Monaco is not in Schengen but is entered through France on a Schengen visa.
+    refusal_rate: 0.158
+    official_sources:
+      - https://home-affairs.ec.europa.eu/policies/schengen-borders-and-visa/visa-policy_en
+    open_questions:
+      - Lead time varies by consulate and season; replace the estimate with current appointment waits per visa centre.
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: GB
+    name: United Kingdom
+    effort: high
+    visa_type: Standard Visitor visa
+    lead_time_days: 45
+    official_sources: [https://www.gov.uk/standard-visitor]
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: US
+    name: United States
+    effort: high
+    visa_type: B1/B2 visitor visa with consular interview
+    lead_time_days: 240
+    note: Interview waits in India vary widely by consulate; check the current wait before planning.
+    official_sources: [https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/global-visa-wait-times.html]
+    open_questions:
+      - Replace the 240-day estimate with the current interview wait for each Indian consulate.
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: CA
+    name: Canada
+    effort: high
+    visa_type: Visitor visa (temporary resident visa) with biometrics
+    lead_time_days: 120
+    official_sources: [https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada.html]
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: AU
+    name: Australia
+    effort: medium
+    visa_type: Visitor visa (subclass 600), online
+    lead_time_days: 45
+    official_sources: [https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/visitor-600]
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: NZ
+    name: New Zealand
+    effort: medium
+    visa_type: Visitor visa, online
+    lead_time_days: 45
+    official_sources: [https://www.immigration.govt.nz/new-zealand-visas/visas/visa/visitor-visa]
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: JP
+    name: Japan
+    effort: medium
+    visa_type: Japan eVISA (single entry), applied through an accredited agency
+    lead_time_days: 21
+    official_sources: [https://www.mofa.go.jp/j_info/visit/visa/index.html]
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: CN
+    name: China
+    effort: medium
+    visa_type: Tourist (L) visa through the Chinese Visa Application Service Center
+    lead_time_days: 30
+    note: The Kailash Mansarovar Yatra's travel documents are arranged through the MEA yatra.
+    official_sources: [https://www.visaforchina.cn/]
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: SG
+    name: Singapore
+    effort: medium
+    visa_type: Visa through an authorised visa agent
+    lead_time_days: 14
+    official_sources: [https://www.ica.gov.sg/enter-transit-depart/entering-singapore/visa_requirements]
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: TR
+    name: Türkiye
+    effort: medium
+    visa_type: Sticker visa through the visa centre
+    lead_time_days: 30
+    exemption: e-Visa if you hold a valid US, UK or Schengen visa or residence permit
+    official_sources: [https://www.evisa.gov.tr/]
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: MX
+    name: Mexico
+    effort: high
+    visa_type: Consular visa
+    lead_time_days: 45
+    exemption: No Mexican visa needed with a valid US, UK, Canada, Japan or Schengen visa
+    official_sources: [https://embamex.sre.gob.mx/india/]
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: AR
+    name: Argentina
+    effort: high
+    visa_type: Consular visa
+    lead_time_days: 60
+    exemption: No Argentine visa needed for tourism (up to 90 days) with a valid US visa, since 28 Aug 2025
+    official_sources:
+      - https://eindi.cancilleria.gob.ar/en/node/75902
+      - https://cgmum.cancilleria.gob.ar/en/node/84317
+    open_questions:
+      - The embassy page says only a B2 visa qualifies; the Mumbai consulate lists B1/B2, B1, J, O, P, E, H-1B and green cards. Confirm which applies.
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: CL
+    name: Chile
+    effort: high
+    visa_type: Consular tourist visa
+    lead_time_days: 45
+    official_sources: []
+    open_questions:
+      - No official source recorded yet; find the Chilean consulate's page for Indian applicants.
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: BR
+    name: Brazil
+    effort: high
+    visa_type: Tourist visa
+    lead_time_days: 45
+    official_sources: [https://www.gov.br/mre/en]
+    open_questions:
+      - One 2026 report describes a Brazil e-visa for Indians; no official confirmation found. Check the Itamaraty consular pages.
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: BO
+    name: Bolivia
+    effort: low
+    visa_type: e-Visa, applied online before travel
+    lead_time_days: 30
+    note: Reports say visa on arrival ended for Indians in 2026.
+    official_sources: [https://www.migracion.gob.bo/]
+    open_questions:
+      - Secondary sources conflict (e-visa, embassy visa, or visa-free). Confirm on the official immigration portal.
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: ZA
+    name: South Africa
+    effort: high
+    visa_type: Visitor visa through the visa centre
+    lead_time_days: 45
+    official_sources: [https://www.dha.gov.za/]
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: ZW
+    name: Zimbabwe
+    effort: low
+    visa_type: e-Visa or visa on arrival; the KAZA Univisa also covers Zambia
+    lead_time_days: 7
+    official_sources: [https://www.evisa.gov.zw/]
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: ZM
+    name: Zambia
+    effort: low
+    visa_type: e-Visa; the KAZA Univisa also covers Zimbabwe
+    lead_time_days: 14
+    official_sources: [https://eservices.zambiaimmigration.gov.zm/]
+    open_questions:
+      - One aggregator claims visa-free entry for Indians; most sources say an e-visa is needed.
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: BW
+    name: Botswana
+    effort: medium
+    visa_type: e-Visa with a tour plan, bookings and return ticket
+    lead_time_days: 21
+    official_sources: []
+    open_questions:
+      - No official source recorded yet; find the Botswana e-visa portal or High Commission page.
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: NA
+    name: Namibia
+    effort: medium
+    visa_type: Visa required; e-visa or visa on arrival reported
+    lead_time_days: 21
+    official_sources: []
+    open_questions:
+      - Sources conflict (visa-free, e-visa, visa on arrival, embassy visa). Confirm on Namibia's official immigration portal.
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: KE
+    name: Kenya
+    effort: low
+    visa_type: Electronic Travel Authorisation (eTA)
+    lead_time_days: 7
+    official_sources: [https://www.etakenya.go.ke/]
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: TZ
+    name: Tanzania
+    effort: low
+    visa_type: e-Visa
+    lead_time_days: 14
+    official_sources: [https://visa.immigration.go.tz/]
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: RW
+    name: Rwanda
+    effort: low
+    visa_type: Visa on arrival or e-visa
+    lead_time_days: 0
+    official_sources: [https://www.migration.gov.rw/]
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: UG
+    name: Uganda
+    effort: low
+    visa_type: e-Visa
+    lead_time_days: 14
+    official_sources: [https://visas.immigration.go.ug/]
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: ET
+    name: Ethiopia
+    effort: low
+    visa_type: e-Visa
+    lead_time_days: 14
+    official_sources: [https://www.evisa.gov.et/]
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: EG
+    name: Egypt
+    effort: low
+    visa_type: e-Visa
+    lead_time_days: 14
+    exemption: Visa on arrival with a valid US, UK or Schengen visa
+    official_sources: [https://visa2egypt.gov.eg/]
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: MA
+    name: Morocco
+    effort: low
+    visa_type: e-Visa
+    lead_time_days: 14
+    exemption: No visa needed with a valid US, UK or Schengen visa
+    official_sources: [https://www.acces-maroc.ma/]
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: MV
+    name: Maldives
+    effort: low
+    visa_type: Free visa on arrival (30 days)
+    lead_time_days: 0
+    official_sources: [https://immigration.gov.mv/]
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: ID
+    name: Indonesia
+    effort: low
+    visa_type: e-Visa on Arrival (e-VOA)
+    lead_time_days: 7
+    official_sources: [https://evisa.imigrasi.go.id/]
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: VN
+    name: Vietnam
+    effort: low
+    visa_type: e-Visa (up to 90 days)
+    lead_time_days: 14
+    official_sources: [https://evisa.gov.vn/]
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: MN
+    name: Mongolia
+    effort: low
+    visa_type: e-Visa
+    lead_time_days: 21
+    official_sources: [https://evisa.mn/]
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: TH
+    name: Thailand
+    effort: none
+    visa_type: Visa exemption for tourism, up to 30 days (cut from 60 days on 15 Sep 2026)
+    lead_time_days: 0
+    note: Complete the Thailand Digital Arrival Card within 72 hours before arrival.
+    official_sources: [https://newdelhi.thaiembassy.org/en/content/latest-update-on-revision-to-thailand-s-visa-exemp]
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: TO
+    name: Tonga
+    effort: medium
+    visa_type: Visa requirement unclear
+    lead_time_days: 30
+    official_sources: []
+    open_questions:
+      - Sources conflict (visa on arrival, visa-free, visa required). Confirm with Tonga immigration before listing whale swims as easy.
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: BT
+    name: Bhutan
+    effort: none
+    visa_type: No visa for Indian citizens; an entry permit and the daily Sustainable Development Fee apply
+    lead_time_days: 0
+    official_sources: [https://www.bhutan.travel/]
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low
+
+  - country: AQ
+    name: Antarctica
+    effort: none
+    visa_type: No visa; landing permits are arranged by the expedition operator under the Antarctic Treaty
+    lead_time_days: 0
+    note: Most voyages start in Argentina, so the Argentina rule applies on the way.
+    official_sources: [https://www.ats.aq/]
+    checked_at: "2026-10-18"
+    verified_by: claude-desk-research
+    confidence: low

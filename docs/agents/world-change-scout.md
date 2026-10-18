@@ -49,6 +49,28 @@ Promotion to L1 for visa and route changes from allow-listed official domains, u
 - Number of lifelists unblocked per month (people whose item moved from "not yet" to "maybe" or "yes").
 - Eval: 50 historical visa and route changes replayed from snapshots (recall of at least 0.9).
 
+## Implementation: the visa beat (live)
+
+The visa beat runs today; the other beats follow the same pattern.
+
+| Part | Where |
+| --- | --- |
+| The rules it watches | `graph/visa/IN.yaml`, one rule per country or group (Schengen), each with official sources, effort, a planning lead time, exemptions and open questions |
+| Page snapshots | `graph/visa/IN.snapshots.json`: content hash, first seen, last changed, failures in a row |
+| The agent | `agents/world-change-scout/scout.ts` (logic) and `run.ts` (command line) |
+| Schedule | `.github/workflows/world-change-scout.yml`, nightly at 03:00 IST and on demand |
+
+Each run, for every official source:
+
+1. Checks `robots.txt`, then fetches the page as `LifelistScout/0.1` and reduces it to text with a hash.
+2. **New page:** records a baseline. **Unchanged:** re-confirms the rule's check date, but only for rules a person already verified (an L1 refresh); unverified rules stay unverified.
+3. **Changed:** with `ANTHROPIC_API_KEY` set, the model reads the page as untrusted data and returns a structured answer. That answer is discarded unless its evidence quote appears verbatim on the page. A grounded change edits the rule at low confidence, with the evidence attached. Without a key, the change is flagged for a person.
+4. **Unreachable three runs in a row,** or a rule with no official source: escalated in the report.
+
+The workflow opens (or updates) one pull request with the report as its body. **Merging is the approval**; nothing reaches travellers without it.
+
+Two repository settings are needed: allow GitHub Actions to create pull requests (Settings → Actions → General), and add `ANTHROPIC_API_KEY` as a repository secret for the model step. Scheduled runs only start from the default branch.
+
 ## Escalates when
 
 - A change affects more than 25 lifelists or any Path 3 booking. Top of the review queue.

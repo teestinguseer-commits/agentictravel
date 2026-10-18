@@ -76,12 +76,33 @@ test("check_feasibility returns a contract-valid verdict for every experience", 
   await h.close();
 });
 
-test("check_feasibility never says yes while visa rules are missing", async () => {
+test("check_feasibility turns visa lead times into dated deadlines", async () => {
   const h = await connect(new YamlStore(), { policy });
   const out = await h.call("check_feasibility", { experience_id: "eclipse-luxor", travel_window: { earliest: "2027-07-30", latest: "2027-08-05" } });
+  assert.equal(out.target_window.value.starts_on, "2027-08-02");
+  assert.equal(out.verdict, "yes");
+  assert.deepEqual(out.timeline.map((t: any) => t.by), ["2027-07-19"]); // 14-day e-Visa lead time
+  assert.ok(out.reasons.some((r: any) => r.code === "VISA_LEAD_TIME" && r.facts.includes("visa_IN_EG")));
+  await h.close();
+});
+
+test("check_feasibility never says yes while a visa rule is missing", async () => {
+  class NoEgyptRule extends YamlStore {
+    visaRule(passport: string, country: string) { return country === "EG" ? undefined : super.visaRule(passport, country); }
+  }
+  const h = await connect(new NoEgyptRule(), { policy });
+  const out = await h.call("check_feasibility", { experience_id: "eclipse-luxor" });
   assert.equal(out.verdict, "maybe");
   assert.ok(out.reasons.some((r: any) => r.code === "FACT_UNKNOWN"));
-  assert.equal(out.target_window.value.starts_on, "2027-08-02");
+  await h.close();
+});
+
+test("visa arranged by the booking doesn't count against the traveller", async () => {
+  const h = await connect(new YamlStore(), { policy });
+  const exp = await h.call("get_experience", { id: "kailash", include: ["visa"] });
+  assert.equal(exp.visa[0].effort.value, "none");
+  const found = await h.call("search_experiences", { max_visa_effort: "none" });
+  assert.ok(found.results.some((r: any) => r.id === "kailash"));
   await h.close();
 });
 

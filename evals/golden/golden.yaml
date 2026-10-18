@@ -300,8 +300,9 @@ items:
     question: Which experiences in January need no visa or only an easy one for an Indian passport?
     tool: { name: search_experiences, args: { month: 1, max_visa_effort: low } }
     checks:
-      - { path: "results[].id", op: set_equals, value: [danakil, gorillas, snow-leopard, son-doong, timkat, vaadhoo] }
-    answer: Danakil Depression, the gorilla trek, snow leopards in Ladakh, Son Doong, Timkat and the glowing shoreline in the Maldives.
+      - { path: "results[].id", op: set_equals, value: [danakil, devils-pool, gorillas, snow-leopard, son-doong, timkat, uyuni, vaadhoo] }
+    answer: Danakil Depression, Devil's Pool, the gorilla trek, snow leopards in Ladakh, Son Doong, Timkat, the Uyuni salt flat and the glowing shoreline in the Maldives.
+    tags: [visa-dependent]
     source: graph
     review: pending
   - id: G033
@@ -372,8 +373,9 @@ items:
     question: Which experiences need no visa at all for an Indian passport?
     tool: { name: search_experiences, args: { max_visa_effort: none } }
     checks:
-      - { path: "results[].id", op: set_equals, value: [hornbill, kailash, paro, purushwadi, snow-leopard] }
-    answer: Hornbill Festival, Kailash Mansarovar Yatra, Paro Tshechu in Bhutan, Sahyadri fireflies and snow leopards in Ladakh.
+      - { path: "results[].id", op: set_equals, value: [hornbill, kailash, paro, purushwadi, snow-leopard, yi-peng] }
+    answer: Hornbill Festival, Kailash Mansarovar Yatra (documents arranged by the MEA), Paro Tshechu in Bhutan, Sahyadri fireflies, snow leopards in Ladakh and Yi Peng in Thailand (visa-exempt for up to 30 days).
+    tags: [visa-dependent]
     source: graph
     review: pending
   - id: G041
@@ -426,8 +428,10 @@ items:
     question: Festivals in February with an easy visa?
     tool: { name: search_experiences, args: { month: 2, lane: [fest], max_visa_effort: low } }
     checks:
-      - { path: "results[].id", op: set_equals, value: [sapporo] }
-    answer: The Sapporo Snow Festival.
+      - { path: "results[].id", op: set_equals, value: [] }
+      - { path: match_quality, op: equals, value: none }
+    answer: None right now. The Sapporo Snow Festival is the closest, but Japan's eVISA goes through an accredited agency, which counts as moderate effort.
+    tags: [visa-dependent]
     source: graph
     review: pending
   - id: G047
@@ -645,7 +649,7 @@ items:
       - { path: verdict, op: one_of, value: [yes, maybe] }
       - { path: timeline, op: length_gte, value: 1 }
     answer: Yes. Egypt offers an e-Visa; book Luxor beds and Nile flights now, as they are filling.
-    requires_data: ["visa_constraints:IN:EG"]
+    tags: [visa-dependent]
     source: graph:eclipse-luxor
     review: pending
   - id: G068
@@ -666,7 +670,7 @@ items:
       - { path: verdict, op: one_of, value: [yes, maybe] }
       - { path: "reasons[].code", op: includes, value: VISA_LEAD_TIME }
     answer: Probably. It fits the budget band, but the Schengen appointment is the bottleneck; apply now and keep bookings refundable.
-    requires_data: ["visa_constraints:IN:NO", "visa_constraints:IN:FI", "visa_constraints:IN:SE", "visa_constraints:IN:IS"]
+    tags: [visa-dependent]
     source: graph:aurora
     review: pending
   - id: G070
@@ -729,7 +733,7 @@ items:
     checks:
       - { path: "reasons[].code", op: includes, value: BALLOT_OR_PERMIT }
     answer: Only through the public ballot or official hospitality; check whether the ballot window is open.
-    requires_data: ["windows:wimbledon:ballot-2027", "visa_constraints:IN:GB"]
+    requires_data: ["windows:wimbledon:ballot-2027"]
     source: graph:wimbledon
     review: pending
   - id: G076
@@ -750,7 +754,7 @@ items:
       - { path: verdict, op: one_of, value: [yes, maybe] }
       - { path: "reasons[].code", op: includes, value: BALLOT_OR_PERMIT }
     answer: Likely, if you win tickets in the ballot and allow time for Zimbabwe and South Africa visas.
-    requires_data: ["visa_constraints:IN:ZW", "visa_constraints:IN:ZA"]
+    tags: [visa-dependent]
     source: graph:cwc2027
     review: pending
   - id: G078
@@ -760,7 +764,7 @@ items:
     checks:
       - { path: "reasons[].code", op: includes, value: [VISA_LEAD_TIME, BALLOT_OR_PERMIT] }
     answer: US visa interview waits and the official ticket draw; book the visa interview early.
-    requires_data: ["visa_constraints:IN:US", "windows:la28:ticket-draw"]
+    requires_data: ["windows:la28:ticket-draw"]
     source: graph:la28
     review: pending
   - id: G079
@@ -770,7 +774,7 @@ items:
     checks:
       - { path: verdict, op: one_of, value: [yes, maybe] }
     answer: Yes. The eclipse is on 22 July 2028; apply for the online Australian visitor visa in good time.
-    requires_data: ["visa_constraints:IN:AU"]
+    tags: [visa-dependent]
     source: graph:eclipse-2028
     review: pending
   - id: G080

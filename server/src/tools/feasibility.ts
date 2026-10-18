@@ -5,8 +5,8 @@
 import { isKnown, type Fact } from "../facts.ts";
 import type { ExperienceDef, GraphStore } from "../store.ts";
 import {
-  BAND_FLOOR_INR, BAND_LABEL, MONTH_NAMES, SUPPORTED_PASSPORTS, budgetBand, nextWindow, toolError, windowsOf,
-  type ToolContext, type ToolError, type WindowValue,
+  BAND_FLOOR_INR, BAND_LABEL, MONTH_NAMES, SUPPORTED_PASSPORTS, budgetBand, nextWindow, ruleProvenance, toolError, visaCountries,
+  windowsOf, type ToolContext, type ToolError, type WindowValue,
 } from "../common.ts";
 
 export interface FeasibilityArgs {
@@ -30,6 +30,22 @@ function monthsBetween(earliest: string, latest: string): number[] {
   const end = new Date(`${latest.slice(0, 7)}-01T00:00:00Z`);
   for (let i = 0; d <= end && i < 24; i++) { out.add(d.getUTCMonth() + 1); d.setUTCMonth(d.getUTCMonth() + 1); }
   return [...out];
+}
+
+const addDays = (iso: string, days: number) => new Date(Date.parse(`${iso}T00:00:00Z`) + days * 86_400_000).toISOString().slice(0, 10);
+
+// The date the trip starts: a fixed date, the traveller's earliest date, or the first day
+// of the next season month.
+function tripStart(d: ExperienceDef, args: FeasibilityArgs, target: Fact<WindowValue> | undefined, now: Date): string | null {
+  if (target && isKnown(target) && target.value.starts_on) return target.value.starts_on;
+  if (args.travel_window) return args.travel_window.earliest;
+  if (!d.season_months.length) return null;
+  const date = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 1));
+  for (let i = 0; i < 12; i++) {
+    if (d.season_months.includes(date.getUTCMonth() + 1)) return date.toISOString().slice(0, 10);
+    date.setUTCMonth(date.getUTCMonth() + 1);
+  }
+  return null;
 }
 
 function pickWindow(d: ExperienceDef, args: FeasibilityArgs, ctx: ToolContext, reasons: Reason[]): Fact<WindowValue> | undefined {
@@ -107,11 +123,49 @@ export function checkFeasibility(store: GraphStore, args: FeasibilityArgs, ctx: 
     reasons.push({ code: "BALLOT_OR_PERMIT", severity: "warning", message: `${d.scarcity.note ?? "Entry is limited"}: secure your place before booking travel.`, facts: [`exp_${d.id}#scarcity`] });
   }
 
+  // Visas: each country's lead time becomes a dated deadline before the trip starts.
   const abroad = d.place.countries.filter((c) => c !== passport);
-  if (abroad.length) {
-    reasons.push({ code: "FACT_UNKNOWN", severity: "warning", message: `Visa lead times for ${abroad.join(", ")} are not loaded yet.` });
-    assumptions.push("Deadlines need visa lead times, which are not loaded yet, so the timeline is empty.");
+  const timeline: { step: string; by: string; facts?: string[] }[] = [];
+  const start = tripStart(d, args, target, policy.now);
+  const today = policy.now.toISOString().slice(0, 10);
+  const seenGroups = new Set<string>();
+  let estimates = false;
+  for (const country of visaCountries(d, passport)) {
+    const rule = store.visaRule(passport, country);
+    if (!rule) {
+      reasons.push({ code: "FACT_UNKNOWN", severity: "warning", message: `The visa rule for ${country} is not loaded yet.` });
+      continue;
+    }
+    const key = rule.group ?? rule.country;
+    if (seenGroups.has(key)) continue;
+    seenGroups.add(key);
+    const ref = ruleProvenance(rule, passport).record_id;
+    if (rule.confidence === "low") estimates = true;
+    if (rule.effort === "none" || rule.lead_time_days === 0) continue;
+    const exemption = rule.exemption ? ` (${rule.exemption})` : "";
+    if (!start) {
+      reasons.push({ code: "VISA_LEAD_TIME", severity: "info", message: `${rule.name}: ${rule.visa_type}; start about ${rule.lead_time_days} days before you travel${exemption}.`, facts: [ref] });
+      continue;
+    }
+    const deadline = addDays(start, -rule.lead_time_days);
+    const daysLeft = Math.round((Date.parse(deadline) - Date.parse(today)) / 86_400_000);
+    const severity: Severity = daysLeft < 30 ? "warning" : "info";
+    reasons.push({
+      code: "VISA_LEAD_TIME",
+      severity,
+      message: daysLeft < 0
+        ? `${rule.name}: ${rule.visa_type} usually needs about ${rule.lead_time_days} days, so the safe date has passed. Apply now and keep bookings refundable${exemption}.`
+        : `${rule.name}: apply for the ${rule.visa_type} by ${deadline}${exemption}.`,
+      facts: [ref],
+    });
+    timeline.push({ step: `Apply for the ${rule.name} visa (${rule.visa_type})`, by: daysLeft < 0 ? today : deadline, facts: [ref] });
+    if ((rule.refusal_rate ?? 0) >= 0.1) {
+      reasons.push({ code: "VISA_REFUSAL_RISK", severity: "info", message: `${rule.name} refused about ${Math.round(rule.refusal_rate! * 100)}% of Indian applications recently; keep bookings refundable until the visa is issued.`, facts: [ref] });
+    }
   }
+  if (d.visa_arranged) assumptions.push(d.visa_arranged.note);
+  if (estimates) assumptions.push("Visa lead times are planning estimates that have not been verified yet.");
+  timeline.sort((a, b) => a.by.localeCompare(b.by));
   if (args.leave_days !== undefined) assumptions.push("Leave days and holiday bridging are not checked yet.");
   if (args.home_city) assumptions.push(`Departing ${args.home_city}.`);
 
@@ -126,7 +180,7 @@ export function checkFeasibility(store: GraphStore, args: FeasibilityArgs, ctx: 
     verdict,
     ...(target ? { target_window: target } : {}),
     reasons,
-    timeline: [],
+    timeline,
     budget: {
       band,
       includes_tcs: abroad.length > 0,

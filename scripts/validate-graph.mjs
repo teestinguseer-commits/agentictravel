@@ -37,6 +37,26 @@ for (const d of defs.values()) {
   }
 }
 
+// Visa rules: schema, one rule per country, and every country an experience enters is covered.
+const validateVisa = ajv.getSchema(`${BASE}visa-rules.schema.json`);
+for (const file of readdirSync("graph/visa").filter((f) => /^[A-Z]{2}\.yaml$/.test(f))) {
+  const doc = parse(readFileSync(`graph/visa/${file}`, "utf8"));
+  if (!validateVisa(doc)) { problems.push(`graph/visa/${file}\n${formatErrors(validateVisa.errors)}`); continue; }
+  if (file !== `${doc.passport}.yaml`) problems.push(`graph/visa/${file}: file name must be ${doc.passport}.yaml`);
+  const seen = new Map();
+  for (const r of doc.rules) for (const c of r.covers ?? [r.country]) {
+    if (seen.has(c)) problems.push(`graph/visa/${file}: ${c} is covered by both ${seen.get(c)} and ${r.country}`);
+    seen.set(c, r.country);
+  }
+  for (const d of defs.values()) {
+    const arranged = new Set(d.visa_arranged?.countries ?? []);
+    for (const c of d.place.countries) {
+      if (c === doc.passport || arranged.has(c)) continue;
+      if (!seen.has(c)) problems.push(`${d.id}: no ${doc.passport} visa rule for ${c} in graph/visa/${file}`);
+    }
+  }
+}
+
 if (problems.length) {
   console.error(problems.map((p) => `✗ ${p}`).join("\n"));
   console.error(`\n${problems.length} problem(s) in ${DIR}`);

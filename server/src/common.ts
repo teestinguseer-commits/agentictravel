@@ -1,6 +1,6 @@
 // Helpers shared by the tools: provenance for a definition's facts, windows, summaries.
 import { fact, type Fact, type FactPolicy, type Provenance } from "./facts.ts";
-import type { ExperienceDef, VisaEffort } from "./store.ts";
+import type { ExperienceDef, GraphStore, VisaEffort, VisaRule } from "./store.ts";
 
 export const SUPPORTED_PASSPORTS = new Set(["IN"]);
 export const VISA_ORDER: VisaEffort[] = ["none", "low", "medium", "high"];
@@ -72,12 +72,39 @@ export function nextWindow(d: ExperienceDef, policy: FactPolicy): Fact<WindowVal
   return seasonal ?? all[0] ?? { unknown: true, last_checked_at: null, reason: "never_checked" };
 }
 
-// Visa effort for the whole trip (the hardest across its countries). Today only the
-// Atlas seed exists, for Indian passports; per-country rules arrive with the
-// World-change Scout.
-export function tripVisaEffort(d: ExperienceDef, passport: string, policy: FactPolicy): Fact<VisaEffort> {
+const VISA_FILE_URL = "https://github.com/teestinguseer-commits/agentictravel/blob/main/graph/visa/IN.yaml";
+
+export function ruleProvenance(rule: VisaRule, passport: string): Provenance {
+  return {
+    source_url: rule.official_sources[0] ?? VISA_FILE_URL,
+    checked_at: `${rule.checked_at}T00:00:00Z`,
+    confidence: rule.confidence,
+    record_id: `visa_${passport}_${rule.group ?? rule.country}`,
+  };
+}
+
+// The countries whose visa rules apply to the traveller: not their own, and not any
+// whose documents the booking arranges (the MEA yatra, for example).
+export const visaCountries = (d: ExperienceDef, passport: string) =>
+  d.place.countries.filter((c) => c !== passport && !(d.visa_arranged?.countries ?? []).includes(c));
+
+// Visa effort for the whole trip: the hardest rule across the countries entered. Falls
+// back to the Atlas seed while any country lacks a rule.
+export function tripVisaEffort(d: ExperienceDef, passport: string, policy: FactPolicy, store?: GraphStore): Fact<VisaEffort> {
   if (passport !== "IN") return { unknown: true, last_checked_at: null, reason: "never_checked" };
-  return fact(d.seed?.visa_in_passport?.effort, provenance(d, `exp_${d.id}#visa_in_passport`), "rule", policy);
+  const countries = visaCountries(d, passport);
+  if (!countries.length) return fact<VisaEffort>("none", provenance(d, `exp_${d.id}#countries`), "seasonal", policy);
+  const rules = store ? countries.map((c) => store.visaRule(passport, c)) : [];
+  if (!store || rules.some((r) => !r)) {
+    return fact(d.seed?.visa_in_passport?.effort, provenance(d, `exp_${d.id}#visa_in_passport`), "rule", policy);
+  }
+  const hardest = (rules as VisaRule[]).reduce((a, b) => (VISA_ORDER.indexOf(b.effort) > VISA_ORDER.indexOf(a.effort) ? b : a));
+  const prov = ruleProvenance(hardest, passport);
+  // The trip is only as fresh and as certain as its weakest rule.
+  const oldest = (rules as VisaRule[]).map((r) => r.checked_at).sort()[0];
+  const ranks = ["low", "medium", "high", "certain"];
+  const weakest = (rules as VisaRule[]).map((r) => r.confidence).sort((a, b) => ranks.indexOf(a) - ranks.indexOf(b))[0];
+  return fact<VisaEffort>(hardest.effort, { ...prov, checked_at: `${oldest}T00:00:00Z`, confidence: weakest }, "rule", policy);
 }
 
 export const budgetBand = (d: ExperienceDef, policy: FactPolicy): Fact<number> =>

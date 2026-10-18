@@ -1,7 +1,7 @@
 // The graph store the tools read from. YamlStore serves the git-reviewed definitions
 // (development, tests, the preview); a Postgres store implements the same interface
 // once the database is deployed.
-import { loadGraph } from "../../evals/lib/graph.mjs";
+import { loadGraph, loadVisaRules } from "../../evals/lib/graph.mjs";
 
 export type Lane = "sky" | "earth" | "wild" | "edge" | "sport" | "endure" | "fest";
 export type ScarcityType = "once" | "event" | "lottery" | "permit_cap" | "capacity" | "season" | "natural";
@@ -23,9 +23,27 @@ export interface ExperienceDef {
   safety_flags: string[];
   pairings?: { with: string; reason: string }[];
   twin_of?: string;
+  visa_arranged?: { countries: string[]; note: string };
   status: "live" | "paused" | "retired";
   seed?: { visa_in_passport?: { effort: VisaEffort; note?: string }; where_to_book?: string };
   provenance: { source_url: string; checked_at: string; verified_by: string; confidence: "certain" | "high" | "medium" | "low" };
+}
+
+export interface VisaRule {
+  country: string;
+  group?: string;
+  name: string;
+  effort: VisaEffort;
+  visa_type: string;
+  lead_time_days: number;
+  exemption?: string;
+  note?: string;
+  refusal_rate?: number;
+  official_sources: string[];
+  open_questions?: string[];
+  checked_at: string;
+  verified_by: string;
+  confidence: "certain" | "high" | "medium" | "low";
 }
 
 export interface ExperienceRequest {
@@ -47,6 +65,7 @@ export interface GraphStore {
   all(): ExperienceDef[];
   get(id: string): ExperienceDef | undefined;
   pairingsOf(id: string): { id: string; name: string; reason: string }[];
+  visaRule(passport: string, country: string): VisaRule | undefined;
   saveRequest(req: ExperienceRequest): { request_id: string; duplicate: boolean };
   recordEvent(event: UsageEvent): void;
 }
@@ -57,8 +76,17 @@ export class YamlStore implements GraphStore {
   readonly requests: (ExperienceRequest & { request_id: string })[] = [];
   readonly events: UsageEvent[] = [];
 
-  constructor(dir = "graph/experiences") {
+  #visa = new Map<string, Map<string, VisaRule>>();
+  #visaDir: string;
+
+  constructor(dir = "graph/experiences", visaDir = "graph/visa") {
     this.#defs = loadGraph(dir) as Map<string, ExperienceDef>;
+    this.#visaDir = visaDir;
+  }
+
+  visaRule(passport: string, country: string) {
+    if (!this.#visa.has(passport)) this.#visa.set(passport, loadVisaRules(passport, this.#visaDir) as Map<string, VisaRule>);
+    return this.#visa.get(passport)!.get(country);
   }
 
   all() {

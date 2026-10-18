@@ -5,24 +5,54 @@
   "description": "The stable, git-reviewed definition of one experience (ADR 0004). Volatile facts (offers, prices, visa rules, availability) live in Postgres; `seed` carries unverified starting values for them.",
   "type": "object",
   "required": [
-    "id", "name", "lane", "hook", "place", "season_months", "scarcity", "budget_band",
-    "segments", "safety_flags", "status", "provenance"
+    "id",
+    "name",
+    "lane",
+    "hook",
+    "place",
+    "season_months",
+    "scarcity",
+    "budget_band",
+    "segments",
+    "safety_flags",
+    "status",
+    "provenance"
   ],
   "properties": {
-    "id": { "$ref": "common.schema.json#/$defs/ExperienceId" },
-    "name": { "type": "string", "minLength": 3, "maxLength": 120 },
-    "lane": { "$ref": "common.schema.json#/$defs/Lane" },
-    "hook": { "type": "string", "minLength": 20, "maxLength": 400, "description": "The anchor moment, in one or two sentences" },
+    "id": {
+      "$ref": "common.schema.json#/$defs/ExperienceId"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 120
+    },
+    "lane": {
+      "$ref": "common.schema.json#/$defs/Lane"
+    },
+    "hook": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 400,
+      "description": "The anchor moment, in one or two sentences"
+    },
     "place": {
       "type": "object",
-      "required": ["label", "countries"],
+      "required": [
+        "label",
+        "countries"
+      ],
       "properties": {
-        "label": { "type": "string" },
+        "label": {
+          "type": "string"
+        },
         "countries": {
           "type": "array",
           "minItems": 1,
           "uniqueItems": true,
-          "items": { "$ref": "common.schema.json#/$defs/CountryCode" }
+          "items": {
+            "$ref": "common.schema.json#/$defs/CountryCode"
+          }
         }
       },
       "additionalProperties": false
@@ -30,51 +60,85 @@
     "season_months": {
       "type": "array",
       "uniqueItems": true,
-      "items": { "$ref": "common.schema.json#/$defs/Month" },
+      "items": {
+        "$ref": "common.schema.json#/$defs/Month"
+      },
       "description": "Empty only when the date is still to be announced"
     },
-    "window_note": { "type": "string" },
+    "window_note": {
+      "type": "string"
+    },
     "fixed_dates": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["start"],
+        "required": [
+          "start"
+        ],
         "properties": {
-          "start": { "type": "string", "format": "date" },
-          "end": { "type": "string", "format": "date" }
+          "start": {
+            "type": "string",
+            "format": "date"
+          },
+          "end": {
+            "type": "string",
+            "format": "date"
+          }
         },
         "additionalProperties": false
       }
     },
     "scarcity": {
       "type": "object",
-      "required": ["type"],
+      "required": [
+        "type"
+      ],
       "properties": {
-        "type": { "$ref": "common.schema.json#/$defs/ScarcityType" },
-        "note": { "type": "string" }
+        "type": {
+          "$ref": "common.schema.json#/$defs/ScarcityType"
+        },
+        "note": {
+          "type": "string"
+        }
       },
       "additionalProperties": false
     },
-    "lead_time_note": { "type": "string" },
-    "budget_band": { "$ref": "common.schema.json#/$defs/BudgetBand" },
+    "lead_time_note": {
+      "type": "string"
+    },
+    "budget_band": {
+      "$ref": "common.schema.json#/$defs/BudgetBand"
+    },
     "segments": {
       "type": "array",
       "uniqueItems": true,
-      "items": { "$ref": "common.schema.json#/$defs/Segment" }
+      "items": {
+        "$ref": "common.schema.json#/$defs/Segment"
+      }
     },
     "safety_flags": {
       "type": "array",
       "uniqueItems": true,
-      "items": { "$ref": "common.schema.json#/$defs/SafetyFlag" }
+      "items": {
+        "$ref": "common.schema.json#/$defs/SafetyFlag"
+      }
     },
     "pairings": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["with", "reason"],
+        "required": [
+          "with",
+          "reason"
+        ],
         "properties": {
-          "with": { "$ref": "common.schema.json#/$defs/ExperienceId" },
-          "reason": { "type": "string", "maxLength": 280 }
+          "with": {
+            "$ref": "common.schema.json#/$defs/ExperienceId"
+          },
+          "reason": {
+            "type": "string",
+            "maxLength": 280
+          }
         },
         "additionalProperties": false
       }
@@ -83,31 +147,81 @@
       "$ref": "common.schema.json#/$defs/ExperienceId",
       "description": "Set when this is a cheaper or easier twin of another experience"
     },
-    "status": { "enum": ["live", "paused", "retired"] },
+    "status": {
+      "enum": [
+        "live",
+        "paused",
+        "retired"
+      ]
+    },
     "seed": {
       "type": "object",
       "properties": {
         "visa_in_passport": {
           "type": "object",
-          "required": ["effort"],
+          "required": [
+            "effort"
+          ],
           "properties": {
-            "effort": { "$ref": "common.schema.json#/$defs/VisaEffort" },
-            "note": { "type": "string" }
+            "effort": {
+              "$ref": "common.schema.json#/$defs/VisaEffort"
+            },
+            "note": {
+              "type": "string"
+            }
           },
           "additionalProperties": false
         },
-        "where_to_book": { "type": "string" }
+        "where_to_book": {
+          "type": "string"
+        }
       },
       "additionalProperties": false
     },
     "provenance": {
       "type": "object",
-      "required": ["source_url", "checked_at", "verified_by", "confidence"],
+      "required": [
+        "source_url",
+        "checked_at",
+        "verified_by",
+        "confidence"
+      ],
       "properties": {
-        "source_url": { "type": "string", "format": "uri" },
-        "checked_at": { "type": "string", "format": "date" },
-        "verified_by": { "type": "string" },
-        "confidence": { "$ref": "common.schema.json#/$defs/Confidence" }
+        "source_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "checked_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "verified_by": {
+          "type": "string"
+        },
+        "confidence": {
+          "$ref": "common.schema.json#/$defs/Confidence"
+        }
+      },
+      "additionalProperties": false
+    },
+    "visa_arranged": {
+      "type": "object",
+      "required": [
+        "countries",
+        "note"
+      ],
+      "description": "Countries whose entry documents are arranged as part of the booking (for example the MEA yatra), so their visa rules don't apply to the traveller",
+      "properties": {
+        "countries": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "common.schema.json#/$defs/CountryCode"
+          }
+        },
+        "note": {
+          "type": "string"
+        }
       },
       "additionalProperties": false
     }

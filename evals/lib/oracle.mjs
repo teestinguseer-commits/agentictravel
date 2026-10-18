@@ -1,3 +1,5 @@
+import { loadVisaRules } from "./graph.mjs";
+
 // Reference implementation of the read tools over the git-stored graph.
 // It answers in the same shape as the tool contracts, with Facts already unwrapped
 // (see normalize() in assert.mjs), so golden checks run unchanged against either the
@@ -9,6 +11,21 @@ const LANE_NAMES = {
   sport: "Sport", endure: "Endurance", fest: "Festivals",
 };
 const VISA_ORDER = ["none", "low", "medium", "high"];
+let visaRules;
+
+// Visa effort for the whole trip: the hardest rule across the countries entered, skipping
+// the home country and any whose documents the booking arranges. Falls back to the
+// Atlas seed when a country has no rule.
+export function tripVisaEffort(d, passport = "IN") {
+  visaRules ??= loadVisaRules(passport);
+  const arranged = new Set(d.visa_arranged?.countries ?? []);
+  const countries = d.place.countries.filter((c) => c !== passport && !arranged.has(c));
+  if (countries.some((c) => !visaRules.has(c))) return d.seed?.visa_in_passport?.effort ?? null;
+  return countries.reduce((hardest, c) => {
+    const e = visaRules.get(c).effort;
+    return VISA_ORDER.indexOf(e) > VISA_ORDER.indexOf(hardest) ? e : hardest;
+  }, "none");
+}
 const STOPWORDS = new Set([
   "a", "an", "the", "in", "of", "to", "for", "with", "and", "or", "at", "on", "i", "my", "me",
   "we", "our", "see", "do", "can", "want", "where", "what", "which", "show", "trip", "trips",
@@ -63,7 +80,7 @@ export function searchExperiences(graph, args) {
     if (lane && !lane.includes(d.lane)) continue;
     if (segment && !d.segments.includes(segment)) continue;
     if (max_visa_effort) {
-      const effort = d.seed?.visa_in_passport?.effort;
+      const effort = tripVisaEffort(d);
       if (!effort || VISA_ORDER.indexOf(effort) > VISA_ORDER.indexOf(max_visa_effort)) continue;
     }
     if (words.length) {

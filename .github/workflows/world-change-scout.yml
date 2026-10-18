@@ -1,0 +1,64 @@
+name: World-change Scout
+
+# Re-reads the official source of every visa rule each night and opens a pull request
+# when something changed. Merging the pull request is the human approval (ADR 0002).
+on:
+  schedule:
+    - cron: "30 21 * * *"   # 03:00 IST
+  workflow_dispatch:
+    inputs:
+      open_pr:
+        description: Open a pull request when something changed (off = report only)
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: world-change-scout
+  cancel-in-progress: false
+
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Read official visa sources
+        env:
+          # Optional. Without it, changed pages are flagged for a person instead of read by the model.
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          npm run scout:visa
+          cat scout-report.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Check the proposed rules still validate
+        run: npm run graph:validate
+      - name: Open or update the pull request
+        if: github.event_name == 'schedule' || inputs.open_pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BASE: ${{ github.ref_name }}
+        run: |
+          if git diff --quiet -- graph/visa; then
+            echo "Nothing changed."
+            exit 0
+          fi
+          branch="scout/world-change-$(date -u +%Y-%m-%d)"
+          git config user.name "lifelist-world-change-scout"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$branch"
+          git add graph/visa
+          git commit -m "World-change Scout: visa sources $(date -u +%Y-%m-%d)"
+          git push --force -u origin "$branch"
+          if gh pr view "$branch" >/dev/null 2>&1; then
+            gh pr edit "$branch" --body-file scout-report.md
+          else
+            gh pr create --base "$BASE" --head "$branch" --title "World-change Scout: visa sources $(date -u +%Y-%m-%d)" --body-file scout-report.md
+          fi

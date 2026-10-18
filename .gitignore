@@ -1,3 +1,4 @@
 node_modules/
 .pgtest/
 web/preview/dist/
+scout-report.md

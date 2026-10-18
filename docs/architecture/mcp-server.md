@@ -36,11 +36,11 @@ Every call records a usage event tagged with the client (`mcp:claude-desktop`, `
 | Tool | Works today | Waits for |
 | --- | --- | --- |
 | `search_experiences` | Filters, weighted keyword search, honest `match_quality`, request suggestions, pagination | Semantic search (pgvector) |
-| `get_experience` | All definition facts with provenance, windows, pairings | Offers from Lane Scouts; per-country visa rules |
-| `check_feasibility` | Season and fixed-date windows, budget band, cold, fitness, ballots and permits; every missing fact named as `FACT_UNKNOWN`, so it never says "yes" while visa rules are missing | Visa lead times, age limits, leave and holiday bridging, a dated timeline |
+| `get_experience` | All definition facts with provenance, windows, pairings, visa per country with lead times | Offers from Lane Scouts |
+| `check_feasibility` | Season and fixed-date windows, budget band, cold, fitness, ballots and permits, and a dated visa timeline per country; any missing fact is named as `FACT_UNKNOWN`, so it never says "yes" on incomplete data | Age limits, leave and holiday bridging, verified visa lead times |
 | `request_experience` | Idempotent requests, similar experiences, rate limiting | Persistence in Postgres; notifications for signed-in users |
 
 ## Tests
 
 - `npm test`: protocol tests over in-memory, stdio and HTTP transports, contract validation of every output, pagination, idempotency, rate limiting and the freshness rules.
-- `npm run golden:run`: the golden set against the server over MCP. Today 94 of 94 runnable checks pass (fact accuracy 100%); 10 items wait for data and 19 for a judge.
+- `npm run golden:run`: the golden set against the server over MCP. Today 102 of 102 runnable checks pass (fact accuracy 100%); 6 items wait for data and 19 for a judge.

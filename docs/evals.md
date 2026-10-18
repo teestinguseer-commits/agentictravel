@@ -49,7 +49,7 @@ There are no tools yet, so `check-golden.mjs` does four things on every push:
 
 ## Against the MCP server
 
-`npm run golden:run` calls the real MCP server over the protocol with each item's arguments and applies the same checks; CI runs it with a pinned clock. Today 94 of 94 runnable checks pass.
+`npm run golden:run` calls the real MCP server over the protocol with each item's arguments and applies the same checks; CI runs it with a pinned clock. Today 102 of 102 runnable checks pass.
 
 ## Still to come
 

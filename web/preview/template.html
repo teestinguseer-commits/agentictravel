@@ -165,7 +165,7 @@ textarea{width:100%;min-height:64px;resize:vertical}
 
   <!-- Traveller view -->
   <section id="view-traveller" role="tabpanel" aria-labelledby="tab-traveller" class="wrap" style="padding:0;gap:16px">
-    <p class="note">This runs the repo's reference search over the 65 Atlas experiences, the same code the tests use. Every fact is still an unverified Atlas seed, and visa rules per country are not loaded yet.</p>
+    <p class="note">This runs the repo's reference search over the 65 Atlas experiences, the same code the tests use. Every fact, including the visa rules per country, is still unverified until you or the Verifier confirm it.</p>
     <div class="deck" role="search">
       <div class="row">
         <label class="label" for="q">Search</label>
@@ -274,7 +274,7 @@ function renderSearch(){
     const d = graph.get(r.id), [, v] = LANES[d.lane];
     return `<button class="res" type="button" data-id="${d.id}" style="--lane:var(${v})" aria-current="${state.selected===d.id}">
       <span class="dot"></span><span class="name">${esc(d.name)}</span>
-      <span class="meta"><span class="rupees">${rupees(d.budget_band)}</span><span>${esc(VISA[d.seed?.visa_in_passport?.effort] ?? "")}</span></span>
+      <span class="meta"><span class="rupees">${rupees(d.budget_band)}</span><span>${esc(VISA[tripVisaEffort(d)] ?? "")}</span></span>
       <span class="where">${esc(d.place.label)}</span></button>`;
   }).join("");
 }
@@ -292,6 +292,18 @@ function renderNoMatch(a){
   </div>`;
   $("#reset2")?.addEventListener("click", resetFilters);
   $("#reqform")?.addEventListener("submit", submitRequest);
+}
+
+const VISA_RULES = new Map(DATA.visa_rules);
+function visaHTML(d){
+  const arranged = new Set(d.visa_arranged?.countries ?? []);
+  const rows = d.place.countries.filter(c => c !== "IN").map(c => {
+    if (arranged.has(c)) return `<li><span class="mono">${c}</span> · arranged with the booking: ${esc(d.visa_arranged.note)}</li>`;
+    const r = VISA_RULES.get(c);
+    if (!r) return `<li><span class="mono">${c}</span> · no rule yet</li>`;
+    return `<li><span class="mono">${c}</span> · ${esc(VISA[r.effort])}: ${esc(r.visa_type)}${r.lead_time_days ? `, start about ${r.lead_time_days} days ahead` : ""}${r.exemption ? `. ${esc(r.exemption)}` : ""}${r.open_questions?.length ? ` <span style="color:var(--warn)">(unconfirmed)</span>` : ""}</li>`;
+  });
+  return `<strong>${esc(VISA[tripVisaEffort(d)] ?? "Unknown")}</strong> for the whole trip${rows.length ? `<ul class="reasons" style="margin-top:4px">${rows.join("")}</ul>` : " (no visa needed in India)"}`;
 }
 
 function renderDetail(id, scroll = true){
@@ -320,7 +332,7 @@ function renderDetail(id, scroll = true){
       <dt>Scarcity</dt><dd><span class="mono" style="font-size:12.5px">${esc(d.scarcity.type)}</span> · ${esc(d.scarcity.note)}</dd>
       <dt>Book</dt><dd>${esc(d.lead_time_note || "")}</dd>
       <dt>Budget</dt><dd><span class="rupees">${rupees(d.budget_band)}</span> ${BANDS[d.budget_band-1][2]}</dd>
-      <dt>Visa</dt><dd>${esc(VISA[d.seed?.visa_in_passport?.effort] ?? "Unknown")}${d.seed?.visa_in_passport?.note ? ` · ${esc(d.seed.visa_in_passport.note)}` : ""}</dd>
+      <dt>Visa</dt><dd>${visaHTML(d)}</dd>
       <dt>Safety</dt><dd><div class="flags">${flags}</div>${crit ? `<span style="font-size:12.5px;color:var(--bad)">Safety-critical: agents can never publish changes to this without a person.</span>` : ""}</dd>
       <dt>Pairs with</dt><dd style="display:grid;gap:6px">${pairs}</dd>
       <dt>Where to book</dt><dd>${esc(d.seed?.where_to_book || "")}</dd>
@@ -328,7 +340,7 @@ function renderDetail(id, scroll = true){
     <p class="prov">Source: Atlas seed, checked ${fmtDate(d.provenance.checked_at)}, confidence ${esc(d.provenance.confidence)}. The Verifier must confirm these facts before travellers see them.</p>
     <form class="fit" id="fitform">
       <h3>Quick fit</h3>
-      <p style="font-size:13px;color:var(--muted)">A preview of check_feasibility using only the season, budget and safety flags. Visa lead times and leave days arrive with the real tool.</p>
+      <p style="font-size:13px;color:var(--muted)">A preview of check_feasibility using the season, budget, safety flags and visa rules. The real tool also dates each visa deadline.</p>
       <div class="row">
         <label class="label" for="fitmonth">Month</label>
         <select id="fitmonth">${MONTHS.map((m,i) => `<option value="${i+1}" ${state.month===i+1?"selected":""}>${m}</option>`).join("")}</select>
@@ -357,7 +369,12 @@ function renderFit(d){
   if (d.safety_flags.includes("extreme_cold")) reasons.push(["COLD","info","Expect deep cold; check the person's cold tolerance."]);
   if (d.safety_flags.includes("age_or_fitness_limit")) reasons.push(["AGE_LIMIT","warning","There are age or fitness rules; they are not loaded yet."]);
   if (["lottery","permit_cap"].includes(d.scarcity.type)) reasons.push(["BALLOT_OR_PERMIT","warning",d.scarcity.note]);
-  reasons.push(["FACT_UNKNOWN","warning","Visa rules per country are not loaded yet."]);
+  const arranged = new Set(d.visa_arranged?.countries ?? []);
+  for (const c of d.place.countries.filter(c => c !== "IN" && !arranged.has(c))) {
+    const r = VISA_RULES.get(c);
+    if (!r) reasons.push(["FACT_UNKNOWN","warning",`No visa rule for ${c} yet.`]);
+    else if (r.lead_time_days) reasons.push(["VISA_LEAD_TIME","info",`${r.name}: ${r.visa_type}; start about ${r.lead_time_days} days before you travel.`]);
+  }
   const verdict = reasons.some(r => r[1]==="blocker") ? "not_yet" : reasons.some(r => r[1]==="warning") ? "maybe" : "yes";
   $("#fitout").innerHTML = `<span class="verdict v-${verdict}">${{yes:"Yes",maybe:"Maybe",not_yet:"Not yet"}[verdict]}</span>
     <ul class="reasons">${reasons.map(([c,s,m]) => `<li>${esc(m)} <code>${c} · ${s}</code></li>`).join("")}</ul>`;

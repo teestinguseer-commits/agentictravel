@@ -10,9 +10,11 @@ Start with [docs/README.md](docs/README.md).
 | --- | --- |
 | `docs/` | The build plan, agent specs, architecture, decisions and the learning track |
 | `graph/experiences/` | One reviewed YAML definition per experience (the stable half of the graph) |
+| `graph/visa/` | Visa rules per country for Indian passports, and the World-change Scout's page snapshots |
 | `graph/seed/` | The Atlas export the definitions were first imported from |
 | `contracts/` | JSON Schema contracts for the public tools, with validated examples |
 | `evals/` | The 100-question golden set, a reference oracle over the graph, and check operators |
+| `agents/` | Agents that run on a schedule; first, the World-change Scout (`npm run scout:visa`) |
 | `server/` | The MCP server (TypeScript on Node 22): four tools over stdio or HTTP, with tests |
 | `supabase/` | Postgres migrations and the generated seed |
 | `web/preview/` | The preview page template; `npm run preview:build` writes `web/preview/dist/lifelist-preview.html` |

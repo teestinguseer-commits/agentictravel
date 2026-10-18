@@ -132,7 +132,7 @@
       "additionalProperties": false
     },
     "Fact": {
-      "description": "A value with provenance, or an explicit unknown when the fact is past its freshness limit.",
+      "description": "A value with provenance, or an explicit unknown when the fact is past its freshness limit. `unverified` means a fact exists but is below the server's minimum confidence.",
       "oneOf": [
         {
           "type": "object",
@@ -170,7 +170,8 @@
                 "stale",
                 "never_checked",
                 "source_unavailable",
-                "contradicted"
+                "contradicted",
+                "unverified"
               ]
             }
           },

@@ -47,9 +47,13 @@ There are no tools yet, so `check-golden.mjs` does four things on every push:
 3. Runs every item the oracle can answer (65 today) against the graph and requires them to pass. If someone edits a YAML file in a way that changes a known answer, CI fails and names the question. Either the edit is wrong, or the item needs updating and re-review.
 4. Counts the rest: feasibility items waiting for the tool, items waiting for data (`requires_data`, such as per-country visa rules or Son Doong's age limit), and judge-graded items.
 
-## In Phase 1
+## Against the MCP server
 
-- `golden:run` will call the real MCP tools with each item's arguments and apply the same checks. The oracle and the tools must agree, so the oracle doubles as an executable spec for the first implementation.
+`npm run golden:run` calls the real MCP server over the protocol with each item's arguments and applies the same checks; CI runs it with a pinned clock. Today 94 of 94 runnable checks pass.
+
+## Still to come
+
+- The oracle and the server are two independent implementations that must keep agreeing, so the oracle stays the executable spec.
 - **Fact accuracy** (the plan's metric, target at least 98%) is the share of passing checks across fact, search, no-match and feasibility items.
 - **Rubric items** are graded by an LLM judge. Calibrate it first: grade 20 items yourself and keep the judge only if it agrees with you on at least 18 (learning rotation R2).
 - Each agent's own eval set (named in its spec) grows from this file. The golden set stays the shared floor.

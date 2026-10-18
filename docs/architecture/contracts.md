@@ -5,7 +5,7 @@ The machine-readable contracts live in [`contracts/`](../../contracts/) as JSON 
 ## Rules every tool follows
 
 - **Facts carry provenance.** Every value that could go stale is a `Fact`: `{ value, provenance: { source_url, checked_at, confidence, record_id } }`.
-- **Stale means unknown.** A fact past its freshness limit comes back as `{ unknown: true, last_checked_at, reason }`, never as an old value. Reasons: `stale`, `never_checked`, `source_unavailable`, `contradicted`.
+- **Stale means unknown.** A fact past its freshness limit comes back as `{ unknown: true, last_checked_at, reason }`, never as an old value. Reasons: `stale`, `never_checked`, `source_unavailable`, `contradicted`, `unverified` (below the server's minimum confidence; see [ADR 0005](../decisions/0005-unverified-seeds.md)).
 - **One error shape.** `{ error: { code, message, retryable, retry_after_seconds?, field?, details? } }`. Codes: `INVALID_INPUT`, `NOT_FOUND`, `UNSUPPORTED_PASSPORT`, `UNAUTHORIZED`, `RATE_LIMITED`, `DUPLICATE_REQUEST`, `UNAVAILABLE`, `INTERNAL`.
 - **Passports default to `IN`.** Feasibility covers Indian passports first; others return `UNSUPPORTED_PASSPORT` until supported.
 - **Every call emits a usage event** for Pulse, tagged with the client (`mcp:<client>`), counted by session, not by call.

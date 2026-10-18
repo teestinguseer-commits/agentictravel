@@ -27,8 +27,18 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: Graph definitions and tool contracts
+      - name: Graph definitions, tool contracts and golden set
         run: npm run check
+      - name: Type check
+        run: npm run typecheck
+      - name: Server tests (MCP over in-memory, stdio and HTTP)
+        run: npm test
+      - name: Golden set against the MCP server (pinned clock)
+        env:
+          LIFELIST_NOW: "2026-10-18T06:00:00Z"
+        run: npm run golden:run
+      - name: Freshness at today's date (warning only)
+        run: npm run golden:run || echo "::warning::Some golden checks fail at today's date, usually because seeded facts have passed their freshness limit. Re-verify them."
       - name: Seed SQL is up to date with the YAML definitions
         run: |
           npm run --silent graph:seed-sql

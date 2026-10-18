@@ -13,6 +13,7 @@ Start with [docs/README.md](docs/README.md).
 | `graph/seed/` | The Atlas export the definitions were first imported from |
 | `contracts/` | JSON Schema contracts for the public tools, with validated examples |
 | `evals/` | The 100-question golden set, a reference oracle over the graph, and check operators |
+| `server/` | The MCP server (TypeScript on Node 22): four tools over stdio or HTTP, with tests |
 | `supabase/` | Postgres migrations and the generated seed |
 | `web/preview/` | The preview page template; `npm run preview:build` writes `web/preview/dist/lifelist-preview.html` |
 | `scripts/` | Import, validation, seed generation, migration tests and the preview build |
@@ -26,6 +27,10 @@ npm ci
 npm run check        # experience definitions, tool contracts and the golden set
 npm run graph:seed-sql
 npm run db:test      # migrations, seed and smoke checks on a throwaway database
+npm run typecheck && npm test   # the MCP server
+npm run golden:run   # the golden set against the MCP server
 ```
+
+Run the MCP server locally with `npm run server:stdio`; see [docs/architecture/mcp-server.md](docs/architecture/mcp-server.md) to connect Claude.
 
 To add or change an experience, edit its YAML file, run `npm run graph:seed-sql`, and open a pull request; CI runs all three checks.

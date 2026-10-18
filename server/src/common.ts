@@ -52,12 +52,16 @@ export function windowsOf(d: ExperienceDef, policy: FactPolicy): Fact<WindowValu
       provenance(d, `win_${d.id}_season`), "seasonal", policy));
   }
   for (const f of d.fixed_dates ?? []) {
+    const verified = d.verified_facts?.find((v) => v.field === "fixed_dates" && v.value === f.start);
+    const prov: Provenance = verified
+      ? { source_url: verified.source_url, checked_at: `${verified.checked_at}T00:00:00Z`, confidence: verified.confidence, record_id: `win_${d.id}_${f.start}` }
+      : provenance(d, `win_${d.id}_${f.start}`);
     out.push(fact<WindowValue>({
       months: [Number(f.start.slice(5, 7))],
       starts_on: f.start,
       ...(f.end ? { ends_on: f.end } : {}),
       ...(d.window_note ? { note: d.window_note } : {}),
-    }, provenance(d, `win_${d.id}_${f.start}`), "fixed", policy));
+    }, prov, "fixed", policy));
   }
   return out;
 }

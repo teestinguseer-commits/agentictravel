@@ -224,6 +224,51 @@
         }
       },
       "additionalProperties": false
+    },
+    "verified_facts": {
+      "type": "array",
+      "description": "Facts confirmed against an official source, each with its own provenance. They override the record-level provenance for that fact.",
+      "items": {
+        "type": "object",
+        "required": [
+          "field",
+          "value",
+          "source_url",
+          "quote",
+          "checked_at",
+          "verified_by",
+          "confidence"
+        ],
+        "properties": {
+          "field": {
+            "enum": [
+              "fixed_dates"
+            ]
+          },
+          "value": {
+            "type": "string"
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "quote": {
+            "type": "string",
+            "maxLength": 600
+          },
+          "checked_at": {
+            "type": "string",
+            "format": "date"
+          },
+          "verified_by": {
+            "type": "string"
+          },
+          "confidence": {
+            "$ref": "common.schema.json#/$defs/Confidence"
+          }
+        },
+        "additionalProperties": false
+      }
     }
   },
   "additionalProperties": false

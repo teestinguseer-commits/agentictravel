@@ -143,3 +143,28 @@ test("facts go unknown when stale or below the minimum confidence", () => {
   assert.equal((fact(null, prov, "fixed", { now: NOW, minConfidence: "low" }) as any).reason, "never_checked");
   assert.throws(() => policyFromEnv({ LIFELIST_MIN_CONFIDENCE: "sure" } as any));
 });
+
+test("in production, only verified facts reach travellers", async () => {
+  const { mkdtempSync, cpSync, readFileSync, writeFileSync } = await import("node:fs");
+  const { join } = await import("node:path");
+  const { tmpdir } = await import("node:os");
+  const dir = mkdtempSync(join(tmpdir(), "graph-"));
+  cpSync("graph/experiences", dir, { recursive: true });
+  const file = join(dir, "eclipse-luxor.yaml");
+  writeFileSync(file, readFileSync(file, "utf8") + `verified_facts:
+  - field: fixed_dates
+    value: "2027-08-02"
+    source_url: https://example.gov/eclipse
+    quote: Totality over Luxor on 2 August 2027.
+    checked_at: "2026-10-18"
+    verified_by: a person
+    confidence: medium
+`);
+  const h = await connect(new YamlStore(dir), { policy: () => ({ now: NOW, minConfidence: "medium" as const }) });
+  const out = await h.call("get_experience", { id: "eclipse-luxor", include: ["windows"] });
+  const fixed = out.windows.find((w: any) => w.value?.starts_on === "2027-08-02");
+  assert.equal(fixed.provenance.source_url, "https://example.gov/eclipse");
+  assert.ok(out.windows.some((w: any) => w.reason === "unverified")); // the unverified seasonal window
+  assert.equal(out.budget_band.reason, "unverified");
+  await h.close();
+});

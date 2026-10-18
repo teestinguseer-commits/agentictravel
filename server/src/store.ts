@@ -24,6 +24,7 @@ export interface ExperienceDef {
   pairings?: { with: string; reason: string }[];
   twin_of?: string;
   visa_arranged?: { countries: string[]; note: string };
+  verified_facts?: { field: "fixed_dates"; value: string; source_url: string; quote: string; checked_at: string; verified_by: string; confidence: "certain" | "high" | "medium" | "low" }[];
   status: "live" | "paused" | "retired";
   seed?: { visa_in_passport?: { effort: VisaEffort; note?: string }; where_to_book?: string };
   provenance: { source_url: string; checked_at: string; verified_by: string; confidence: "certain" | "high" | "medium" | "low" };

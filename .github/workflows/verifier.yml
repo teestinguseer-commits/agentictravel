@@ -1,0 +1,70 @@
+name: Verifier
+
+# Checks unverified facts against official sources each night and opens a pull request
+# proposing them at medium confidence, with evidence. Merging is the human approval.
+on:
+  schedule:
+    - cron: "30 22 * * *"   # 04:00 IST, after the World-change Scout
+  workflow_dispatch:
+    inputs:
+      max_checks:
+        description: Model-backed checks this run (cost control)
+        default: "10"
+      open_pr:
+        description: Open a pull request when something changed (off = report only)
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: verifier
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Verify facts against official sources
+        env:
+          # Without it, only the freshness report runs.
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MAX_CHECKS: ${{ inputs.max_checks || '10' }}
+        run: |
+          node agents/verifier/run.ts --max "$MAX_CHECKS" --report verifier-report.md
+          cat verifier-report.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Regenerate the seed and run the checks
+        run: |
+          npm run graph:seed-sql
+          npm run check
+      - name: Open or update the pull request
+        if: github.event_name == 'schedule' || inputs.open_pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BASE: ${{ github.ref_name }}
+        run: |
+          if git diff --quiet -- graph supabase/seed.sql; then
+            echo "Nothing to propose."
+            exit 0
+          fi
+          branch="verifier/$(date -u +%Y-%m-%d)"
+          git config user.name "lifelist-verifier"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$branch"
+          git add graph supabase/seed.sql
+          git commit -m "Verifier: proposals $(date -u +%Y-%m-%d)"
+          git push --force -u origin "$branch"
+          if gh pr view "$branch" >/dev/null 2>&1; then
+            gh pr edit "$branch" --body-file verifier-report.md
+          else
+            gh pr create --base "$BASE" --head "$branch" --title "Verifier: $(date -u +%Y-%m-%d)" --body-file verifier-report.md
+          fi

@@ -51,6 +51,24 @@ L1 at launch: refreshes an existing fact when the source confirms it within tole
 - Golden-set fact accuracy (target at least 98%).
 - Share of pre-show checks that withheld a fact.
 
+## Implementation (live: visa rules and event dates)
+
+| Part | Where |
+| --- | --- |
+| The agent | `agents/verifier/verifier.ts` (logic) and `run.ts` (command line) |
+| Schedule | `.github/workflows/verifier.yml`, nightly at 04:00 IST (after the World-change Scout) and on demand |
+| What it writes | Visa rules in `graph/visa/IN.yaml` (confidence, evidence, sources) and `verified_facts` on experiences for fixed dates |
+
+Each run, within a budget of model-backed checks (default 10):
+
+1. **Freshness report:** visa rules within a week of their 30-day limit, or past it.
+2. **Visa rules at low confidence,** the most-used first. Fetch each official source, ask the model whether the page confirms the rule, and keep the answer only if its quote is on the page. Confirmed rules are proposed at **medium**, with the evidence attached. A different rule on the page becomes a proposed correction, still at low confidence and with an open question. A rule with no source on file gets a web search for an official one (government, embassy, immigration or e-visa hosts only; aggregators are blocked).
+3. **Fixed event dates:** search for the organiser's or an official page, fetch it independently, and require the quote to be on the page and to state the date. A match becomes a `verified_facts` entry at medium confidence. A different date is flagged for a person.
+
+The workflow regenerates the seed, runs every check and opens one pull request with the report. **Merging accepts the proposals at medium confidence, which production shows to travellers** ([ADR 0005](../decisions/0005-unverified-seeds.md)), so open the evidence links before merging. Without `ANTHROPIC_API_KEY`, only the freshness report runs.
+
+What it does not do yet: experience facts other than fixed dates (seasons, budget bands), offers, and the pre-show and pre-book checks, which arrive with the Postgres store.
+
 ## Escalates when
 
 - Two sources contradict on a date, price band or visa rule.

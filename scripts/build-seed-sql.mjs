@@ -67,5 +67,14 @@ on conflict (a, b) do update set reason = excluded.reason;
 }
 commit;
 `;
+if (process.argv.includes("--check")) {
+  const current = readFileSync("supabase/seed.sql", "utf8");
+  if (current !== sql) {
+    console.error("✗ supabase/seed.sql is out of date with graph/experiences. Run: npm run graph:seed-sql");
+    process.exit(1);
+  }
+  console.log("✓ supabase/seed.sql matches the experience definitions");
+  process.exit(0);
+}
 writeFileSync("supabase/seed.sql", sql);
 console.log(`Wrote supabase/seed.sql: ${rows.experiences.length} experiences, ${rows.windows.length} windows, ${rows.pairings.size} pairings`);

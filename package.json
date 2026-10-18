@@ -14,13 +14,15 @@
     "golden:check": "node scripts/check-golden.mjs",
     "db:test": "bash scripts/test-migrations.sh",
     "preview:build": "node scripts/build-preview.mjs",
-    "check": "npm run graph:validate && npm run contracts:check && npm run golden:check",
+    "check": "npm run graph:validate && npm run graph:check-seed && npm run contracts:check && npm run golden:check",
     "typecheck": "tsc -p tsconfig.json",
     "test": "node --test server/test/*.test.ts agents/test/*.test.ts",
     "golden:run": "node scripts/run-golden.ts",
     "server:stdio": "node server/src/stdio.ts",
     "server:http": "node server/src/http.ts",
-    "scout:visa": "node agents/world-change-scout/run.ts --report scout-report.md"
+    "scout:visa": "node agents/world-change-scout/run.ts --report scout-report.md",
+    "graph:check-seed": "node scripts/build-seed-sql.mjs --check",
+    "verify": "node agents/verifier/run.ts --report verifier-report.md"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "0.131.0",

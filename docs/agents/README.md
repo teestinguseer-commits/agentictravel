@@ -13,11 +13,11 @@ Two principles from v1 still hold:
 | --- | --- | --- | --- | --- |
 | Discovery | [Pulse](pulse.md) | Turns first-party usage into demand Signals | 1 | Writes Signals only |
 | Discovery | [Trend Scout](trend-scout.md) | Turns outside trends (Google, Meta, YouTube, Wikipedia, Reddit) into Signals | 1 | Writes Signals only |
-| Discovery | [World-change Scout](world-change-scout.md) | Spots visa, route, fixture and policy changes that shift feasibility | 1 | L0 |
+| Discovery | [World-change Scout](world-change-scout.md) | Spots visa, route, fixture and policy changes that shift feasibility (**visa beat live**) | 1 | L0 |
 | Discovery | [Lane Scouts](lane-scout.md) | Watch suppliers and official sources per lane | 1 | L1 |
 | Discovery | [Prospector](prospector.md) | Turns Signals into Candidate experiences, twins and offers | 2 | L0 |
 | Discovery | [Pairing Miner](pairing-miner.md) | Proposes Pairings from co-saves and co-views | 2 | L0 |
-| Curation | [Verifier](verifier.md) | Checks every fact before it is shown or booked | 1 | L1 |
+| Curation | [Verifier](verifier.md) | Checks every fact before it is shown or booked (**visa rules and event dates live**) | 1 | L1 |
 | Curation | [Editor](editor.md) | Writes experience pages, collections, schema.org and llms.txt from verified facts | 1 | L0 for new pages, L1 for refreshes |
 | Curation | [Curator](curator.md) | Matches experiences to one person's lifelist and constraints | 2 | Read-only |
 | Curation | [Experimenter](experimenter.md) | Exposes new experiences to a small share and decides keep or retire | 2 | L0 for retirements |

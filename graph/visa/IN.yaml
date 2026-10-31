@@ -9,7 +9,7 @@
 # confidence:      every entry starts low. A person (or the Verifier, later) raises it after
 #                  checking the official source.
 passport: IN
-updated: "2026-10-18"
+updated: "2026-10-31"
 rules:
   - country: SCHENGEN
     name: Schengen area

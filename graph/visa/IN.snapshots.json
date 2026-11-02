@@ -1,0 +1,235 @@
+{
+  "https://cgmum.cancilleria.gob.ar/en/node/84317": {
+    "sha256": "d158bec34298af99c9462e11fce057a438724b63e085530aa1e98f8465b8d346",
+    "first_seen": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "failures": 0
+  },
+  "https://eindi.cancilleria.gob.ar/en/node/75902": {
+    "sha256": "ca0c5ae38ab610935ff3cb1f6131dfe50bec3b69f6305d095098899a5e764e09",
+    "first_seen": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "failures": 0
+  },
+  "https://embamex.sre.gob.mx/india/": {
+    "sha256": "e7a6770808fa8ff2aa0a01d5667b00c41de143d9ba0e061d74cc2f1f2b93f42b",
+    "first_seen": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "failures": 0
+  },
+  "https://eservices.zambiaimmigration.gov.zm/": {
+    "sha256": "bb49bb61d2c569fa8d6e424a6dbabf932385b697585ee09847af228a4eec941f",
+    "first_seen": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "failures": 0
+  },
+  "https://evisa.gov.vn/": {
+    "sha256": "",
+    "first_seen": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "failures": 1,
+    "last_error": "network: network error: fetch failed"
+  },
+  "https://evisa.imigrasi.go.id/": {
+    "sha256": "",
+    "first_seen": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "failures": 1,
+    "last_error": "http: HTTP 403"
+  },
+  "https://evisa.mn/": {
+    "sha256": "924fb5ac439e2e87875849050e032dc521d4594e8587806ef374347dabf26bb6",
+    "first_seen": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "failures": 0
+  },
+  "https://home-affairs.ec.europa.eu/policies/schengen-borders-and-visa/visa-policy_en": {
+    "sha256": "55f20c83d1e81177ff6c68da68167d71e4f0cf9360caf6961acf4499cebc405f",
+    "first_seen": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "failures": 0
+  },
+  "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/visitor-600": {
+    "sha256": "31419f014c10baca8bf5fc7e3c39a2ad07aca231b58ed2a79c9ad012eac440b1",
+    "first_seen": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "failures": 0
+  },
+  "https://immigration.gov.mv/": {
+    "sha256": "8830915e913fffe3f3a17c805a8d93c5ff9f62fdcccd88ffd77c65d08251d2c9",
+    "first_seen": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "failures": 0
+  },
+  "https://newdelhi.thaiembassy.org/en/content/latest-update-on-revision-to-thailand-s-visa-exemp": {
+    "sha256": "93cd14a3b3f1b8b916e97917fc223f47865710be8e76793efa21c164288a19d4",
+    "first_seen": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "failures": 0
+  },
+  "https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/global-visa-wait-times.html": {
+    "sha256": "",
+    "first_seen": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "failures": 1,
+    "last_error": "http: HTTP 403"
+  },
+  "https://visa.immigration.go.tz/": {
+    "sha256": "",
+    "first_seen": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "failures": 1,
+    "last_error": "network: network error: fetch failed"
+  },
+  "https://visa2egypt.gov.eg/": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "first_seen": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "failures": 0
+  },
+  "https://visas.immigration.go.ug/": {
+    "sha256": "",
+    "first_seen": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "failures": 1,
+    "last_error": "network: network error: fetch failed"
+  },
+  "https://www.acces-maroc.ma/": {
+    "sha256": "1e2dce7167bf86476da6f849d2a54b1462ae2b2cfefcdf84b0a43607817636f4",
+    "first_seen": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "failures": 0
+  },
+  "https://www.ats.aq/": {
+    "sha256": "",
+    "first_seen": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "failures": 1,
+    "last_error": "robots: robots.txt disallows /"
+  },
+  "https://www.bhutan.travel/": {
+    "sha256": "bf7cd12377e0f4d3294c73ad49640bba9d5ee9f775cdf1b26f1d0f96cf0b224c",
+    "first_seen": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "failures": 0
+  },
+  "https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada.html": {
+    "sha256": "641617197efdea9305333279507558947903fe723c05b9dce59df263633ab6d5",
+    "first_seen": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "failures": 0
+  },
+  "https://www.dha.gov.za/": {
+    "sha256": "6e930a339784ac4036fa6400ce845b651a30bd8d5543c154ee5a052bdd3ec879",
+    "first_seen": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "failures": 0
+  },
+  "https://www.etakenya.go.ke/": {
+    "sha256": "df00a9c640e6be5cd5d1236ca1db34b98e32c893b8792bd6d7dc62959408d1ae",
+    "first_seen": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "failures": 0
+  },
+  "https://www.evisa.gov.et/": {
+    "sha256": "826ad81e950102c6ec2d7539e679ca6ca03c3c5d5db90b4571d675637f156212",
+    "first_seen": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "failures": 0
+  },
+  "https://www.evisa.gov.tr/": {
+    "sha256": "86bc70669ce895cfd1b732be51c62ce2a07c113791f2f287ee1e72efc168b688",
+    "first_seen": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "failures": 0
+  },
+  "https://www.evisa.gov.zw/": {
+    "sha256": "efcaa680c8319e40f68ed0adb1363ad7a6e626eaf6491280eeaa88f0579b9a11",
+    "first_seen": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "failures": 0
+  },
+  "https://www.gov.br/mre/en": {
+    "sha256": "",
+    "first_seen": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "failures": 1,
+    "last_error": "network: network error: fetch failed"
+  },
+  "https://www.gov.uk/standard-visitor": {
+    "sha256": "478035adede77c024ffa0836d149af731c6d6c0ffb4405ddafe25e673da9f138",
+    "first_seen": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "failures": 0
+  },
+  "https://www.ica.gov.sg/enter-transit-depart/entering-singapore/visa_requirements": {
+    "sha256": "257bc28755edc2325e1bed9445d6b185a99f2b97c5cb65214166e6d57711647c",
+    "first_seen": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "failures": 0
+  },
+  "https://www.immigration.govt.nz/new-zealand-visas/visas/visa/visitor-visa": {
+    "sha256": "3be4f4ab3ba6266693b068abf25593ec89686a23963064f585e54540ed5305a6",
+    "first_seen": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "failures": 0
+  },
+  "https://www.migracion.gob.bo/": {
+    "sha256": "",
+    "first_seen": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "failures": 1,
+    "last_error": "network: network error: fetch failed"
+  },
+  "https://www.migration.gov.rw/": {
+    "sha256": "df1e415d4e06534896d60d18c2a45bd94ec550f802453dcd97e3fd20b29cd5a8",
+    "first_seen": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "failures": 0
+  },
+  "https://www.mofa.go.jp/j_info/visit/visa/index.html": {
+    "sha256": "",
+    "first_seen": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "failures": 1,
+    "last_error": "http: HTTP 403"
+  },
+  "https://www.visaforchina.cn/": {
+    "sha256": "3c6e22c29c9d045873b5a49963293a982952397c3e71e48afc1fd25af320b131",
+    "first_seen": "2026-11-02",
+    "last_checked": "2026-11-02",
+    "last_changed": "2026-11-02",
+    "failures": 0
+  }
+}
